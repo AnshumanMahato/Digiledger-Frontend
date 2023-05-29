@@ -4,9 +4,9 @@ import BalanceCard from "./components/BalanceCard";
 
 function App() {
   return (
-    <div className="min-h-screen w-screen bg-slate-950 flex flex-col items-center p-10">
+    <div className="min-h-screen w-screen text-white bg-accent flex flex-col items-center pt-10 px-5">
       <Header />
-      <main className="flex flex-wrap justify-between text-red-400">
+      <main className="flex flex-col justify-between items-center w-full">
         <BalanceCard />
         <GoalsCard />
       </main>

@@ -5,9 +5,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     colors: {
-      primary: "#302d43",
+      accent: "#302d43",
       secondary: "#6953f7",
-      accent: "#cd4ff7",
+      primary: "#cd4ff7",
       white: colors.white,
       slate: colors.slate,
       black: colors.black,
