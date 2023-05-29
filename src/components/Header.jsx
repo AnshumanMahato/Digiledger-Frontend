@@ -2,7 +2,7 @@ import { FaBars } from "react-icons/fa";
 
 function Header() {
   return (
-    <header className="flex justify-between items-center w-full">
+    <header className="flex justify-between items-center w-full mb-10">
       <div className="logo ">
         <h1 className="text-slate-100 font-sans text-[25px]">DIGILEDGER</h1>
       </div>
