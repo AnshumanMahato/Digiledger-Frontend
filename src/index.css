@@ -24,7 +24,9 @@
 }
 
 @layer components {
-  .bal-card {
+  .glass {
+    @apply bg-white/5;
+    @apply backdrop-blur-[10px];
     box-shadow: inset 0 2px 30px 15px rgba(255, 255, 255, 0.05),
       inset 0 4px 20px 5px rgba(255, 255, 255, 0.05),
       inset 0 8px 10px 1px rgba(255, 255, 255, 0.13),
