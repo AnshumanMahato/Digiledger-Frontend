@@ -4,14 +4,8 @@ function BalanceCard() {
       <h2 className=" text-3xl relative z-10 font-bold mb-8 w-full">
         Current Month
       </h2>
-      <div
-        className="container relative h-min 
-      before:content-[''] before:absolute before:bg-gradient-to-r before:from-primary before:to-secondary 
-      before:top-0 before:left-0 before:h-[90%] before:w-[85%] before:rounded-2xl
-      before:shadow-xl before:shadow-white/20
-      before:transform before:origin-top-left before:-rotate-[8deg]"
-      >
-        <div className="w-full p-6 bg-white/5 relative rounded-2xl backdrop-blur-[8px] shadow-md">
+      <div className="container relative h-min card">
+        <div className="w-full p-6 bg-white/5 relative rounded-3xl backdrop-blur-[10px] bal-card">
           <div className="flex flex-col mb-5">
             <span className="text-xl mb-1">Balance</span>
             <span className=" text-4xl font-bold">$2000</span>
