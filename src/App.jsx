@@ -35,11 +35,20 @@ function App() {
     {
       label: "Transaction detail",
       render: (transaction) => {
-        const date = new Date(transaction.date);
+        const date = new Date(transaction.date * 1);
         return (
           <div className=" whitespace-nowrap">
             <p className="text-lg font-bold">{transaction.party}</p>
-            <p className="text-sm text-gray-500">{`${transaction.date}`}</p>
+            <p className="text-sm text-gray-500">{`${new Intl.DateTimeFormat(
+              "en-US",
+              {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              }
+            ).format(date)}`}</p>
           </div>
         );
       },
