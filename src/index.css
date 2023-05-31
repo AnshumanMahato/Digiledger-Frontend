@@ -24,6 +24,32 @@
 }
 
 @layer components {
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #4a4474 transparent;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: theme(colors.accent);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #4a4474;
+    border-radius: 10px;
+  }
+  *::-webkit-scrollbar-thumb:hover,
+  *::-webkit-scrollbar-thumb:active {
+    background-color: #6d60c1;
+    border-radius: 10px;
+  }
+
   .glass {
     @apply bg-white/5;
     @apply backdrop-blur-[10px];

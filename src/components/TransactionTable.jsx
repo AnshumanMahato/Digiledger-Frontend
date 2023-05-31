@@ -6,7 +6,7 @@ function TransactionTable() {
     {
       date: "1669668738",
       party: "Alta Blaszczynski",
-      amount: 66498.95,
+      amount: 166498.95,
       type: "expense",
       description: "Maecenas tincidunt lacus at velit.",
     },
@@ -33,7 +33,7 @@ function TransactionTable() {
       render: (transaction) => {
         const date = new Date(transaction.date * 1);
         return (
-          <div className=" whitespace-nowrap">
+          <div className="">
             <p className="text-lg font-bold">{transaction.party}</p>
             <p className="text-sm text-gray-500">{`${new Intl.DateTimeFormat(
               "en-US",

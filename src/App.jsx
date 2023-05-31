@@ -13,7 +13,7 @@ function App() {
           <SectionHeader>May 2023</SectionHeader>
           <BalanceCard />
         </Section>
-        <Section>
+        <Section className="flex flex-col items-center">
           <SectionHeader className="text-2xl">
             Recent Transactions
           </SectionHeader>

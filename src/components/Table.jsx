@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 function Table({ data, config, keyFn }) {
   const renderedRows = data.map((el) => {
     const renderedCells = config.map((attr) => (
@@ -16,7 +14,7 @@ function Table({ data, config, keyFn }) {
   });
 
   return (
-    <table className="container border-separate px-4">
+    <table className="container border-separate">
       <tbody className="my-4">{renderedRows}</tbody>
     </table>
   );
