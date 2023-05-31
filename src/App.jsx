@@ -1,11 +1,77 @@
 import Header from "./components/Header";
-import GoalsCard from "./components/GoalsCard";
 import BalanceCard from "./components/BalanceCard";
-import ListComponent from "./components/ListComponent";
 import SectionHeader from "./components/SectionHeader";
 import Section from "./components/Section";
+import Table from "./components/Table";
+import classNames from "classnames";
 
 function App() {
+  const data = [
+    {
+      date: "1669668738",
+      party: "Alta Blaszczynski",
+      amount: 66498.95,
+      type: "expense",
+      description: "Maecenas tincidunt lacus at velit.",
+    },
+    {
+      date: "1655167165",
+      party: "Rickard Shalliker",
+      amount: 24645.35,
+      type: "income",
+      description: "Mauris sit amet eros.",
+    },
+    {
+      date: "1683793316",
+      party: "Pascale Lorking",
+      amount: 70445.19,
+      type: "expense",
+      description:
+        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+    },
+  ];
+
+  const config = [
+    {
+      label: "Transaction detail",
+      render: (transaction) => {
+        const date = new Date(transaction.date);
+        return (
+          <div className=" whitespace-nowrap">
+            <p className="text-lg font-bold">{transaction.party}</p>
+            <p className="text-sm text-gray-500">{`${transaction.date}`}</p>
+          </div>
+        );
+      },
+    },
+    {
+      label: "Amount",
+      render: (transaction) => (
+        <div className="flex justify-end items-center ml-10">
+          <p className="text-lg font-bold">{`$${transaction.amount}`}</p>
+        </div>
+      ),
+    },
+    {
+      label: "Amount",
+      render: (transaction) => {
+        const classes = classNames(
+          "hidden sm:flex justify-end items-center ml-10",
+          {
+            invisible: transaction.type === "income",
+          }
+        );
+        return (
+          <div className={classes}>
+            <p className="text-lg font-bold">{`-$${transaction.amount}`}</p>
+          </div>
+        );
+      },
+    },
+  ];
+
+  const keyFn = (transaction) => transaction.party;
+
   return (
     <div className="min-h-screen w-screen text-white bg-accent flex flex-col items-center pt-10 px-[10%]">
       <Header />
@@ -18,7 +84,7 @@ function App() {
           <SectionHeader className="text-2xl">
             Recent Transactions
           </SectionHeader>
-          <ListComponent />
+          <Table data={data} config={config} keyFn={keyFn}></Table>
         </Section>
       </main>
     </div>
