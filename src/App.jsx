@@ -3,6 +3,8 @@ import BalanceCard from "./components/BalanceCard";
 import SectionHeader from "./components/SectionHeader";
 import Section from "./components/Section";
 import TransactionTable from "./components/TransactionTable";
+import Button from "./components/Button";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -19,7 +21,11 @@ function App() {
           </SectionHeader>
           <TransactionTable />
         </Section>
+        <Section className="flex justify-evenly items-center">
+          <Button>Transactions</Button>
+        </Section>
       </main>
+      <Footer />
     </div>
   );
 }
