@@ -15,6 +15,10 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+      {
         path: "transactions",
         element: <Transactions />,
       },
