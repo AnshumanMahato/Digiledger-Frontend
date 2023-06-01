@@ -1,24 +1,17 @@
-import { NavLink } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import classNames from "classnames";
+import NavButton from "./NavButton";
 
 function Nav() {
-  const classes = ({ isActive, isPending }) => {
-    console.log(isActive, isPending);
-    return classNames("flex", "items-center", {
-      invisible: isActive,
-    });
-  };
   return (
-    <nav className="container flex justify-between items-center mb-2 text-md font-medium">
-      <NavLink to="/dashboard" className={classes}>
+    <nav className="container flex justify-between items-center mb-2 text-xs font-sm">
+      <NavButton to="/dashboard">
         <AiOutlineArrowLeft className=" mr-2" />
         Dashboard
-      </NavLink>
-      <NavLink to="/transactions" className={classes}>
+      </NavButton>
+      <NavButton to="/transactions">
         Transactions
         <AiOutlineArrowRight className=" ml-2" />
-      </NavLink>
+      </NavButton>
     </nav>
   );
 }
