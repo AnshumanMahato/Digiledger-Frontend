@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="min-h-screen w-screen text-white bg-accent flex flex-col items-center pt-10 px-[10%]">
+    <div className="min-h-screen w-screen text-white bg-accent flex flex-col items-center pt-10 px-[10%] font-poppins">
       <Header />
       <main className="flex flex-col justify-between items-center w-full">
         <Section className="flex flex-col items-center">

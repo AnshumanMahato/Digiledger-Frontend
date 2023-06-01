@@ -34,12 +34,12 @@ function TransactionTable() {
         const date = new Date(transaction.date * 1);
         return (
           <div className="">
-            <p className="text-lg font-bold">{transaction.party}</p>
+            <p className="text-lg font-medium">{transaction.party}</p>
             <p className="text-sm text-gray-500">{`${new Intl.DateTimeFormat(
               "en-US",
               {
                 year: "numeric",
-                month: "long",
+                month: "short",
                 day: "numeric",
                 hour: "2-digit",
                 minute: "2-digit",
@@ -53,7 +53,7 @@ function TransactionTable() {
       label: "Amount",
       render: (transaction) => (
         <div className="flex justify-end items-center ml-10">
-          <p className="text-lg font-bold">{`$${transaction.amount}`}</p>
+          <p className="text-xl">{`$${transaction.amount}`}</p>
         </div>
       ),
     },
@@ -68,7 +68,7 @@ function TransactionTable() {
         );
         return (
           <div className={classes}>
-            <p className="text-lg font-bold">{`-$${transaction.amount}`}</p>
+            <p className="text-xl">{`-$${transaction.amount}`}</p>
           </div>
         );
       },
