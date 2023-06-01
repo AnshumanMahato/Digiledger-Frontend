@@ -1,41 +1,17 @@
-import Table from "../components/Table";
+import Table from "./Table";
 import classNames from "classnames";
 
-function TransactionTable() {
-  const data = [
-    {
-      date: "1669668738",
-      party: "Alta Blaszczynski",
-      amount: 166498.95,
-      type: "expense",
-      description: "Maecenas tincidunt lacus at velit.",
-    },
-    {
-      date: "1655167165",
-      party: "Rickard Shalliker",
-      amount: 24645.35,
-      type: "income",
-      description: "Mauris sit amet eros.",
-    },
-    {
-      date: "1683793316",
-      party: "Pascale Lorking",
-      amount: 70445.19,
-      type: "expense",
-      description:
-        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
-    },
-  ];
-
+function TransactionTable({ transactions }) {
+  console.log(transactions);
   const config = [
     {
       label: "Transaction detail",
       render: (transaction) => {
         const date = new Date(transaction.date * 1);
         return (
-          <div className="">
-            <p className="text-lg font-medium">{transaction.party}</p>
-            <p className="text-sm text-gray-500">{`${new Intl.DateTimeFormat(
+          <div className=" whitespace-nowrap">
+            <p className="text-md font-medium">{transaction.party}</p>
+            <p className="text-sm text-slate-400">{`${new Intl.DateTimeFormat(
               "en-US",
               {
                 year: "numeric",
@@ -53,7 +29,7 @@ function TransactionTable() {
       label: "Amount",
       render: (transaction) => (
         <div className="flex justify-end items-center ml-10">
-          <p className="text-xl">{`$${transaction.amount}`}</p>
+          <p className="text-lg">{`$${transaction.amount}`}</p>
         </div>
       ),
     },
@@ -68,7 +44,7 @@ function TransactionTable() {
         );
         return (
           <div className={classes}>
-            <p className="text-xl">{`-$${transaction.amount}`}</p>
+            <p className="text-lg">{`-$${transaction.amount}`}</p>
           </div>
         );
       },
@@ -77,7 +53,7 @@ function TransactionTable() {
 
   const keyFn = (transaction) => transaction.party;
 
-  return <Table data={data} config={config} keyFn={keyFn}></Table>;
+  return <Table data={transactions} config={config} keyFn={keyFn}></Table>;
 }
 
 export default TransactionTable;

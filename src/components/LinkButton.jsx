@@ -4,7 +4,7 @@ function LinkButton({ children, to }) {
   return (
     <Link
       to={to}
-      className=" px-10 font-md text-md py-3 rounded-full shadow-primary shadow-md hover:shadow-lg active:shadow-lg hover:shadow-primary active:shadow-primary border border-primary"
+      className=" px-10 font-md text-md py-3 rounded-full transition-shadow shadow-primary shadow-md hover:shadow-lg active:shadow-sm hover:shadow-primary active:shadow-primary border border-primary glass"
     >
       {children}
     </Link>
