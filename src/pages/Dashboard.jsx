@@ -2,7 +2,6 @@ import BalanceCard from "../components/BalanceCard";
 import SectionHeader from "../components/SectionHeader";
 import Section from "../components/Section";
 import TransactionTable from "../components/TransactionTable";
-import LinkButton from "../components/LinkButton";
 
 function Dashboard() {
   const transactions = [
@@ -39,9 +38,6 @@ function Dashboard() {
       <Section className="flex flex-col items-center">
         <SectionHeader className="text-2xl">Recent Transactions</SectionHeader>
         <TransactionTable transactions={transactions} />
-      </Section>
-      <Section className="flex justify-evenly items-center">
-        <LinkButton to="/transactions">Transactions</LinkButton>
       </Section>
     </main>
   );
