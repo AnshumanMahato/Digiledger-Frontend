@@ -89,8 +89,11 @@ function TransactionsPanel() {
 
   return (
     <div className="container mx-auto">
-      <div>
-        <div></div>
+      <div className="flex justify-between">
+        <div className="flex-grow"></div>
+        <Button className="border-2 rounded-md ml-5">
+          <BsFilter />
+        </Button>
       </div>
       <TransactionTable transactions={transactions} />
       <div className="flex justify-center mt-4">
