@@ -4,6 +4,7 @@ function Button({
   className,
   rounded,
   small,
+  plain,
   success,
   warning,
   danger,
@@ -11,10 +12,12 @@ function Button({
 }) {
   const classes = classnames(
     className,
-    "flex items-center border font-medium transition-shadow",
+    "flex items-center font-medium transition-shadow",
     {
       "rounded-full": rounded,
-      "border-white bg-white/5 bg-blur-[10px]": !success && !warning && !danger,
+      border: !plain,
+      "border-white bg-white/5 bg-blur-[10px]":
+        !success && !warning && !danger && !plain,
       "px-3 py-1.5 text-sm": small,
       "px-4 py-2 text-md": !small,
       "border-red-900 bg-gradient-to-r from-red-400 to-red-600": danger,

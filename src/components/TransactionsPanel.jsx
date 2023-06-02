@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { BsFilter } from "react-icons/bs";
 import TransactionTable from "./TransactionTable";
+import FilterPanel from "./FilterPanel";
 import Button from "./utils/Button";
 function TransactionsPanel() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleClickPrev = () => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -11,6 +13,11 @@ function TransactionsPanel() {
 
   const handleClickNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handleFilter = () => {
+    document.body.classList.toggle("overflow-hidden");
+    setShowFilters((current) => !current);
   };
 
   const totalPages = 1;
@@ -91,7 +98,10 @@ function TransactionsPanel() {
     <div className="container mx-auto">
       <div className="flex justify-between">
         <div className="flex-grow"></div>
-        <Button className="border-2 rounded-md ml-5 flex items-center">
+        <Button
+          className="border-2 rounded-md ml-5 flex items-center"
+          onClick={handleFilter}
+        >
           <BsFilter />
           <span className="ml-2">Filter</span>
         </Button>
@@ -116,6 +126,7 @@ function TransactionsPanel() {
           Next
         </button>
       </div>
+      <FilterPanel showFilters={showFilters} onClose={handleFilter} />
     </div>
   );
 }
