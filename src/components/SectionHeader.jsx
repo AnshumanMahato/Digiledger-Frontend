@@ -1,9 +1,8 @@
-function SectionHeader({ children }) {
-  return (
-    <h2 className={`text-2xl relative z-10 font-bold mb-8 w-full`}>
-      {children}
-    </h2>
-  );
+import classNames from "classnames";
+
+function SectionHeader({ children, className }) {
+  const classes = classNames(className, "text-2xl", "font-bold", "w-full");
+  return <h2 className={classes}>{children}</h2>;
 }
 
 export default SectionHeader;

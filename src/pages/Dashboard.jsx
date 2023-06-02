@@ -2,6 +2,7 @@ import BalanceCard from "../components/BalanceCard";
 import SectionHeader from "../components/SectionHeader";
 import Section from "../components/Section";
 import TransactionTable from "../components/TransactionTable";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const transactions = [
@@ -31,12 +32,17 @@ function Dashboard() {
 
   return (
     <main className="flex flex-col justify-between items-center w-full">
-      <Section className="flex flex-col items-center">
-        <SectionHeader>May 2023</SectionHeader>
+      <Section className="flex flex-col items-center mb-8">
+        <SectionHeader className="relative z-10 mb-8">May 2023</SectionHeader>
         <BalanceCard />
       </Section>
       <Section className="flex flex-col items-center">
-        <SectionHeader className="text-2xl">Recent Transactions</SectionHeader>
+        <div className="container flex justify-between items-center mb-2">
+          <SectionHeader>Transactions</SectionHeader>
+          <Link to="/transactions" className=" whitespace-nowrap">
+            See All
+          </Link>
+        </div>
         <TransactionTable transactions={transactions} />
       </Section>
     </main>

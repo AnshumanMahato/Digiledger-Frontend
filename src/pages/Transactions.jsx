@@ -1,13 +1,13 @@
 import Section from "../components/Section";
-import LinkButton from "../components/LinkButton";
-import ListComponent from "../components/TransactionsPanel";
+import TransactionsPanel from "../components/TransactionsPanel";
+import SectionHeader from "../components/SectionHeader";
 
 function Transactions() {
   return (
     <main className="flex flex-col justify-between items-center w-full">
       <Section className="flex flex-col justify-evenly items-center">
-        <ListComponent />
-        <LinkButton to="/dashboard">Dashboard</LinkButton>
+        <SectionHeader className="mb-5">Transactions</SectionHeader>
+        <TransactionsPanel />
       </Section>
     </main>
   );

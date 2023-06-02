@@ -13,6 +13,8 @@ module.exports = {
       slate: colors.slate,
       black: colors.black,
       red: colors.red,
+      green: colors.green,
+      amber: colors.amber,
     },
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
