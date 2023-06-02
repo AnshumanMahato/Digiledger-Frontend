@@ -1,6 +1,6 @@
 import BalanceCard from "../components/BalanceCard";
-import SectionHeader from "../components/SectionHeader";
-import Section from "../components/Section";
+import SectionHeader from "../components/utils/SectionHeader";
+import Section from "../components/utils/Section";
 import TransactionTable from "../components/TransactionTable";
 import { Link } from "react-router-dom";
 

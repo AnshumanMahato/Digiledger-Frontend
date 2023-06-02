@@ -1,7 +1,7 @@
-import Section from "../components/Section";
+import Section from "../components/utils/Section";
 import TransactionsPanel from "../components/TransactionsPanel";
-import SectionHeader from "../components/SectionHeader";
-import Button from "../components/Button";
+import SectionHeader from "../components/utils/SectionHeader";
+import Button from "../components/utils/Button";
 
 function Transactions() {
   return (

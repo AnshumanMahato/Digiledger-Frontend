@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsFilter } from "react-icons/bs";
 import TransactionTable from "./TransactionTable";
-import Button from "./Button";
+import Button from "./utils/Button";
 function TransactionsPanel() {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -91,8 +91,9 @@ function TransactionsPanel() {
     <div className="container mx-auto">
       <div className="flex justify-between">
         <div className="flex-grow"></div>
-        <Button className="border-2 rounded-md ml-5">
+        <Button className="border-2 rounded-md ml-5 flex items-center">
           <BsFilter />
+          <span className="ml-2">Filter</span>
         </Button>
       </div>
       <TransactionTable transactions={transactions} />
