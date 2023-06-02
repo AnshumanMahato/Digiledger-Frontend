@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 
-function NavButton({ children, to }) {
+function NavButton({ children, to, ...rest }) {
   const classes = (isActive) => {
     return classNames(
       "flex",
@@ -18,7 +18,7 @@ function NavButton({ children, to }) {
     );
   };
   return (
-    <NavLink to={to} className={({ isActive }) => classes(isActive)}>
+    <NavLink {...rest} to={to} className={({ isActive }) => classes(isActive)}>
       {children}
     </NavLink>
   );
