@@ -111,8 +111,6 @@ function TransactionsPanel() {
         >
           Next
         </button>
-
-        <Button warning>Text</Button>
       </div>
     </div>
   );
