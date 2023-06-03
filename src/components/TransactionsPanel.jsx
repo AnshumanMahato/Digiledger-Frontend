@@ -3,9 +3,20 @@ import { BsFilter } from "react-icons/bs";
 import TransactionTable from "./TransactionTable";
 import FilterPanel from "./FilterPanel";
 import Button from "./utils/Button";
+
 function TransactionsPanel() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showFilters, setShowFilters] = useState(false);
+
+  const [filters, setFilters] = useState({
+    sort: "-timestamp",
+    category: null,
+    party: null,
+    startDate: null,
+    endDate: null,
+  });
+
+  const updateFilters = (newFilters) => setFilters(newFilters);
 
   const handleClickPrev = () => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -15,7 +26,7 @@ function TransactionsPanel() {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  const handleFilter = () => {
+  const handleFilterPanel = () => {
     document.body.classList.toggle("overflow-hidden");
     setShowFilters((current) => !current);
   };
@@ -100,7 +111,7 @@ function TransactionsPanel() {
         <div className="flex-grow"></div>
         <Button
           className="border-2 rounded-md ml-5 flex items-center"
-          onClick={handleFilter}
+          onClick={handleFilterPanel}
         >
           <BsFilter />
           <span className="ml-2">Filter</span>
@@ -126,7 +137,12 @@ function TransactionsPanel() {
           Next
         </button>
       </div>
-      <FilterPanel showFilters={showFilters} onClose={handleFilter} />
+      <FilterPanel
+        showFilters={showFilters}
+        filters={filters}
+        updateFilters={updateFilters}
+        onClose={handleFilterPanel}
+      />
     </div>
   );
 }

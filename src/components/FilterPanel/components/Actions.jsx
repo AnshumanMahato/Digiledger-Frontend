@@ -1,10 +1,14 @@
 import Button from "../../utils/Button";
 
-function Actions() {
+function Actions({ applyFilters, clearFilters }) {
   return (
     <div className="col-start-2 row-start-3 flex justify-evenly items-center p-3">
-      <Button success>Apply</Button>
-      <Button danger>Clear</Button>
+      <Button success onClick={applyFilters}>
+        Apply
+      </Button>
+      <Button danger onClick={clearFilters}>
+        Clear
+      </Button>
     </div>
   );
 }
