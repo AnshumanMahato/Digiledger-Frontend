@@ -39,7 +39,7 @@ function Dashboard() {
       <Section className="flex flex-col items-center">
         <div className="container flex justify-between items-center mb-2">
           <SectionHeader>Transactions</SectionHeader>
-          <Link to="/transactions" className=" whitespace-nowrap">
+          <Link to="transactions" className=" whitespace-nowrap">
             See All
           </Link>
         </div>

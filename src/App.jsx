@@ -3,23 +3,28 @@ import ErrorPage from "./pages/Error";
 import Root from "./pages/Root";
 import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Signup />,
+  },
+  {
+    path: "app",
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: "/app",
         element: <Dashboard />,
       },
       {
-        path: "/dashboard",
+        path: "dashboard",
         element: <Dashboard />,
       },
       {
-        path: "/transactions",
+        path: "transactions",
         element: <Transactions />,
       },
     ],
