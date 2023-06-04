@@ -1,23 +1,20 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/Error";
-import Root from "./pages/Root";
+import Layout from "./pages/Layout";
 import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
-import Signup from "./pages/Signup";
+import { UserProvider } from "./contexts/UserContext";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Signup />,
-  },
-  {
-    path: "app",
-    element: <Root />,
+    element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/app",
-        element: <Dashboard />,
+        path: "",
+        element: <Home />,
       },
       {
         path: "dashboard",
@@ -32,7 +29,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  );
 }
 
 export default App;

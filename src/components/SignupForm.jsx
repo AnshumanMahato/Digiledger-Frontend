@@ -22,7 +22,7 @@ export default function SignupForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
       <label>Name</label>
       <input
         type="text"

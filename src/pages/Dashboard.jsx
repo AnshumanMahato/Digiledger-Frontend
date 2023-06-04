@@ -3,8 +3,10 @@ import SectionHeader from "../components/utils/SectionHeader";
 import Section from "../components/utils/Section";
 import TransactionTable from "../components/TransactionTable";
 import { Link } from "react-router-dom";
+import useAuthorization from "../hooks/useAuthorization";
 
 function Dashboard() {
+  useAuthorization();
   const transactions = [
     {
       date: "1669668738",
@@ -39,7 +41,7 @@ function Dashboard() {
       <Section className="flex flex-col items-center">
         <div className="container flex justify-between items-center mb-2">
           <SectionHeader>Transactions</SectionHeader>
-          <Link to="transactions" className=" whitespace-nowrap">
+          <Link to="/transactions" className=" whitespace-nowrap">
             See All
           </Link>
         </div>
