@@ -5,7 +5,6 @@ import Button from "../components/utils/Button";
 import useAuthorization from "../hooks/useAuthorization";
 
 function Transactions() {
-  useAuthorization();
   return (
     <main className="flex flex-col justify-between items-center w-full">
       <Section className="flex justify-evenly items-center">
