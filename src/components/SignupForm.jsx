@@ -1,100 +1,27 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import FormGroup from "./formComponents/FormGroup";
+import Input from "./formComponents/Input";
+import Button from "./utils/Button";
 
-export default function SignupForm() {
-  const [form, setForm] = useState({});
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const updateForm = (updates) => {
-    const copy = { ...form };
-    for (const [key, value] of Object.entries(updates)) {
-      copy[key] = value;
-    }
-    setForm(copy);
-  };
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
+function SignupForm() {
   return (
-    <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-      <label>Name</label>
-      <input
-        type="text"
-        {...register("name", {
-          required: true,
-          minLength: 3,
-          maxLength: 20,
-        })}
-        onChange={(e) => updateForm({ name: e.target.value })}
-      />
-      {errors.name && errors.name.type === "required" && (
-        <p>This field is required</p>
-      )}
-      {errors.name && errors.name.type === "minLength" && (
-        <p>This field must have at least 3 characters</p>
-      )}
-      {errors.name && errors.name.type === "maxLength" && (
-        <p>This field must have no more than 20 characters</p>
-      )}
-
-      <label>Email</label>
-      <input
-        type="email"
-        {...register("email", {
-          required: true,
-          pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        })}
-        onChange={(e) => updateForm({ email: e.target.value })}
-      />
-      {errors.email && errors.email.type === "required" && (
-        <p>This field is required</p>
-      )}
-      {errors.email && errors.email.type === "pattern" && (
-        <p>This field must be a valid email address</p>
-      )}
-
-      <label>Password</label>
-      <input
-        type="password"
-        {...register("password", {
-          required: true,
-          minLength: 8,
-          maxLength: 20,
-        })}
-        onChange={(e) => updateForm({ password: e.target.value })}
-      />
-      {errors.password && errors.password.type === "required" && (
-        <p>This field is required</p>
-      )}
-      {errors.password && errors.password.type === "minLength" && (
-        <p>This field must have at least 8 characters</p>
-      )}
-      {errors.password && errors.password.type === "maxLength" && (
-        <p>This field must have no more than 20 characters</p>
-      )}
-
-      <label>Confirm Password</label>
-      <input
-        type="password"
-        {...register("passwordConfirm", {
-          required: true,
-          validate: (value) => value === form.password,
-        })}
-      />
-      {errors.passwordConfirm && errors.passwordConfirm.type === "required" && (
-        <p>This field is required</p>
-      )}
-      {errors.passwordConfirm && errors.passwordConfirm.type === "validate" && (
-        <p>This field must match the password</p>
-      )}
-
-      <button type="submit">Sign Up</button>
+    <form className="w-1/2 min-w-[20rem] border-2 border-primary shadow-md shadow-primary/50 px-8 py-10 my-10 rounded-2xl">
+      <FormGroup>
+        <Input type="text" label="Name" id="name" />
+      </FormGroup>
+      <FormGroup>
+        <Input type="email" label="Email" id="email" />
+      </FormGroup>
+      <FormGroup>
+        <Input type="password" label="Password" id="password" />
+      </FormGroup>
+      <FormGroup>
+        <Input type="password" label="Confirm Password" id="passwordConfirm" />
+      </FormGroup>
+      <div className="flex justify-center items-center">
+        <Button success>Sign Up</Button>
+      </div>
     </form>
   );
 }
+
+export default SignupForm;

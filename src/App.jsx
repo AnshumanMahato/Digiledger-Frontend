@@ -5,18 +5,18 @@ import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
 import { UserProvider } from "./contexts/UserContext";
 import Home from "./pages/Home";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "",
+        path: "/",
         element: <Home />,
       },
-      { path: "login" },
+      { path: "signin", element: <Signup /> },
       { path: "logout" },
       {
         path: "dashboard",

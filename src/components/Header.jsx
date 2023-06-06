@@ -10,8 +10,8 @@ function Header() {
         <h1 className="text-3xl font-bold">Digiledger</h1>
       </div>
 
-      {user ? (
-        <Button className="rounded-md " small>
+      {!user ? (
+        <Button className="rounded-md" to="/signin" small>
           Sign In
         </Button>
       ) : (

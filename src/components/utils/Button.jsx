@@ -1,4 +1,5 @@
 import classnames from "classnames";
+import { Link } from "react-router-dom";
 function Button({
   children,
   className,
@@ -8,6 +9,7 @@ function Button({
   success,
   warning,
   danger,
+  to,
   ...rest
 }) {
   const classes = classnames(
@@ -26,7 +28,11 @@ function Button({
       "border-amber-900 bg-gradient-to-r from-amber-400 to-amber-600": warning,
     }
   );
-  return (
+  return to ? (
+    <Link to={to} className={classes}>
+      {children}
+    </Link>
+  ) : (
     <button {...rest} className={classes}>
       {children}
     </button>
@@ -36,7 +42,7 @@ function Button({
 Button.propTypes = {
   checkVariation: ({ success, warning, danger }) => {
     const count = Number(!!success + !!warning + !!danger);
-    if (count < 1)
+    if (count > 1)
       return new Error(
         "Only one of primary, secondary, success, warning or danger can be true"
       );
