@@ -6,6 +6,7 @@ import Transactions from "./pages/Transactions";
 import { UserProvider } from "./contexts/UserContext";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,8 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      { path: "signin", element: <Signup /> },
+      { path: "signin", element: <Signin /> },
+      { path: "signup", element: <Signup /> },
       { path: "logout" },
       {
         path: "dashboard",

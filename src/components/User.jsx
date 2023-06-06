@@ -22,7 +22,7 @@ function User() {
 
   const renderedOptions = options.map((option) => {
     const classes = ({ isActive }) => {
-      return classNames("p-4", {
+      return classNames("inline-block", "p-4", {
         "text-primary": isActive,
       });
     };

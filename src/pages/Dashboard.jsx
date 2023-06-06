@@ -34,7 +34,7 @@ function Dashboard() {
   return (
     <main className="flex flex-col justify-between items-center w-full">
       <Section className="flex flex-col items-center mb-8">
-        <SectionHeader className="relative z-10 mb-8">May 2023</SectionHeader>
+        <SectionHeader className="relative z-1 mb-8">May 2023</SectionHeader>
         <BalanceCard />
       </Section>
       <Section className="flex flex-col items-center">

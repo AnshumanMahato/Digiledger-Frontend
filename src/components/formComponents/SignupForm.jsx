@@ -1,6 +1,6 @@
-import FormGroup from "./formComponents/FormGroup";
-import Input from "./formComponents/Input";
-import Button from "./utils/Button";
+import FormGroup from "./FormGroup";
+import Input from "./Input";
+import Button from "../utils/Button";
 
 function SignupForm() {
   return (
