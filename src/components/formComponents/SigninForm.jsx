@@ -2,16 +2,39 @@ import { useForm } from "react-hook-form";
 import FormGroup from "./FormGroup";
 import Button from "../utils/Button";
 import { loginRequest } from "../../services/authServices";
+import { useEffect, useState } from "react";
+import useUserContext from "../../hooks/useUserContext";
+import { useNavigate } from "react-router-dom";
 
 function SigninForm() {
+  const navigate = useNavigate();
+  const { user, updateCurrentUser } = useUserContext();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard", {
+        replace: true,
+      });
+    }
+  }, [user, navigate]);
+
+  const [error, setError] = useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = async (data) => {
-    const { err, res } = await loginRequest(data);
-    console.log(err, res);
+    try {
+      const {
+        data: { user },
+      } = await loginRequest(data);
+      updateCurrentUser(user);
+      setError(null);
+    } catch (e) {
+      setError(e.response.data.message);
+    }
   };
 
   return (
@@ -19,6 +42,7 @@ function SigninForm() {
       className="w-1/2 min-w-[20rem] border-2 border-primary shadow-md shadow-primary/50 px-8 py-10 my-10 rounded-2xl"
       onSubmit={handleSubmit(onSubmit)}
     >
+      <FormGroup>{error && <p className="text-red-500">{error}</p>}</FormGroup>
       <FormGroup>
         <label htmlFor="email" className="block text-xl font-bold mb-3">
           Email
