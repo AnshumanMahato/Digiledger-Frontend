@@ -16,7 +16,7 @@ function Header() {
       </div>
 
       {pathname !== "/signin" && pathname !== "/signup" ? (
-        user ? (
+        !user ? (
           <Button className="rounded-md" to="/signin" small>
             Sign In
           </Button>
