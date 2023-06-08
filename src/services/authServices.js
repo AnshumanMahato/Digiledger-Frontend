@@ -8,3 +8,9 @@ export const loginRequest = async ({ email, password }) => {
   });
   return data;
 };
+
+export const initLogin = async () => {
+  const { data } = await apiRequest.get(`${url}/user/loginStatus`);
+
+  return data;
+};
