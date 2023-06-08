@@ -5,7 +5,7 @@ import useUserContext from "../hooks/useUserContext";
 import User from "./User";
 
 function Header() {
-  const { user } = useUserContext();
+  const { currentUser } = useUserContext();
   const { pathname } = useLocation();
   return (
     <header className="flex justify-between items-center w-full mb-10">
@@ -16,7 +16,7 @@ function Header() {
       </div>
 
       {pathname !== "/signin" && pathname !== "/signup" ? (
-        !user ? (
+        !currentUser ? (
           <Button className="rounded-md" to="/signin" small>
             Sign In
           </Button>

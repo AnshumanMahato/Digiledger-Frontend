@@ -1,12 +1,13 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { initLogin } from "../services/authServices";
 import useUserContext from "../hooks/useUserContext";
 
 function Layout() {
   const { currentUser, updateCurrentUser } = useUserContext();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -21,14 +22,19 @@ function Layout() {
           }
         } catch (e) {}
       }
+      setIsLoaded(true);
     })();
   });
 
   return (
     <div className="min-h-screen w-screen text-white bg-accent flex flex-col justify-between items-center pt-10 px-[10%] font-poppins">
-      <Header />
-      <Outlet />
-      <Footer />
+      {isLoaded && (
+        <>
+          <Header />
+          <Outlet />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }

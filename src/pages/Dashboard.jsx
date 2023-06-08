@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import useAuthorization from "../hooks/useAuthorization";
 
 function Dashboard() {
+  useAuthorization();
   const transactions = [
     {
       date: "1669668738",

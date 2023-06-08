@@ -8,15 +8,15 @@ import { useNavigate } from "react-router-dom";
 
 function SigninForm() {
   const navigate = useNavigate();
-  const { user, updateCurrentUser } = useUserContext();
+  const { currentUser, updateCurrentUser } = useUserContext();
 
   useEffect(() => {
-    if (user) {
+    if (currentUser) {
       navigate("/dashboard", {
         replace: true,
       });
     }
-  }, [user, navigate]);
+  }, [currentUser, navigate]);
 
   const [error, setError] = useState(null);
   const {

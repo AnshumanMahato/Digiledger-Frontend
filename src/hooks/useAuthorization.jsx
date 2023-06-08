@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import useUserContext from "./useUserContext";
 
 function useAuthorization() {
-  const { user } = useUserContext();
+  const { currentUser } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate("/");
+    if (!currentUser) {
+      navigate("/signin");
     }
-  }, [user, navigate]);
+  }, [currentUser, navigate]);
 }
 
 export default useAuthorization;

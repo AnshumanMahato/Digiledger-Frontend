@@ -8,6 +8,7 @@ import { useState } from "react";
 import TransactionForm from "../components/formComponents/TransactionForm";
 
 function Transactions() {
+  useAuthorization();
   const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => setShowModal(true);
