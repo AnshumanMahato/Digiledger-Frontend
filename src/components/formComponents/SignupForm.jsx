@@ -1,9 +1,23 @@
 import { useForm } from "react-hook-form";
 import FormGroup from "./FormGroup";
 import Button from "../utils/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { signupRequest } from "../../services/authServices";
+import useUserContext from "../../hooks/useUserContext";
+import { useNavigate } from "react-router-dom";
 
 function SignupForm() {
+  const navigate = useNavigate();
+  const { currentUser, updateCurrentUser } = useUserContext();
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/dashboard", {
+        replace: true,
+      });
+    }
+  }, [currentUser, navigate]);
+
   const [error, setError] = useState(null);
   const {
     register,
@@ -12,7 +26,17 @@ function SignupForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const {
+        data: { user },
+      } = await signupRequest(data);
+      updateCurrentUser(user);
+      setError(null);
+    } catch (e) {
+      setError(e.response.data.message);
+    }
+  };
   const getPasswordField = watch("password");
 
   return (
