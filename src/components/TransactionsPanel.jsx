@@ -27,7 +27,6 @@ function TransactionsPanel() {
   };
 
   const handleFilterPanel = () => {
-    document.body.classList.toggle("overflow-hidden");
     setShowFilters((current) => !current);
   };
 
@@ -137,12 +136,14 @@ function TransactionsPanel() {
           Next
         </button>
       </div>
-      <FilterPanel
-        showFilters={showFilters}
-        filters={filters}
-        updateFilters={updateFilters}
-        onClose={handleFilterPanel}
-      />
+      {showFilters && (
+        <FilterPanel
+          showFilters={showFilters}
+          filters={filters}
+          updateFilters={updateFilters}
+          onClose={handleFilterPanel}
+        />
+      )}
     </div>
   );
 }

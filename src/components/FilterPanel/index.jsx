@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer, useState, useEffect } from "react";
 import classNames from "classnames";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -37,6 +37,11 @@ const reducer = (state, action) => {
 };
 
 function FilterPanel({ filters, updateFilters, showFilters, onClose }) {
+  useEffect(() => {
+    document.body.classList.add("overflow-hidden");
+    return () => document.body.classList.remove("overflow-hidden");
+  }, []);
+
   const [option, setOption] = useState("sort");
   const [selectedFilters, dispatch] = useReducer(reducer, { ...filters });
 
