@@ -7,7 +7,7 @@ function TransactionTable({ transactions }) {
     {
       label: "Transaction detail",
       render: (transaction) => {
-        const date = new Date(transaction.date * 1);
+        const date = new Date(transaction.timestamp * 1);
         return (
           <div className=" whitespace-nowrap">
             <p className="text-md font-medium">{transaction.party}</p>
