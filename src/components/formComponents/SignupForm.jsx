@@ -20,7 +20,7 @@ function SignupForm() {
       className="w-1/2 min-w-[20rem] border-2 border-primary shadow-md shadow-primary/50 px-8 py-10 my-10 rounded-2xl"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <FormGroup></FormGroup>
+      <FormGroup>{error && <p className="text-red-500">{error}</p>}</FormGroup>
       <FormGroup>
         <label htmlFor="name" className="block text-xl font-bold mb-3">
           Name
