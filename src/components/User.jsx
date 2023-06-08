@@ -18,6 +18,7 @@ function User() {
   const options = [
     { label: "Dashboard", to: "/dashboard" },
     { label: "Transactions", to: "/transactions" },
+    { label: "Logout", to: "/logout" },
   ];
 
   const renderedOptions = options.map((option) => {

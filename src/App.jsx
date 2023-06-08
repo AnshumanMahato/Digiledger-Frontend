@@ -7,6 +7,7 @@ import { UserProvider } from "./contexts/UserContext";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
+import Logout from "./pages/Logout";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
       },
       { path: "signin", element: <Signin /> },
       { path: "signup", element: <Signup /> },
-      { path: "logout" },
+      { path: "logout", element: <Logout /> },
       {
         path: "dashboard",
         element: <Dashboard />,
