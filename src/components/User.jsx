@@ -28,7 +28,7 @@ function User() {
       });
     };
     return (
-      <li>
+      <li key={option.label}>
         <NavLink to={option.to} className={classes}>
           {option.label}
         </NavLink>

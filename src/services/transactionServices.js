@@ -3,8 +3,10 @@ import apiRequest from "./apiRequest";
 const getTransactions = async (filters) => {
   let query = "";
   if (filters) {
-    Object.keys(filters).forEach((filter) => {
-      query += `${filter}=${filters[filter]}&`;
+    Object.keys(filters).forEach((key) => {
+      if (filters[key]) {
+        query += `${key}=${filters[key]}&`;
+      }
     });
   }
   const { data } = await apiRequest(`/transaction?${query}`);

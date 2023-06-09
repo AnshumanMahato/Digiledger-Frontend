@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsFilter } from "react-icons/bs";
 import TransactionTable from "./TransactionTable";
 import FilterPanel from "./FilterPanel";
+import Pagination from "./Pagination";
 import Button from "./utils/Button";
+import { getTransactions } from "../services/transactionServices";
 
 function TransactionsPanel() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,22 +17,20 @@ function TransactionsPanel() {
     startDate: null,
     endDate: null,
   });
+  let data = useRef();
+  useEffect(() => {
+    (async () => {
+      data.current = await getTransactions({ ...filters, page: currentPage });
+    })();
+  }, [currentPage, filters]);
 
   const updateFilters = (newFilters) => setFilters(newFilters);
-
-  const handleClickPrev = () => {
-    setCurrentPage((prevPage) => prevPage - 1);
-  };
-
-  const handleClickNext = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
+  const updatePage = (newPage) => setCurrentPage(newPage);
 
   const handleFilterPanel = () => {
     setShowFilters((current) => !current);
   };
 
-  const totalPages = 1;
   const transactions = [
     {
       timestamp: "1669668738",
@@ -106,6 +106,7 @@ function TransactionsPanel() {
 
   return (
     <div className="container mx-auto">
+      {console.log(data.current)}
       <div className="flex justify-between">
         <div className="flex-grow"></div>
         <Button
@@ -117,33 +118,15 @@ function TransactionsPanel() {
         </Button>
       </div>
       <TransactionTable transactions={transactions} />
-      <div className="flex justify-center mt-4">
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-l"
-          onClick={handleClickPrev}
-          disabled={currentPage === 1}
-        >
-          Prev
-        </button>
-        <span className="bg-blue-500 text-white font-bold py-2 px-4">
-          {currentPage}
-        </span>
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-r"
-          onClick={handleClickNext}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
-      {showFilters && (
+      <Pagination />
+      {
         <FilterPanel
           showFilters={showFilters}
           filters={filters}
           updateFilters={updateFilters}
           onClose={handleFilterPanel}
         />
-      )}
+      }
     </div>
   );
 }

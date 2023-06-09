@@ -2,7 +2,6 @@ import Table from "./utils/Table";
 import classNames from "classnames";
 
 function TransactionTable({ transactions }) {
-  console.log(transactions);
   const config = [
     {
       label: "Transaction detail",
@@ -69,7 +68,7 @@ function TransactionTable({ transactions }) {
     },
   ];
 
-  const keyFn = (transaction) => transaction.party;
+  const keyFn = (transaction) => transaction._id;
 
   return <Table data={transactions} config={config} keyFn={keyFn}></Table>;
 }
