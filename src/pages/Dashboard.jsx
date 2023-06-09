@@ -2,41 +2,27 @@ import BalanceCard from "../components/BalanceCard";
 import SectionHeader from "../components/utils/SectionHeader";
 import Section from "../components/utils/Section";
 import TransactionTable from "../components/TransactionTable";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import useAuthorization from "../hooks/useAuthorization";
 
 function Dashboard() {
   useAuthorization();
-  const transactions = [
-    {
-      timestamp: "1669668738",
-      party: "Alta Blaszczynski",
-      amount: 166498.95,
-      type: "expense",
-      description: "Maecenas tincidunt lacus at velit.",
-    },
-    {
-      timestamp: "1655167165",
-      party: "Rickard Shalliker",
-      amount: 24645.35,
-      type: "income",
-      description: "Mauris sit amet eros.",
-    },
-    {
-      timestamp: "1683793316",
-      party: "Pascale Lorking",
-      amount: 70445.19,
-      type: "expense",
-      description:
-        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
-    },
-  ];
+  const { transactions, monthlyStats } = useLoaderData();
 
   return (
     <main className="flex flex-col justify-between items-center w-full">
+      {console.log(monthlyStats)}
       <Section className="flex flex-col items-center mb-8">
-        <SectionHeader className="relative z-1 mb-8">May 2023</SectionHeader>
-        <BalanceCard />
+        <SectionHeader className="relative z-1 mb-8">
+          {new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            year: "numeric",
+          }).format(new Date())}
+        </SectionHeader>
+        <BalanceCard
+          income={monthlyStats.income || 0}
+          expense={monthlyStats.expense || 0}
+        />
       </Section>
       <Section className="flex flex-col items-center">
         <div className="container flex justify-between items-center mb-2">

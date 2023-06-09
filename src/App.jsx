@@ -8,6 +8,20 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Logout from "./pages/Logout";
+import {
+  getCurrentMonthStats,
+  getTransactions,
+} from "./services/transactionServices";
+
+const dashboardLoader = async () => {
+  const limit = 5,
+    sort = "-timestamp";
+  const {
+    data: { docs: transactions },
+  } = await getTransactions({ limit, sort });
+  const { data: monthlyStats } = await getCurrentMonthStats();
+  return { transactions, monthlyStats };
+};
 
 const router = createBrowserRouter([
   {
@@ -23,6 +37,7 @@ const router = createBrowserRouter([
       { path: "logout", element: <Logout /> },
       {
         path: "dashboard",
+        loader: dashboardLoader,
         element: <Dashboard />,
       },
       {

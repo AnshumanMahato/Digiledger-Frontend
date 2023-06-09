@@ -1,8 +1,7 @@
 import apiRequest from "./apiRequest";
-const url = "https://localhost:3000/api/v1";
 
 const loginRequest = async ({ email, password }) => {
-  const { data } = await apiRequest.post(`${url}/user/login`, {
+  const { data } = await apiRequest.post(`/user/login`, {
     email,
     password,
   });
@@ -10,18 +9,18 @@ const loginRequest = async ({ email, password }) => {
 };
 
 const logoutRequest = async () => {
-  const { data } = await apiRequest.get(`${url}/user/logout`);
+  const { data } = await apiRequest.get(`/user/logout`);
   return data;
 };
 
 const initLogin = async () => {
-  const { data } = await apiRequest.get(`${url}/user/loginStatus`);
+  const { data } = await apiRequest.get(`/user/loginStatus`);
 
   return data;
 };
 
 const signupRequest = async ({ name, email, password, passwordConfirm }) => {
-  const { data } = await apiRequest.post(`${url}/user/signup`, {
+  const { data } = await apiRequest.post(`/user/signup`, {
     name,
     email,
     password,
