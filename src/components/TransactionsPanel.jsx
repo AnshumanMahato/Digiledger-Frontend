@@ -33,21 +33,21 @@ function TransactionsPanel() {
   const totalPages = 1;
   const transactions = [
     {
-      date: "1669668738",
+      timestamp: "1669668738",
       party: "Alta Blaszczynski",
       amount: 166498.95,
       type: "expense",
       description: "Maecenas tincidunt lacus at velit.",
     },
     {
-      date: "1655167165",
+      timestamp: "1655167165",
       party: "Rickard Shalliker",
       amount: 24645.35,
       type: "income",
       description: "Mauris sit amet eros.",
     },
     {
-      date: "1683793316",
+      timestamp: "1683793316",
       party: "Pascale Lorking",
       amount: 70445.19,
       type: "expense",
@@ -55,7 +55,7 @@ function TransactionsPanel() {
         "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
     },
     {
-      date: "1683793316",
+      timestamp: "1683793316",
       party: "Pascale Lorking",
       amount: 70445.19,
       type: "expense",
@@ -63,7 +63,7 @@ function TransactionsPanel() {
         "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
     },
     {
-      date: "1683793316",
+      timestamp: "1683793316",
       party: "Pascale Lorking",
       amount: 70445.19,
       type: "expense",
@@ -71,7 +71,7 @@ function TransactionsPanel() {
         "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
     },
     {
-      date: "1683793316",
+      timestamp: "1683793316",
       party: "Pascale Lorking",
       amount: 70445.19,
       type: "expense",
@@ -79,7 +79,7 @@ function TransactionsPanel() {
         "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
     },
     {
-      date: "1683793316",
+      timestamp: "1683793316",
       party: "Pascale Lorking",
       amount: 70445.19,
       type: "expense",
@@ -87,7 +87,7 @@ function TransactionsPanel() {
         "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
     },
     {
-      date: "1683793316",
+      timestamp: "1683793316",
       party: "Pascale Lorking",
       amount: 70445.19,
       type: "expense",
@@ -95,7 +95,7 @@ function TransactionsPanel() {
         "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
     },
     {
-      date: "1683793316",
+      timestamp: "1683793316",
       party: "Pascale Lorking",
       amount: 70445.19,
       type: "expense",

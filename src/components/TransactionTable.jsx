@@ -26,25 +26,43 @@ function TransactionTable({ transactions }) {
       },
     },
     {
-      label: "Amount",
-      render: (transaction) => (
-        <div className="flex justify-end items-center ml-10">
-          <p className="text-lg">{`$${transaction.amount}`}</p>
-        </div>
-      ),
-    },
-    {
-      label: "Amount",
+      label: "Income",
       render: (transaction) => {
         const classes = classNames(
-          "hidden sm:flex justify-end items-center ml-10",
+          "flex justify-end items-center ml-10 font-medium",
           {
-            invisible: transaction.type === "income",
+            "sm:invisible": transaction.type === "expense",
           }
         );
         return (
           <div className={classes}>
-            <p className="text-lg">{`-$${transaction.amount}`}</p>
+            {transaction.type === "income" && (
+              <p className="text-lg text-green-400">{`+$${transaction.amount}`}</p>
+            )}
+            {transaction.type === "expense" && (
+              <p className="text-lg text-red-400">{`-$${transaction.amount}`}</p>
+            )}
+          </div>
+        );
+      },
+    },
+    {
+      label: "Expense",
+      render: (transaction) => {
+        const classes = classNames(
+          "hidden sm:flex justify-end items-center ml-10 font-medium",
+          {
+            "sm:invisible": transaction.type === "income",
+          }
+        );
+        return (
+          <div className={classes}>
+            {transaction.type === "income" && (
+              <p className="text-lg text-green-400">{`+$${transaction.amount}`}</p>
+            )}
+            {transaction.type === "expense" && (
+              <p className="text-lg text-red-400">{`-$${transaction.amount}`}</p>
+            )}
           </div>
         );
       },
