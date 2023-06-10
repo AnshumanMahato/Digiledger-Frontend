@@ -6,6 +6,7 @@ import Actions from "./components/Actions";
 import SortOptions from "./components/SortOptions";
 import CategoryOptions from "./components/CategoryOptions";
 import PartyOptions from "./components/PartyOptions";
+import useUserContext from "../../hooks/useUserContext";
 
 const SET_PREV_FILTERS = -1;
 const RESET = 0;
@@ -41,6 +42,10 @@ function FilterPanel({ filters, updateFilters, showFilters, onClose }) {
     document.body.classList.add("overflow-hidden");
     return () => document.body.classList.remove("overflow-hidden");
   }, []);
+
+  const {
+    currentUser: { categories, parties },
+  } = useUserContext();
 
   const [option, setOption] = useState("sort");
   const [selectedFilters, dispatch] = useReducer(reducer, { ...filters });
@@ -115,6 +120,7 @@ function FilterPanel({ filters, updateFilters, showFilters, onClose }) {
           <CategoryOptions
             current={selectedFilters.category}
             update={updateCategoryField}
+            options={categories}
           />
         )}
 
@@ -122,6 +128,7 @@ function FilterPanel({ filters, updateFilters, showFilters, onClose }) {
           <PartyOptions
             current={selectedFilters.party}
             update={updatePartyField}
+            options={parties}
           />
         )}
       </div>

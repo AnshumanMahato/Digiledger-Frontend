@@ -27,12 +27,14 @@ function TransactionsPanel() {
     (async () => {
       const { data } = await getTransactions({ ...filters, page: currentPage });
       transactions.current = data.docs;
+      totalPages.current = data.totalPages;
       setIsLoading(false);
     })();
   }, [currentPage, filters]);
 
   const updateFilters = (newFilters) => {
     setFilters(newFilters);
+    setCurrentPage(1);
     setIsLoading(true);
   };
   const updatePage = (newPage) => {
@@ -57,13 +59,19 @@ function TransactionsPanel() {
         </Button>
       </div>
       {!isLoading && <TransactionTable transactions={transactions.current} />}
-      <Pagination />
-      <FilterPanel
-        showFilters={showFilters}
-        filters={filters}
-        updateFilters={updateFilters}
-        onClose={handleFilterPanel}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages.current}
+        updatePage={updatePage}
       />
+      {showFilters && (
+        <FilterPanel
+          showFilters={showFilters}
+          filters={filters}
+          updateFilters={updateFilters}
+          onClose={handleFilterPanel}
+        />
+      )}
     </div>
   );
 }

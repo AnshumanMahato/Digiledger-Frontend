@@ -15,7 +15,11 @@ function Sidebar({
     );
 
     return (
-      <li className={classes} onClick={() => handleOptionClick(filter.option)}>
+      <li
+        className={classes}
+        onClick={() => handleOptionClick(filter.option)}
+        key={filter.option}
+      >
         {filter.label}
       </li>
     );
