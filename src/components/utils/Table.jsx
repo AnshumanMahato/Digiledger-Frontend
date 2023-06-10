@@ -1,4 +1,5 @@
 function Table({ data, config, keyFn }) {
+  console.log(data);
   const renderedRows = data.map((el) => {
     const renderedCells = config.map((attr) => (
       <td className="py-4" key={attr.label}>

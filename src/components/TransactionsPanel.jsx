@@ -4,9 +4,11 @@ import TransactionTable from "./TransactionTable";
 import FilterPanel from "./FilterPanel";
 import Pagination from "./Pagination";
 import Button from "./utils/Button";
+import Loading from "./Loading";
 import { getTransactions } from "../services/transactionServices";
 
 function TransactionsPanel() {
+  const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [showFilters, setShowFilters] = useState(false);
 
@@ -17,96 +19,33 @@ function TransactionsPanel() {
     startDate: null,
     endDate: null,
   });
-  let data = useRef();
+
+  const transactions = useRef([]);
+  const totalPages = useRef(null);
+
   useEffect(() => {
     (async () => {
-      data.current = await getTransactions({ ...filters, page: currentPage });
+      const { data } = await getTransactions({ ...filters, page: currentPage });
+      transactions.current = data.docs;
+      setIsLoading(false);
     })();
   }, [currentPage, filters]);
 
-  const updateFilters = (newFilters) => setFilters(newFilters);
-  const updatePage = (newPage) => setCurrentPage(newPage);
+  const updateFilters = (newFilters) => {
+    setFilters(newFilters);
+    setIsLoading(true);
+  };
+  const updatePage = (newPage) => {
+    setCurrentPage(newPage);
+    setIsLoading(true);
+  };
 
   const handleFilterPanel = () => {
     setShowFilters((current) => !current);
   };
 
-  const transactions = [
-    {
-      timestamp: "1669668738",
-      party: "Alta Blaszczynski",
-      amount: 166498.95,
-      type: "expense",
-      description: "Maecenas tincidunt lacus at velit.",
-    },
-    {
-      timestamp: "1655167165",
-      party: "Rickard Shalliker",
-      amount: 24645.35,
-      type: "income",
-      description: "Mauris sit amet eros.",
-    },
-    {
-      timestamp: "1683793316",
-      party: "Pascale Lorking",
-      amount: 70445.19,
-      type: "expense",
-      description:
-        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
-    },
-    {
-      timestamp: "1683793316",
-      party: "Pascale Lorking",
-      amount: 70445.19,
-      type: "expense",
-      description:
-        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
-    },
-    {
-      timestamp: "1683793316",
-      party: "Pascale Lorking",
-      amount: 70445.19,
-      type: "expense",
-      description:
-        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
-    },
-    {
-      timestamp: "1683793316",
-      party: "Pascale Lorking",
-      amount: 70445.19,
-      type: "expense",
-      description:
-        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
-    },
-    {
-      timestamp: "1683793316",
-      party: "Pascale Lorking",
-      amount: 70445.19,
-      type: "expense",
-      description:
-        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
-    },
-    {
-      timestamp: "1683793316",
-      party: "Pascale Lorking",
-      amount: 70445.19,
-      type: "expense",
-      description:
-        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
-    },
-    {
-      timestamp: "1683793316",
-      party: "Pascale Lorking",
-      amount: 70445.19,
-      type: "expense",
-      description:
-        "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
-    },
-  ];
-
   return (
     <div className="container mx-auto">
-      {console.log(data.current)}
       <div className="flex justify-between">
         <div className="flex-grow"></div>
         <Button
@@ -117,16 +56,14 @@ function TransactionsPanel() {
           <span className="ml-2">Filter</span>
         </Button>
       </div>
-      <TransactionTable transactions={transactions} />
+      {!isLoading && <TransactionTable transactions={transactions.current} />}
       <Pagination />
-      {
-        <FilterPanel
-          showFilters={showFilters}
-          filters={filters}
-          updateFilters={updateFilters}
-          onClose={handleFilterPanel}
-        />
-      }
+      <FilterPanel
+        showFilters={showFilters}
+        filters={filters}
+        updateFilters={updateFilters}
+        onClose={handleFilterPanel}
+      />
     </div>
   );
 }
