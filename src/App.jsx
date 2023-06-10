@@ -16,9 +16,7 @@ import {
 const dashboardLoader = async () => {
   const limit = 5,
     sort = "-timestamp";
-  const {
-    data: { docs: transactions },
-  } = await getTransactions({ limit, sort });
+  const { docs: transactions } = await getTransactions({ limit, sort });
   const { data: monthlyStats } = await getCurrentMonthStats();
   return { transactions, monthlyStats };
 };

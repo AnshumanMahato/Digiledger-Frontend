@@ -4,6 +4,7 @@ import Section from "../components/utils/Section";
 import TransactionTable from "../components/TransactionTable";
 import { Link, useLoaderData } from "react-router-dom";
 import useAuthorization from "../hooks/useAuthorization";
+import NoTransactions from "../components/NoTransactions";
 
 function Dashboard() {
   useAuthorization();
@@ -11,7 +12,6 @@ function Dashboard() {
 
   return (
     <main className="flex flex-col justify-between items-center w-full">
-      {console.log(monthlyStats)}
       <Section className="flex flex-col items-center mb-8">
         <SectionHeader className="relative z-1 mb-8">
           {new Intl.DateTimeFormat("en-US", {
@@ -24,6 +24,7 @@ function Dashboard() {
           expense={monthlyStats.expense || 0}
         />
       </Section>
+
       <Section className="flex flex-col items-center">
         <div className="container flex justify-between items-center mb-2">
           <SectionHeader>Transactions</SectionHeader>
@@ -34,7 +35,12 @@ function Dashboard() {
             See All
           </Link>
         </div>
-        <TransactionTable transactions={transactions} />
+
+        {transactions.length === 0 ? (
+          <NoTransactions />
+        ) : (
+          <TransactionTable transactions={transactions} />
+        )}
       </Section>
     </main>
   );

@@ -6,6 +6,7 @@ import Pagination from "./Pagination";
 import Button from "./utils/Button";
 import Loading from "./Loading";
 import { getTransactions } from "../services/transactionServices";
+import NoTransactions from "./NoTransactions";
 
 function TransactionsPanel() {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +26,7 @@ function TransactionsPanel() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await getTransactions({ ...filters, page: currentPage });
+      const data = await getTransactions({ ...filters, page: currentPage });
       transactions.current = data.docs;
       totalPages.current = data.totalPages;
       setIsLoading(false);
@@ -58,12 +59,20 @@ function TransactionsPanel() {
           <span className="ml-2">Filter</span>
         </Button>
       </div>
-      {!isLoading && <TransactionTable transactions={transactions.current} />}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages.current}
-        updatePage={updatePage}
-      />
+
+      {!totalPages.current && <NoTransactions />}
+
+      {!isLoading && totalPages.current !== 0 && (
+        <>
+          <TransactionTable transactions={transactions.current} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages.current}
+            updatePage={updatePage}
+          />
+        </>
+      )}
+
       {showFilters && (
         <FilterPanel
           showFilters={showFilters}

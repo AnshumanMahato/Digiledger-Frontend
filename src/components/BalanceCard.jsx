@@ -7,7 +7,7 @@ function BalanceCard({ income, expense }) {
         <div className="flex flex-col mb-5">
           <span className="text-md mb-1">Balance</span>
           <span className=" text-4xl font-bold">
-            {balance && balanceState} ${Math.abs(balance)}
+            {balance !== 0 && balanceState} ${Math.abs(balance)}
           </span>
         </div>
         <div className="flex justify-between items-center">

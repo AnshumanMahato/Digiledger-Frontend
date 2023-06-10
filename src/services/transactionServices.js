@@ -1,16 +1,27 @@
 import apiRequest from "./apiRequest";
 
 const getTransactions = async (filters) => {
-  let query = "";
-  if (filters) {
-    Object.keys(filters).forEach((key) => {
-      if (filters[key]) {
-        query += `${key}=${filters[key]}&`;
-      }
-    });
+  try {
+    let query = "";
+    if (filters) {
+      Object.keys(filters).forEach((key) => {
+        if (filters[key]) {
+          query += `${key}=${filters[key]}&`;
+        }
+      });
+    }
+    const {
+      data: { data },
+    } = await apiRequest(`/transaction?${query}`);
+    return data;
+  } catch (err) {
+    if (err.response.status === 404)
+      return {
+        count: 0,
+        totalPages: 0,
+        docs: [],
+      };
   }
-  const { data } = await apiRequest(`/transaction?${query}`);
-  return data;
 };
 
 const getCurrentMonthStats = async () => {

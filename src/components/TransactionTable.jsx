@@ -70,7 +70,7 @@ function TransactionTable({ transactions }) {
 
   const keyFn = (transaction) => transaction._id;
 
-  return <Table data={transactions} config={config} keyFn={keyFn}></Table>;
+  return <Table data={transactions} config={config} keyFn={keyFn} />;
 }
 
 export default TransactionTable;
