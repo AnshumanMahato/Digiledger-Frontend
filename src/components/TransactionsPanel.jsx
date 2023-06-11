@@ -4,7 +4,6 @@ import TransactionTable from "./TransactionTable";
 import FilterPanel from "./FilterPanel";
 import Pagination from "./Pagination";
 import Button from "./utils/Button";
-import Loading from "./Loading";
 import { getTransactions } from "../services/transactionServices";
 import NoTransactions from "./NoTransactions";
 

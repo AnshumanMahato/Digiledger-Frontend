@@ -1,7 +1,7 @@
 import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "react-datepicker/dist/react-datepicker.css";
+
 import "./index.css";
 
 const el = document.getElementById("root");

@@ -1,26 +1,70 @@
 import FormGroup from "./FormGroup";
 import Input from "./Input";
 import Button from "../utils/Button";
-import DatePicker from "react-datepicker";
+import DateTime from "./DateTime";
 
 function TransactionForm() {
   return (
-    <form className="border-2 border-primary shadow-md shadow-primary/50 px-8 py-10 my-10 rounded-2xl bg-accent text-white font-poppins">
+    <form className="border-2 border-primary shadow-md shadow-primary/50 px-8 py-10 my-10 rounded-2xl bg-accent text-white font-poppins grid grid-cols-2 gap-x-6">
       <FormGroup>
-        <Input type="number" label="Amount" id="amount" step="0.01" />
+        <label htmlFor="amount" className="block text-xl font-bold mb-3">
+          Amount
+        </label>
+        <input
+          type="number"
+          name="amount"
+          id="amount"
+          className="form__input placeholder:text-slate-500"
+        />
       </FormGroup>
       <FormGroup>
-        <label>Date and Time</label>
-        <DatePicker showIcon showTimeInput />
+        <label htmlFor="timestamp" className="block text-xl font-bold mb-3">
+          Date
+        </label>
+        <DateTime
+          showIcon
+          showTime
+          className=""
+          name="timestamp"
+          id="timestamp"
+        />
       </FormGroup>
       <FormGroup>
-        <Input type="text" label="Category" id="category" />
+        <label htmlFor="category" className="block text-xl font-bold mb-3">
+          Category
+        </label>
+        <input
+          type="text"
+          name="category"
+          id="category"
+          className="form__input placeholder:text-slate-500"
+        />
       </FormGroup>
       <FormGroup>
-        <Input type="text" label="Category" id="category" />
+        <label htmlFor="party" className="block text-xl font-bold mb-3">
+          Party
+        </label>
+        <input
+          type="text"
+          name="party"
+          id="party"
+          className="form__input placeholder:text-slate-500"
+        />
       </FormGroup>
-      <div className="flex justify-center items-center">
-        <Button success>Sign In</Button>
+      <FormGroup className="col-span-full">
+        <label htmlFor="description" className="block text-xl font-bold mb-3">
+          Note
+        </label>
+        <textarea
+          name="description"
+          id="desription"
+          cols="50"
+          rows="3"
+          className="form__input"
+        ></textarea>
+      </FormGroup>
+      <div className="flex justify-center items-center col-span-full">
+        <Button success>Add Income</Button>
       </div>
     </form>
   );

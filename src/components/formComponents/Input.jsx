@@ -1,4 +1,4 @@
-function Input({ label, id, type, registerFields, ...rest }) {
+function Input({ label, id, type, register, ...rest }) {
   return (
     <>
       <label htmlFor={id} className="block text-xl font-bold mb-3">
@@ -9,7 +9,7 @@ function Input({ label, id, type, registerFields, ...rest }) {
         name={id}
         id={id}
         className="form__input placeholder:text-slate-500"
-        {...registerFields}
+        {...register}
         {...rest}
       />
     </>
