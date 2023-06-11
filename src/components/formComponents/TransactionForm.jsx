@@ -2,8 +2,10 @@ import FormGroup from "./FormGroup";
 import Button from "../utils/Button";
 import DateTime from "./DateTime";
 import { Controller, useForm } from "react-hook-form";
+import { AiOutlineClose } from "react-icons/ai";
+import classNames from "classnames";
 
-function TransactionForm() {
+function TransactionForm({ type, mode, onClose: close }) {
   const {
     control,
     register,
@@ -13,13 +15,21 @@ function TransactionForm() {
 
   const onSubmit = (data) => console.log(data);
 
+  const formClasses = classNames(
+    "relative border-2 border-white shadow-white/50 shadow-md px-5 py-8 sm:px-8 sm:py-10 my-10 rounded-2xl bg-accent text-white font-poppins grid grid-cols-2 gap-x-4 sm:gap-x-6"
+  );
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="border-2 border-primary shadow-md shadow-primary/50 px-8 py-10 my-10 rounded-2xl bg-accent text-white font-poppins grid grid-cols-2 gap-x-6"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className={formClasses}>
+      <span
+        onClick={close}
+        className="text-white text-xl font-bold absolute right-[5%] top-[5%] p-1 hover:text-red-400 cursor-pointer"
+      >
+        <AiOutlineClose />
+      </span>
+      <FormGroup className="col-span-full"></FormGroup>
       <FormGroup>
-        <label htmlFor="amount" className="block text-xl font-bold mb-3">
+        <label htmlFor="amount" className="block text-md font-bold mb-3">
           Amount
         </label>
         <input
@@ -37,7 +47,7 @@ function TransactionForm() {
         )}
       </FormGroup>
       <FormGroup>
-        <label htmlFor="timestamp" className="block text-xl font-bold mb-3">
+        <label htmlFor="timestamp" className="block text-md font-bold mb-3">
           Date
         </label>
         <Controller
@@ -51,7 +61,7 @@ function TransactionForm() {
         )}
       </FormGroup>
       <FormGroup>
-        <label htmlFor="category" className="block text-xl font-bold mb-3">
+        <label htmlFor="category" className="block text-md font-bold mb-3">
           Category
         </label>
         <input
@@ -72,7 +82,7 @@ function TransactionForm() {
         )}
       </FormGroup>
       <FormGroup>
-        <label htmlFor="party" className="block text-xl font-bold mb-3">
+        <label htmlFor="party" className="block text-md font-bold mb-3">
           Party
         </label>
         <input
@@ -97,7 +107,7 @@ function TransactionForm() {
         )}
       </FormGroup>
       <FormGroup className="col-span-full">
-        <label htmlFor="description" className="block text-xl font-bold mb-3">
+        <label htmlFor="description" className="block text-md font-bold mb-3">
           Note
         </label>
         <textarea
@@ -114,8 +124,14 @@ function TransactionForm() {
           <p>This field must have no more than 100 characters</p>
         )}
       </FormGroup>
-      <div className="flex justify-center items-center col-span-full">
-        <Button success>Add Income</Button>
+      <div className="flex justify-evenly items-center col-span-full">
+        {mode === "entry" && (
+          <>
+            {type === "income" && <Button success>Add Income</Button>}
+            {type === "expense" && <Button success>Add Expense</Button>}
+          </>
+        )}
+        {mode === "view" && <></>}
       </div>
     </form>
   );

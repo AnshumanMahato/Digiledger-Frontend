@@ -11,7 +11,7 @@ function Dashboard() {
   const { transactions, monthlyStats } = useLoaderData();
 
   return (
-    <main className="flex flex-col justify-between items-center w-full">
+    <main className="flex flex-col justify-evenly items-center w-full flex-grow">
       <Section className="flex flex-col items-center mb-8">
         <SectionHeader className="relative z-1 mb-8">
           {new Intl.DateTimeFormat("en-US", {
