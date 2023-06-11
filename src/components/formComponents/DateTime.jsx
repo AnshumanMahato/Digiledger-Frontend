@@ -1,10 +1,9 @@
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function DateTime(className, ...rest) {
-  const [startDate, setStartDate] = useState(new Date());
-  const RefInput = forwardRef(({ value, onClick }, ref) => (
+function DateTime({ field }) {
+  const RefInput = forwardRef(({ value, onClick, onChange }, ref) => (
     <input
       type="text"
       name="timesatmp"
@@ -13,19 +12,20 @@ function DateTime(className, ...rest) {
       value={value}
       ref={ref}
       onClick={onClick}
+      onChange={onChange}
+      placeholder="dd/MM/yyyy hh:mm aa"
     />
   ));
 
   return (
     <DatePicker
-      selected={startDate}
-      onChange={(date) => setStartDate(date)}
+      selected={field.value}
+      onChange={field.onChange}
       customInput={<RefInput />}
       dateFormat="dd/MM/yyyy hh:mm aa"
       showTimeInput
       timeInputLabel="Time"
       maxDate={new Date()}
-      {...rest}
     />
   );
 }
