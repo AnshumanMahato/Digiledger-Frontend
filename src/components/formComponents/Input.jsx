@@ -118,12 +118,12 @@ function InputDescription({ register, errors }) {
   );
 }
 
-function InputDate({ control, errors }) {
+function InputDate({ fieldname, control, errors }) {
   return (
     <Input
       label="Date"
       type="date"
-      name="timestamp"
+      name={fieldname || "timestamp"}
       control={control}
       errors={errors}
       rules={{

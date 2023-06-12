@@ -2,6 +2,7 @@ import { useState } from "react";
 import Table from "./utils/Table";
 import classNames from "classnames";
 import Modal from "./Modal";
+import TransactionViewForm from "./formComponents/TransactionViewForm";
 
 function TransactionTable({ transactions }) {
   const [activeTransaction, setActiveTransaction] = useState(null);
@@ -86,10 +87,10 @@ function TransactionTable({ transactions }) {
       />
       {activeTransaction && (
         <Modal onClose={() => setActiveTransaction(null)}>
-          <div>
-            Hello
-            {console.log(activeTransaction)}
-          </div>
+          <TransactionViewForm
+            onClose={() => setActiveTransaction(null)}
+            transaction={activeTransaction}
+          />
         </Modal>
       )}
     </>

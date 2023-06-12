@@ -10,7 +10,7 @@ import {
   InputParty,
 } from "./Input";
 
-function TransactionForm({ type, onClose: close }) {
+function TransactionViewForm({ transaction, onClose: close }) {
   const {
     control,
     register,
@@ -32,6 +32,7 @@ function TransactionForm({ type, onClose: close }) {
         <AiOutlineClose />
       </span>
       <FormGroup className="col-span-full"></FormGroup>
+      {console.log(errors)}
       <FormGroup>
         <InputAmount register={register} errors={errors} />
       </FormGroup>
@@ -47,12 +48,16 @@ function TransactionForm({ type, onClose: close }) {
       <FormGroup className="col-span-full">
         <InputDescription register={register} errors={errors} />
       </FormGroup>
-      <div className="flex justify-evenly items-center col-span-full">
-        {type === "income" && <Button success>Add Income</Button>}
-        {type === "expense" && <Button success>Add Expense</Button>}
+      <div className="col-span-full grid grid-cols-8 gap-6">
+        <Button success className="col-start-2 col-span-3">
+          Edit
+        </Button>
+        <Button danger className="col-start-5 col-span-3">
+          Delete
+        </Button>
       </div>
     </form>
   );
 }
 
-export default TransactionForm;
+export default TransactionViewForm;

@@ -14,7 +14,7 @@ function Button({
 }) {
   const classes = classnames(
     className,
-    "flex items-center font-medium transition-all",
+    "flex items-center justify-center font-medium transition-all",
     {
       "rounded-full": rounded,
       border: !plain,
