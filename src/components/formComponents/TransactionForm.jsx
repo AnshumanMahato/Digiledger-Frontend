@@ -4,8 +4,15 @@ import DateTime from "./DateTime";
 import { Controller, useForm } from "react-hook-form";
 import { AiOutlineClose } from "react-icons/ai";
 import classNames from "classnames";
+import {
+  InputAmount,
+  InputCategory,
+  InputDate,
+  InputDescription,
+  InputParty,
+} from "./Input";
 
-function TransactionForm({ type, mode, onClose: close }) {
+function TransactionForm({ type, onClose: close }) {
   const {
     control,
     register,
@@ -28,110 +35,25 @@ function TransactionForm({ type, mode, onClose: close }) {
         <AiOutlineClose />
       </span>
       <FormGroup className="col-span-full"></FormGroup>
+      {console.log(errors)}
       <FormGroup>
-        <label htmlFor="amount" className="block text-md font-bold mb-3">
-          Amount
-        </label>
-        <input
-          type="number"
-          name="amount"
-          id="amount"
-          className="form__input placeholder:text-slate-500"
-          {...register("amount", { required: true, min: 1 })}
-        />
-        {errors.amount && errors.amount.type === "required" && (
-          <p>This field is required</p>
-        )}
-        {errors.amount && errors.amount.type === "min" && (
-          <p>Minimum amount is 1</p>
-        )}
+        <InputAmount register={register} errors={errors} />
       </FormGroup>
       <FormGroup>
-        <label htmlFor="timestamp" className="block text-md font-bold mb-3">
-          Date
-        </label>
-        <Controller
-          control={control}
-          name="timestamp"
-          render={({ field }) => <DateTime className="" field={field} />}
-          rules={{ required: true }}
-        />
-        {errors.timestamp && errors.timestamp.type === "required" && (
-          <p>This field is required</p>
-        )}
+        <InputDate control={control} errors={errors} />
       </FormGroup>
       <FormGroup>
-        <label htmlFor="category" className="block text-md font-bold mb-3">
-          Category
-        </label>
-        <input
-          type="text"
-          name="category"
-          id="category"
-          className="form__input placeholder:text-slate-500"
-          {...register("category", {
-            maxLength: 10,
-            minLength: 3,
-          })}
-        />
-        {errors.category && errors.category.type === "minLength" && (
-          <p>This field must have at least 3 characters</p>
-        )}
-        {errors.category && errors.category.type === "maxLength" && (
-          <p>This field must have no more than 10 characters</p>
-        )}
+        <InputCategory register={register} errors={errors} />
       </FormGroup>
       <FormGroup>
-        <label htmlFor="party" className="block text-md font-bold mb-3">
-          Party
-        </label>
-        <input
-          type="text"
-          name="party"
-          id="party"
-          className="form__input placeholder:text-slate-500"
-          {...register("party", {
-            required: true,
-            minLength: 3,
-            maxLength: 15,
-          })}
-        />
-        {errors.party && errors.party.type === "required" && (
-          <p>This field is required</p>
-        )}
-        {errors.party && errors.party.type === "minLength" && (
-          <p>This field must have at least 3 characters</p>
-        )}
-        {errors.party && errors.party.type === "maxLength" && (
-          <p>This field must have no more than 15 characters</p>
-        )}
+        <InputParty register={register} errors={errors} />
       </FormGroup>
       <FormGroup className="col-span-full">
-        <label htmlFor="description" className="block text-md font-bold mb-3">
-          Note
-        </label>
-        <textarea
-          name="description"
-          id="desription"
-          cols="50"
-          rows="3"
-          className="form__input"
-          {...register("description", {
-            maxLength: 100,
-          })}
-        ></textarea>
-        {errors.description && errors.description.type === "maxLength" && (
-          <p>This field must have no more than 100 characters</p>
-        )}
+        <InputDescription register={register} errors={errors} />
       </FormGroup>
       <div className="flex justify-evenly items-center col-span-full">
-        {mode === "entry" && (
-          <>
-            {type === "income" && <Button success>Add Income</Button>}
-            {type === "expense" && <Button success>Add Expense</Button>}
-          </>
-        )}
-        {mode === "view" && <></>}
+        {type === "income" && <Button success>Add Income</Button>}
+        {type === "expense" && <Button success>Add Expense</Button>}
       </div>
     </form>
   );

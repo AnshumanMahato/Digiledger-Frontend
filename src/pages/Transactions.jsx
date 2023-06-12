@@ -35,7 +35,6 @@ function Transactions() {
           >
             <TransactionForm
               type={showModal}
-              mode="entry"
               onClose={() => setShowModal(null)}
             />
           </Modal>
