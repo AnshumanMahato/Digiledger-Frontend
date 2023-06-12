@@ -1,9 +1,7 @@
 import FormGroup from "./FormGroup";
 import Button from "../utils/Button";
-import DateTime from "./DateTime";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { AiOutlineClose } from "react-icons/ai";
-import classNames from "classnames";
 import {
   InputAmount,
   InputCategory,
@@ -22,12 +20,11 @@ function TransactionForm({ type, onClose: close }) {
 
   const onSubmit = (data) => console.log(data);
 
-  const formClasses = classNames(
-    "relative border-2 border-white shadow-white/50 shadow-md px-5 py-8 sm:px-8 sm:py-10 my-10 rounded-2xl bg-accent text-white font-poppins grid grid-cols-2 gap-x-4 sm:gap-x-6"
-  );
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={formClasses}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="relative border-2 border-white shadow-white/50 shadow-md px-5 py-8 sm:px-8 sm:py-10 my-10 rounded-2xl bg-accent text-white font-poppins grid grid-cols-2 gap-x-4 sm:gap-x-6"
+    >
       <span
         onClick={close}
         className="text-white text-xl font-bold absolute right-[5%] top-[5%] p-1 hover:text-red-400 cursor-pointer"

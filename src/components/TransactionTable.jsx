@@ -1,7 +1,13 @@
+import { useState } from "react";
 import Table from "./utils/Table";
 import classNames from "classnames";
+import Modal from "./Modal";
 
 function TransactionTable({ transactions }) {
+  const [activeTransaction, setActiveTransaction] = useState(null);
+
+  const showTransaction = (transaction) => setActiveTransaction(transaction);
+
   const config = [
     {
       label: "Transaction detail",
@@ -70,7 +76,24 @@ function TransactionTable({ transactions }) {
 
   const keyFn = (transaction) => transaction._id;
 
-  return <Table data={transactions} config={config} keyFn={keyFn} />;
+  return (
+    <>
+      <Table
+        data={transactions}
+        config={config}
+        keyFn={keyFn}
+        onClick={showTransaction}
+      />
+      {activeTransaction && (
+        <Modal onClose={() => setActiveTransaction(null)}>
+          <div>
+            Hello
+            {console.log(activeTransaction)}
+          </div>
+        </Modal>
+      )}
+    </>
+  );
 }
 
 export default TransactionTable;

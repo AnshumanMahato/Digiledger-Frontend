@@ -85,6 +85,25 @@
     box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.303);
   }
 
+  .transaction td {
+    @apply cursor-pointer;
+    @apply border-white/25;
+    @apply border-t-2;
+    @apply border-b-2;
+  }
+  .transaction td:first-child {
+    @apply border-l-2;
+    @apply rounded-l-xl;
+  }
+  .transaction td:last-child {
+    @apply border-r-2;
+    @apply rounded-r-xl;
+  }
+
+  .transaction:hover td {
+    @apply border-primary;
+  }
+
   .form__input {
     resize: none;
     display: block;
