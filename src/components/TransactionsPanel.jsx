@@ -1,25 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
-import { BsFilter } from "react-icons/bs";
+import React, { useEffect, useRef } from "react";
 import TransactionTable from "./TransactionTable";
-import FilterPanel from "./FilterPanel";
 import Pagination from "./Pagination";
-import Button from "./utils/Button";
 import { getTransactions } from "../services/transactionServices";
 import NoTransactions from "./NoTransactions";
 
-function TransactionsPanel() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [showFilters, setShowFilters] = useState(false);
-
-  const [filters, setFilters] = useState({
-    sort: "-timestamp",
-    category: null,
-    party: null,
-    startDate: null,
-    endDate: null,
-  });
-
+function TransactionsPanel({
+  currentPage,
+  filters,
+  updatePage,
+  isLoading,
+  onLoad,
+}) {
   const transactions = useRef([]);
   const totalPages = useRef(null);
 
@@ -28,37 +19,12 @@ function TransactionsPanel() {
       const data = await getTransactions({ ...filters, page: currentPage });
       transactions.current = data.docs;
       totalPages.current = data.totalPages;
-      setIsLoading(false);
+      onLoad();
     })();
-  }, [currentPage, filters]);
-
-  const updateFilters = (newFilters) => {
-    setFilters(newFilters);
-    setCurrentPage(1);
-    setIsLoading(true);
-  };
-  const updatePage = (newPage) => {
-    setCurrentPage(newPage);
-    setIsLoading(true);
-  };
-
-  const handleFilterPanel = () => {
-    setShowFilters((current) => !current);
-  };
+  }, [currentPage, filters, onLoad]);
 
   return (
-    <div className="container mx-auto">
-      <div className="flex justify-between">
-        <div className="flex-grow"></div>
-        <Button
-          className="border-2 rounded-md ml-5 flex items-center"
-          onClick={handleFilterPanel}
-        >
-          <BsFilter />
-          <span className="ml-2">Filter</span>
-        </Button>
-      </div>
-
+    <>
       {!totalPages.current && <NoTransactions />}
 
       {!isLoading && totalPages.current !== 0 && (
@@ -71,16 +37,7 @@ function TransactionsPanel() {
           />
         </>
       )}
-
-      {showFilters && (
-        <FilterPanel
-          showFilters={showFilters}
-          filters={filters}
-          updateFilters={updateFilters}
-          onClose={handleFilterPanel}
-        />
-      )}
-    </div>
+    </>
   );
 }
 
