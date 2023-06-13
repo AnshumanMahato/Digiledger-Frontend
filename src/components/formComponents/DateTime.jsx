@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function DateTime({ field }) {
+function DateTime({ field, disabled }) {
   const RefInput = forwardRef(({ value, onClick, onChange }, ref) => (
     <input
       type="text"
@@ -14,6 +14,7 @@ function DateTime({ field }) {
       onClick={onClick}
       onChange={onChange}
       placeholder="dd/MM/yyyy hh:mm aa"
+      disabled={disabled}
     />
   ));
 
@@ -26,6 +27,7 @@ function DateTime({ field }) {
       showTimeInput
       timeInputLabel="Time"
       maxDate={new Date()}
+      disabled={disabled}
     />
   );
 }

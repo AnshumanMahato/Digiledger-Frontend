@@ -2,44 +2,46 @@ import { forwardRef } from "react";
 import { Controller } from "react-hook-form";
 import DateTime from "./DateTime";
 
-const Input = forwardRef(({ label, type, id, name, errors, ...rest }, ref) => (
-  <>
-    <label htmlFor={id} className="block text-md font-bold mb-3">
-      {label}
-    </label>
-    {type === "textarea" && (
-      <textarea
-        name={name}
-        id={id}
-        className="form__input"
-        ref={ref}
-        {...rest}
-      />
-    )}
-    {type === "date" && (
-      <Controller
-        name={name}
-        render={({ field }) => <DateTime field={field} />}
-        {...rest}
-      />
-    )}
-    {type !== "textarea" && type !== "date" && (
-      <input
-        type={type}
-        id={id}
-        name={name}
-        className="form__input placeholder:text-slate-500"
-        ref={ref}
-        {...rest}
-      />
-    )}
-    {errors[name] && <p>{errors[name].message}</p>}
-  </>
-));
+const Input = forwardRef(
+  ({ label, type, id, name, errors, control, ...rest }, ref) => (
+    <>
+      <label htmlFor={id} className="block text-md font-bold mb-3">
+        {label}
+      </label>
+      {type === "textarea" && (
+        <textarea
+          name={name}
+          id={id}
+          className="form__input"
+          ref={ref}
+          {...rest}
+        />
+      )}
+      {type === "date" && (
+        <Controller
+          name={name}
+          render={({ field }) => <DateTime field={field} {...rest} />}
+          control={control}
+        />
+      )}
+      {type !== "textarea" && type !== "date" && (
+        <input
+          type={type}
+          id={id}
+          name={name}
+          className="form__input placeholder:text-slate-500"
+          ref={ref}
+          {...rest}
+        />
+      )}
+      {errors[name] && <p>{errors[name].message}</p>}
+    </>
+  )
+);
 
 /* ************************** Transaction Form Fields ************************ */
 
-function InputAmount({ register, errors }) {
+function InputAmount({ register, errors, ...rest }) {
   return (
     <Input
       label="Amount"
@@ -51,11 +53,12 @@ function InputAmount({ register, errors }) {
         min: { value: 1, message: "Minimum amount is 1" },
       })}
       step="0.01"
+      {...rest}
     />
   );
 }
 
-function InputCategory({ register, errors }) {
+function InputCategory({ register, errors, ...rest }) {
   return (
     <Input
       label="Category"
@@ -72,11 +75,12 @@ function InputCategory({ register, errors }) {
           message: "This field must have at least 3 characters",
         },
       })}
+      {...rest}
     />
   );
 }
 
-function InputParty({ register, errors }) {
+function InputParty({ register, errors, ...rest }) {
   return (
     <Input
       label="Party"
@@ -95,11 +99,12 @@ function InputParty({ register, errors }) {
           message: "This field must have at least 3 characters",
         },
       })}
+      {...rest}
     />
   );
 }
 
-function InputDescription({ register, errors }) {
+function InputDescription({ register, errors, ...rest }) {
   return (
     <Input
       label="Note"
@@ -114,11 +119,12 @@ function InputDescription({ register, errors }) {
           message: "This field must have no more than 100 characters",
         },
       })}
+      {...rest}
     />
   );
 }
 
-function InputDate({ fieldname, control, errors }) {
+function InputDate({ fieldname, control, errors, ...rest }) {
   return (
     <Input
       label="Date"
@@ -129,6 +135,7 @@ function InputDate({ fieldname, control, errors }) {
       rules={{
         required: "This field is required",
       }}
+      {...rest}
     />
   );
 }
