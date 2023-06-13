@@ -9,8 +9,12 @@ import {
   InputDescription,
   InputParty,
 } from "./Input";
+import { addTransaction } from "../../services/transactionServices";
+import { useState } from "react";
 
 function TransactionForm({ type, onClose: close }) {
+  const [error, setError] = useState(null);
+
   const {
     control,
     register,
@@ -18,8 +22,12 @@ function TransactionForm({ type, onClose: close }) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
-
+  const onSubmit = async (formData) => {
+    const transaction = { ...formData, type };
+    const { data, err } = await addTransaction(transaction);
+    console.log(data, err);
+    if (err) setError(err);
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -31,7 +39,9 @@ function TransactionForm({ type, onClose: close }) {
       >
         <AiOutlineClose />
       </span>
-      <FormGroup className="col-span-full"></FormGroup>
+      <FormGroup className="col-span-full">
+        {error && <p className="text-red-500">{error}</p>}
+      </FormGroup>
       <FormGroup>
         <InputAmount register={register} errors={errors} />
       </FormGroup>

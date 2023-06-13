@@ -29,9 +29,46 @@ const getCurrentMonthStats = async () => {
   const monthStart = new Date(today.getFullYear(), today.getMonth(), 1),
     monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
   const { data } = await apiRequest(
-    `transaction/stats?startDate=${monthStart.getTime()}&endDate=${monthEnd.getTime()}`
+    `/transaction/stats?startDate=${monthStart.getTime()}&endDate=${monthEnd.getTime()}`
   );
   return data;
 };
 
-export { getTransactions, getCurrentMonthStats };
+const addTransaction = async ({
+  amount,
+  type,
+  party,
+  category,
+  timestamp,
+  description,
+}) => {
+  const transaction = {
+    amount,
+    type,
+    party,
+    category,
+    description,
+    timestamp: timestamp.getTime(),
+  };
+
+  try {
+    const { data } = await apiRequest.post("/transaction", transaction);
+    return data;
+  } catch (err) {
+    return {
+      err: err.response?.data.message || err.message,
+    };
+  }
+};
+
+const updateTransaction = async () => {};
+
+const deleteTransaction = async () => {};
+
+export {
+  getTransactions,
+  getCurrentMonthStats,
+  addTransaction,
+  updateTransaction,
+  deleteTransaction,
+};
