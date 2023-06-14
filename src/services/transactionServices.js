@@ -61,7 +61,23 @@ const addTransaction = async ({
   }
 };
 
-const updateTransaction = async () => {};
+const updateTransaction = async (transactionId, updatedData) => {
+  const updates = { ...updatedData };
+  if (updates.timestamp) {
+    updates.timestamp = updates.timestamp.getTime();
+  }
+  try {
+    const { data } = await apiRequest.patch(
+      `/transaction/${transactionId}`,
+      updates
+    );
+    return data;
+  } catch (err) {
+    return {
+      err: err.response?.data.message || err.message,
+    };
+  }
+};
 
 const deleteTransaction = async () => {};
 

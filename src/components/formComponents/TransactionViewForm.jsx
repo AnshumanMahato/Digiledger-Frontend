@@ -10,9 +10,24 @@ import {
   InputParty,
 } from "./Input";
 import { useState } from "react";
+import { updateTransaction } from "../../services/transactionServices";
+import useTransactionQuery from "../../hooks/useTransactionQuery";
 
 function TransactionViewForm({ transaction, onClose: close }) {
-  const [editMode, setEditMode] = useState(true);
+  const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [deleteMode, setDeleteMode] = useState(false);
+
+  const { updateCategories, updateParties, resetFilters } =
+    useTransactionQuery();
+
+  const defaultValues = {
+    amount: transaction.amount,
+    category: transaction.category,
+    party: transaction.party,
+    description: transaction.description,
+    timestamp: new Date(transaction.timestamp),
+  };
 
   const {
     control,
@@ -20,10 +35,36 @@ function TransactionViewForm({ transaction, onClose: close }) {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: transaction,
+    defaultValues,
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (formData) => {
+    const { data, err } = await updateTransaction(transaction._id, formData);
+    if (err) {
+      setError(err);
+    }
+    if (data) {
+      if (data.updates) {
+        updateCategories(data.updates.categories);
+        updateParties(data.updates.parties);
+      }
+      resetFilters();
+      close();
+    }
+  };
+  const handleEditClick = (e) => {
+    e.preventDefault();
+    setEditMode(true);
+  };
+  const handleCancelClick = (e) => {
+    e.preventDefault();
+    setEditMode(false);
+    setDeleteMode(false);
+  };
+  const handleDeleteClick = (e) => {
+    e.preventDefault();
+    setDeleteMode(true);
+  };
 
   return (
     <form
@@ -36,7 +77,9 @@ function TransactionViewForm({ transaction, onClose: close }) {
       >
         <AiOutlineClose />
       </span>
-      <FormGroup className="col-span-full"></FormGroup>
+      <FormGroup className="col-span-full">
+        {error && <p className="text-red-500">{error}</p>}
+      </FormGroup>
       <FormGroup>
         <InputAmount register={register} errors={errors} disabled={!editMode} />
       </FormGroup>
@@ -63,10 +106,18 @@ function TransactionViewForm({ transaction, onClose: close }) {
       <div className="col-span-full grid grid-cols-8 gap-6">
         {!editMode && (
           <>
-            <Button success className="col-start-2 col-span-3">
+            <Button
+              success
+              className="col-start-2 col-span-3"
+              onClick={handleEditClick}
+            >
               Edit
             </Button>
-            <Button danger className="col-start-5 col-span-3">
+            <Button
+              danger
+              className="col-start-5 col-span-3"
+              onClick={handleDeleteClick}
+            >
               Delete
             </Button>
           </>
@@ -76,25 +127,31 @@ function TransactionViewForm({ transaction, onClose: close }) {
             <Button success className="col-start-2 col-span-3">
               Save
             </Button>
-            <Button danger className="col-start-5 col-span-3">
+            <Button
+              danger
+              className="col-start-5 col-span-3"
+              onClick={handleCancelClick}
+            >
               Cancel
             </Button>
           </>
         )}
       </div>
-      <div className="absolute h-full w-full p-12 flex justify-center items-center bg-accent/30">
-        <div className="bg-accent p-5 border-2 rounded-lg text-center  text-sm">
-          <p>Are you sure you want to delete this transaction?</p>
-          <div className="container flex justify-evenly mt-5">
-            <Button small success className="">
-              Confirm
-            </Button>
-            <Button small danger className="">
-              Cancel
-            </Button>
+      {deleteMode && (
+        <div className="absolute h-full w-full p-12 flex justify-center items-center bg-accent/30">
+          <div className="bg-accent p-5 border-2 rounded-lg text-center  text-sm">
+            <p>Are you sure you want to delete this transaction?</p>
+            <div className="container flex justify-evenly mt-5">
+              <Button small success className="">
+                Confirm
+              </Button>
+              <Button small danger onClick={handleCancelClick}>
+                Cancel
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </form>
   );
 }
