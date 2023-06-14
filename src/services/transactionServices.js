@@ -79,7 +79,19 @@ const updateTransaction = async (transactionId, updatedData) => {
   }
 };
 
-const deleteTransaction = async () => {};
+const deleteTransaction = async (transactionId) => {
+  try {
+    const res = await apiRequest.delete(`/transaction/${transactionId}`);
+    console.log(res);
+    return {
+      data: "success",
+    };
+  } catch (err) {
+    return {
+      err: err.response?.data.message || err.message,
+    };
+  }
+};
 
 export {
   getTransactions,

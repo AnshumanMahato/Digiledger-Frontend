@@ -4,7 +4,7 @@ import classNames from "classnames";
 import Modal from "./Modal";
 import TransactionViewForm from "./formComponents/TransactionViewForm";
 
-function TransactionTable({ transactions }) {
+function TransactionTable({ transactions, onClick }) {
   const [activeTransaction, setActiveTransaction] = useState(null);
 
   const showTransaction = (transaction) => setActiveTransaction(transaction);
@@ -15,8 +15,10 @@ function TransactionTable({ transactions }) {
       render: (transaction) => {
         const date = new Date(transaction.timestamp * 1);
         return (
-          <div className=" whitespace-nowrap">
-            <p className="text-md font-medium">{transaction.party}</p>
+          <div className="">
+            <p className="text-md font-medium whitespace-nowrap">
+              {transaction.party}
+            </p>
             <p className="text-sm text-slate-400">{`${new Intl.DateTimeFormat(
               "en-US",
               {
@@ -35,7 +37,7 @@ function TransactionTable({ transactions }) {
       label: "Income",
       render: (transaction) => {
         const classes = classNames(
-          "flex justify-end items-center ml-10 font-medium",
+          "flex justify-end items-center font-medium",
           {
             "sm:invisible": transaction.type === "expense",
           }
@@ -56,7 +58,7 @@ function TransactionTable({ transactions }) {
       label: "Expense",
       render: (transaction) => {
         const classes = classNames(
-          "hidden sm:flex justify-end items-center ml-10 font-medium",
+          "hidden sm:flex justify-end items-center font-medium",
           {
             "sm:invisible": transaction.type === "income",
           }
@@ -83,7 +85,7 @@ function TransactionTable({ transactions }) {
         data={transactions}
         config={config}
         keyFn={keyFn}
-        onClick={showTransaction}
+        onClick={onClick || showTransaction}
       />
       {activeTransaction && (
         <Modal onClose={() => setActiveTransaction(null)}>

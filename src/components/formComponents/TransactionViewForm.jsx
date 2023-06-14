@@ -10,7 +10,10 @@ import {
   InputParty,
 } from "./Input";
 import { useState } from "react";
-import { updateTransaction } from "../../services/transactionServices";
+import {
+  deleteTransaction,
+  updateTransaction,
+} from "../../services/transactionServices";
 import useTransactionQuery from "../../hooks/useTransactionQuery";
 
 function TransactionViewForm({ transaction, onClose: close }) {
@@ -64,6 +67,19 @@ function TransactionViewForm({ transaction, onClose: close }) {
   const handleDeleteClick = (e) => {
     e.preventDefault();
     setDeleteMode(true);
+  };
+
+  const handleDeleteConfirm = async (e) => {
+    e.preventDefault();
+    const { data, err } = await deleteTransaction(transaction._id);
+    if (err) {
+      setError(err);
+      setDeleteMode(false);
+    }
+    if (data) {
+      resetFilters();
+      close();
+    }
   };
 
   return (
@@ -142,7 +158,7 @@ function TransactionViewForm({ transaction, onClose: close }) {
           <div className="bg-accent p-5 border-2 rounded-lg text-center  text-sm">
             <p>Are you sure you want to delete this transaction?</p>
             <div className="container flex justify-evenly mt-5">
-              <Button small success className="">
+              <Button small success onClick={handleDeleteConfirm}>
                 Confirm
               </Button>
               <Button small danger onClick={handleCancelClick}>

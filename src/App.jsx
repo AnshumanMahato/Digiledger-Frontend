@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         path: "transactions",
         element: (
           <TransactionQueryProvider>
-            <Transactions />,
+            <Transactions />
           </TransactionQueryProvider>
         ),
       },

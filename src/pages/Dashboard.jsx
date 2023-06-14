@@ -2,13 +2,17 @@ import BalanceCard from "../components/BalanceCard";
 import SectionHeader from "../components/utils/SectionHeader";
 import Section from "../components/utils/Section";
 import TransactionTable from "../components/TransactionTable";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import useAuthorization from "../hooks/useAuthorization";
 import NoTransactions from "../components/NoTransactions";
 
 function Dashboard() {
   useAuthorization();
+  const navigate = useNavigate();
   const { transactions, monthlyStats } = useLoaderData();
+  const handleClick = () => {
+    navigate("/transactions");
+  };
 
   return (
     <main className="flex flex-col justify-evenly items-center w-full flex-grow">
@@ -39,7 +43,7 @@ function Dashboard() {
         {transactions.length === 0 ? (
           <NoTransactions />
         ) : (
-          <TransactionTable transactions={transactions} />
+          <TransactionTable transactions={transactions} onClick={handleClick} />
         )}
       </Section>
     </main>
