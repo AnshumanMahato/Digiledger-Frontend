@@ -6,7 +6,6 @@ import Actions from "./components/Actions";
 import SortOptions from "./components/SortOptions";
 import CategoryOptions from "./components/CategoryOptions";
 import PartyOptions from "./components/PartyOptions";
-import useUserContext from "../../hooks/useUserContext";
 import useTransactionQuery from "../../hooks/useTransactionQuery";
 
 const SET_PREV_FILTERS = -1;
