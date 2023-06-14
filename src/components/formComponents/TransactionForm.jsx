@@ -11,6 +11,7 @@ import {
 } from "./Input";
 import { addTransaction } from "../../services/transactionServices";
 import { useState } from "react";
+import useTransactionQuery from "../../hooks/useTransactionQuery";
 
 function TransactionForm({ type, onClose: close }) {
   const [error, setError] = useState(null);
@@ -22,11 +23,23 @@ function TransactionForm({ type, onClose: close }) {
     formState: { errors },
   } = useForm();
 
+  const { updateCategories, updateParties, resetFilters } =
+    useTransactionQuery();
+
   const onSubmit = async (formData) => {
     const transaction = { ...formData, type };
     const { data, err } = await addTransaction(transaction);
-    console.log(data, err);
-    if (err) setError(err);
+    if (err) {
+      setError(err);
+    }
+    if (data) {
+      if (data.updates) {
+        updateCategories(data.updates.categories);
+        updateParties(data.updates.parties);
+      }
+      resetFilters();
+      close();
+    }
   };
   return (
     <form

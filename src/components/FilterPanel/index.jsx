@@ -44,11 +44,8 @@ function FilterPanel({ showFilters, onClose }) {
     return () => document.body.classList.remove("overflow-hidden");
   }, []);
 
-  const {
-    currentUser: { categories, parties },
-  } = useUserContext();
-
-  const { filters, updateFilters, resetFilters } = useTransactionQuery();
+  const { categories, parties, filters, updateFilters, resetFilters } =
+    useTransactionQuery();
 
   const [option, setOption] = useState("sort");
   const [selectedFilters, dispatch] = useReducer(reducer, { ...filters });
@@ -117,7 +114,7 @@ function FilterPanel({ showFilters, onClose }) {
           <CategoryOptions
             current={selectedFilters.category}
             update={updateCategoryField}
-            options={categories}
+            options={categories.current}
           />
         )}
 
@@ -125,7 +122,7 @@ function FilterPanel({ showFilters, onClose }) {
           <PartyOptions
             current={selectedFilters.party}
             update={updatePartyField}
-            options={parties}
+            options={parties.current}
           />
         )}
       </div>
