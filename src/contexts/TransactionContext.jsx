@@ -1,9 +1,9 @@
-import { createContext, useRef, useState } from "react";
+import { createContext, useState } from "react";
 
-const TransactionContext = createContext(null);
+const TransactionQueryContext = createContext(null);
 
-function TransactionProvider({ children }) {
-  const [synchronized, setSynchronized] = useState(true);
+function TransactionQueryProvider({ children }) {
+  const [isFetching, setIsFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
     sort: "-timestamp",
@@ -13,34 +13,40 @@ function TransactionProvider({ children }) {
     endDate: null,
   });
 
-  const transactions = useRef([]);
-  const totalPages = useRef(null);
-
-  const updateSyncState = (state) => setSynchronized(state);
   const updateFilters = (newFilters) => {
     setFilters(newFilters);
     setCurrentPage(1);
-    setIsLoading(true);
+    setIsFetching(true);
   };
   const updatePage = (newPage) => {
     setCurrentPage(newPage);
-    setIsLoading(true);
+    setIsFetching(true);
   };
 
+  const resetFilters = () =>
+    updateFilters({
+      sort: "-timestamp",
+      category: null,
+      party: null,
+      startDate: null,
+      endDate: null,
+    });
+
   const values = {
-    transactions,
-    totalPages,
-    synchronized,
     filters,
     currentPage,
-    updateSyncState,
+    isFetching,
+    resetFilters,
     updateFilters,
     updatePage,
   };
 
   return (
-    <TransactionContext.Provider value={values}>
+    <TransactionQueryContext.Provider value={values}>
       {children}
-    </TransactionContext.Provider>
+    </TransactionQueryContext.Provider>
   );
 }
+
+export { TransactionQueryProvider };
+export default TransactionQueryContext;
