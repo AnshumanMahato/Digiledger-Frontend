@@ -7,6 +7,7 @@ import SortOptions from "./components/SortOptions";
 import CategoryOptions from "./components/CategoryOptions";
 import PartyOptions from "./components/PartyOptions";
 import useUserContext from "../../hooks/useUserContext";
+import useTransactionQuery from "../../hooks/useTransactionQuery";
 
 const SET_PREV_FILTERS = -1;
 const RESET = 0;
@@ -37,7 +38,7 @@ const reducer = (state, action) => {
   }
 };
 
-function FilterPanel({ filters, updateFilters, showFilters, onClose }) {
+function FilterPanel({ showFilters, onClose }) {
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
     return () => document.body.classList.remove("overflow-hidden");
@@ -46,6 +47,8 @@ function FilterPanel({ filters, updateFilters, showFilters, onClose }) {
   const {
     currentUser: { categories, parties },
   } = useUserContext();
+
+  const { filters, updateFilters, resetFilters } = useTransactionQuery();
 
   const [option, setOption] = useState("sort");
   const [selectedFilters, dispatch] = useReducer(reducer, { ...filters });
@@ -71,13 +74,7 @@ function FilterPanel({ filters, updateFilters, showFilters, onClose }) {
   };
   const clearFilters = () => {
     dispatch({ type: RESET });
-    updateFilters({
-      sort: "-timestamp",
-      category: null,
-      party: null,
-      startDate: null,
-      endDate: null,
-    });
+    resetFilters();
     onClose();
   };
 

@@ -13,26 +13,6 @@ function Transactions() {
   useAuthorization();
   const [showModal, setShowModal] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [filters, setFilters] = useState({
-    sort: "-timestamp",
-    category: null,
-    party: null,
-    startDate: null,
-    endDate: null,
-  });
-
-  const updateFilters = (newFilters) => {
-    setFilters(newFilters);
-    setCurrentPage(1);
-    setIsLoading(true);
-  };
-  const updatePage = (newPage) => {
-    setCurrentPage(newPage);
-    setIsLoading(true);
-  };
 
   const handleFilterPanel = () => {
     setShowFilters((current) => !current);
@@ -80,18 +60,10 @@ function Transactions() {
               <span className="ml-2">Filter</span>
             </Button>
           </div>
-          <TransactionsPanel
-            currentPage={currentPage}
-            filters={filters}
-            updatePage={updatePage}
-            isLoading={isLoading}
-            onLoad={() => setIsLoading(false)}
-          />
+          <TransactionsPanel />
           {showFilters && (
             <FilterPanel
               showFilters={showFilters}
-              filters={filters}
-              updateFilters={updateFilters}
               onClose={handleFilterPanel}
             />
           )}

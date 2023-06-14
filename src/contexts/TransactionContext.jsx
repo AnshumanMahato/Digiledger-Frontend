@@ -32,6 +32,8 @@ function TransactionQueryProvider({ children }) {
       endDate: null,
     });
 
+  const stopFetching = () => setIsFetching(false);
+
   const values = {
     filters,
     currentPage,
@@ -39,6 +41,7 @@ function TransactionQueryProvider({ children }) {
     resetFilters,
     updateFilters,
     updatePage,
+    stopFetching,
   };
 
   return (

@@ -12,6 +12,7 @@ import {
   getCurrentMonthStats,
   getTransactions,
 } from "./services/transactionServices";
+import { TransactionQueryProvider } from "./contexts/TransactionContext";
 
 const dashboardLoader = async () => {
   const limit = 5,
@@ -40,7 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: "transactions",
-        element: <Transactions />,
+        element: (
+          <TransactionQueryProvider>
+            <Transactions />,
+          </TransactionQueryProvider>
+        ),
       },
     ],
   },
