@@ -142,10 +142,85 @@ function InputDate({ fieldname, control, errors, ...rest }) {
 
 /* ************************** User Form Fields ************************ */
 
-function InputName({ registor, errors }) {}
-function InputEmail({ registor, errors }) {}
-function InputPassword({ registor, errors }) {}
-function InputPasswordConfirm({ registor, errors }) {}
+function InputName({ register, errors }) {
+  return (
+    <Input
+      label="Name"
+      type="text"
+      id="name"
+      className="form__input placeholder:text-slate-500"
+      errors={errors}
+      {...register("name", {
+        required: '"This field is required"',
+        maxLength: {
+          value: 30,
+          message: "This field must have no more than 30 characters",
+        },
+        minLength: {
+          value: 3,
+          message: "This field must have at least 3 characters",
+        },
+      })}
+    />
+  );
+}
+function InputEmail({ register, errors, ...rest }) {
+  return (
+    <Input
+      label="Email"
+      type="email"
+      id="email"
+      className="form__input placeholder:text-slate-500"
+      errors={errors}
+      {...register("email", {
+        required: "This field is required",
+        pattern: {
+          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          message: "This field must be a valid email address",
+        },
+      })}
+      {...rest}
+    />
+  );
+}
+function InputPassword({ register, errors }) {
+  return (
+    <Input
+      label="Password"
+      type="password"
+      id="password"
+      className="form__input placeholder:text-slate-500"
+      errors={errors}
+      {...register("password", {
+        required: "This field is required",
+        maxLength: {
+          value: 20,
+          message: "This field must have no more than 20 characters",
+        },
+        minLength: {
+          value: 8,
+          message: "This field must have at least 8 characters",
+        },
+      })}
+    />
+  );
+}
+function InputPasswordConfirm({ register, errors, getPasswordField }) {
+  return (
+    <Input
+      label="Confirm Password"
+      type="password"
+      id="passwordConfirm"
+      errors={errors}
+      className="form__input placeholder:text-slate-500"
+      {...register("passwordConfirm", {
+        required: "This field is required",
+        validate: (value) =>
+          value === getPasswordField || "This field must match the password",
+      })}
+    />
+  );
+}
 
 export {
   InputAmount,

@@ -5,6 +5,7 @@ import { loginRequest } from "../../services/authServices";
 import { useEffect, useState } from "react";
 import useUserContext from "../../hooks/useUserContext";
 import { useNavigate } from "react-router-dom";
+import { InputEmail, InputPassword } from "./Input";
 
 function SigninForm() {
   const navigate = useNavigate();
@@ -44,50 +45,10 @@ function SigninForm() {
     >
       <FormGroup>{error && <p className="text-red-500">{error}</p>}</FormGroup>
       <FormGroup>
-        <label htmlFor="email" className="block text-xl font-bold mb-3">
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className="form__input placeholder:text-slate-500"
-          {...register("email", {
-            required: true,
-            pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-          })}
-        />
-        {errors.email && errors.email.type === "required" && (
-          <p>This field is required</p>
-        )}
-        {errors.email && errors.email.type === "pattern" && (
-          <p>This field must be a valid email address</p>
-        )}
+        <InputEmail register={register} errors={errors} />
       </FormGroup>
       <FormGroup>
-        <label htmlFor="password" className="block text-xl font-bold mb-3">
-          Password
-        </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          className="form__input placeholder:text-slate-500"
-          {...register("password", {
-            required: true,
-            minLength: 8,
-            maxLength: 20,
-          })}
-        />
-        {errors.password && errors.password.type === "required" && (
-          <p>This field is required</p>
-        )}
-        {errors.password && errors.password.type === "minLength" && (
-          <p>This field must have at least 8 characters</p>
-        )}
-        {errors.password && errors.password.type === "maxLength" && (
-          <p>This field must have no more than 20 characters</p>
-        )}
+        <InputPassword register={register} errors={errors} />
       </FormGroup>
       <div className="flex justify-center items-center">
         <Button success>Sign In</Button>
