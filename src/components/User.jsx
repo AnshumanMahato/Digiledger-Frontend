@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import pfp from "../assets/pfp_f_1.jpg";
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 
 function User() {
   const [active, setActive] = useState(false);
+
+  const refEl = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!refEl.current) return;
+
+      if (!refEl.current.contains(e.target)) {
+        setActive(false);
+      }
+    };
+
+    document.addEventListener("click", handler, true);
+
+    return () => document.removeEventListener("click", handler);
+  }, []);
 
   const handleClick = () => setActive((current) => !current);
 
@@ -18,6 +34,7 @@ function User() {
   const options = [
     { label: "Dashboard", to: "/dashboard" },
     { label: "Transactions", to: "/transactions" },
+    { label: "Analytics", to: "/analytics" },
     { label: "Logout", to: "/logout" },
   ];
 
@@ -40,7 +57,8 @@ function User() {
     <div className={classes} onClick={handleClick}>
       <img src={pfp} alt="user-profile" className="rounded-full h-14 w-14" />
       <nav
-        className={`absolute left-[-50%] z-10 transition-opacity ${
+        ref={refEl}
+        className={`absolute left-[-50%] z-10 transition-opacity transform translate-x-[-50%] ${
           !active ? "invisible opacity-0" : ""
         }`}
       >

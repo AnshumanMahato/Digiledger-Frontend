@@ -3,13 +3,11 @@ import SectionHeader from "../components/utils/SectionHeader";
 import Section from "../components/utils/Section";
 import TransactionTable from "../components/TransactionTable";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
-import useAuthorization from "../hooks/useAuthorization";
 import NoTransactions from "../components/NoTransactions";
 
 function Dashboard() {
-  useAuthorization();
   const navigate = useNavigate();
-  const { transactions, monthlyStats } = useLoaderData();
+  const { transactions, overall } = useLoaderData();
   const handleClick = () => {
     navigate("/transactions");
   };
@@ -24,8 +22,8 @@ function Dashboard() {
           }).format(new Date())}
         </SectionHeader>
         <BalanceCard
-          income={monthlyStats.income || 0}
-          expense={monthlyStats.expense || 0}
+          income={overall.income || 0}
+          expense={overall.expense || 0}
         />
       </Section>
 

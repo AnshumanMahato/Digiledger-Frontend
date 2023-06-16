@@ -2,7 +2,6 @@ import Section from "../components/utils/Section";
 import TransactionsPanel from "../components/TransactionsPanel";
 import SectionHeader from "../components/utils/SectionHeader";
 import Button from "../components/utils/Button";
-import useAuthorization from "../hooks/useAuthorization";
 import Modal from "../components/Modal";
 import { useState } from "react";
 import TransactionForm from "../components/formComponents/TransactionForm";
@@ -10,7 +9,6 @@ import { BsFilter } from "react-icons/bs";
 import FilterPanel from "../components/FilterPanel";
 
 function Transactions() {
-  useAuthorization();
   const [showModal, setShowModal] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
 

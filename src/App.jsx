@@ -13,13 +13,17 @@ import {
   getTransactions,
 } from "./services/transactionServices";
 import { TransactionQueryProvider } from "./contexts/TransactionContext";
+import Analytics from "./pages/Analytics";
+import Protected from "./components/Protected";
 
 const dashboardLoader = async () => {
   const limit = 5,
     sort = "-timestamp";
   const { docs: transactions } = await getTransactions({ limit, sort });
-  const { data: monthlyStats } = await getCurrentMonthStats();
-  return { transactions, monthlyStats };
+  const {
+    data: { overall },
+  } = await getCurrentMonthStats();
+  return { transactions, overall };
 };
 
 const router = createBrowserRouter([
@@ -37,14 +41,28 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         loader: dashboardLoader,
-        element: <Dashboard />,
+        element: (
+          <Protected>
+            <Dashboard />,
+          </Protected>
+        ),
       },
       {
         path: "transactions",
         element: (
-          <TransactionQueryProvider>
-            <Transactions />
-          </TransactionQueryProvider>
+          <Protected>
+            <TransactionQueryProvider>
+              <Transactions />
+            </TransactionQueryProvider>
+          </Protected>
+        ),
+      },
+      {
+        path: "analytics",
+        element: (
+          <Protected>
+            <Analytics />,
+          </Protected>
         ),
       },
     ],
