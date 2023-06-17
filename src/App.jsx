@@ -8,23 +8,9 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Logout from "./pages/Logout";
-import {
-  getCurrentMonthStats,
-  getTransactions,
-} from "./services/transactionServices";
 import { TransactionQueryProvider } from "./contexts/TransactionContext";
 import Analytics from "./pages/Analytics";
 import Protected from "./components/Protected";
-
-const dashboardLoader = async () => {
-  const limit = 5,
-    sort = "-timestamp";
-  const { docs: transactions } = await getTransactions({ limit, sort });
-  const {
-    data: { overall },
-  } = await getCurrentMonthStats();
-  return { transactions, overall };
-};
 
 const router = createBrowserRouter([
   {
@@ -40,10 +26,9 @@ const router = createBrowserRouter([
       { path: "logout", element: <Logout /> },
       {
         path: "dashboard",
-        loader: dashboardLoader,
         element: (
           <Protected>
-            <Dashboard />,
+            <Dashboard />
           </Protected>
         ),
       },

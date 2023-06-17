@@ -1,12 +1,13 @@
 import { createContext, useRef, useState } from "react";
 import useUserContext from "../hooks/useUserContext";
+import { useOutletContext } from "react-router-dom";
 
 const TransactionQueryContext = createContext(null);
 
 function TransactionQueryProvider({ children }) {
   const { currentUser } = useUserContext();
+  const { setIsFetching } = useOutletContext();
 
-  const [isFetching, setIsFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
     sort: "-timestamp",
@@ -38,8 +39,6 @@ function TransactionQueryProvider({ children }) {
       endDate: null,
     });
 
-  const stopFetching = () => setIsFetching(false);
-
   const updateCategories = (newCategories) =>
     (categories.current = newCategories);
   const updateParties = (newParties) => (parties.current = newParties);
@@ -47,7 +46,6 @@ function TransactionQueryProvider({ children }) {
   const values = {
     filters,
     currentPage,
-    isFetching,
     categories,
     parties,
     updateCategories,
@@ -55,7 +53,6 @@ function TransactionQueryProvider({ children }) {
     resetFilters,
     updateFilters,
     updatePage,
-    stopFetching,
   };
 
   return (

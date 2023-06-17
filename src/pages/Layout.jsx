@@ -8,6 +8,7 @@ import useUserContext from "../hooks/useUserContext";
 function Layout() {
   const { currentUser, updateCurrentUser } = useUserContext();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -31,7 +32,7 @@ function Layout() {
       {isLoaded && (
         <>
           <Header />
-          <Outlet />
+          <Outlet context={{ isFetching, setIsFetching }} />
           <Footer />
         </>
       )}
