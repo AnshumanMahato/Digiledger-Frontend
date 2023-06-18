@@ -1,9 +1,10 @@
 import { forwardRef } from "react";
 import { Controller } from "react-hook-form";
 import DateTime from "./DateTime";
+import FormGroup from "./FormGroup";
 
 const Input = forwardRef(
-  ({ label, type, id, name, errors, control, ...rest }, ref) => (
+  ({ label, type, id, name, errors, control, rules, ...rest }, ref) => (
     <>
       <label htmlFor={id} className="block text-md font-bold mb-3">
         {label}
@@ -22,6 +23,7 @@ const Input = forwardRef(
           name={name}
           render={({ field }) => <DateTime field={field} {...rest} />}
           control={control}
+          rules={rules}
         />
       )}
       {type !== "textarea" && type !== "date" && (
@@ -140,6 +142,53 @@ function InputDate({ fieldname, control, errors, ...rest }) {
   );
 }
 
+function InputDateRange({
+  fieldname,
+  control,
+  errors,
+  watch,
+  values,
+  ...rest
+}) {
+  const watchFrom = watch("startDate", new Date());
+  const watchTo = watch("startDate", new Date());
+
+  return (
+    <>
+      <FormGroup>
+        <Input
+          label="From"
+          type="date"
+          name="startDate"
+          control={control}
+          errors={errors}
+          rules={{
+            required: "This field is required",
+            validate: (value) =>
+              value <= watchTo || "Must be a date before the 'to' date",
+          }}
+          {...rest}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Input
+          label="To"
+          type="date"
+          name="endDate"
+          control={control}
+          errors={errors}
+          rules={{
+            required: "This field is required",
+            validate: (value) =>
+              value >= watchFrom || "Must be a date after the 'From' date",
+          }}
+          {...rest}
+        />
+      </FormGroup>
+    </>
+  );
+}
+
 /* ************************** User Form Fields ************************ */
 
 function InputName({ register, errors }) {
@@ -226,6 +275,7 @@ export {
   InputAmount,
   InputCategory,
   InputDate,
+  InputDateRange,
   InputDescription,
   InputParty,
   InputName,
