@@ -34,6 +34,19 @@ const getCurrentMonthStats = async () => {
   return data;
 };
 
+const getStats = async (startDate, endDate) => {
+  try {
+    const { data } = await apiRequest(
+      `/transaction/stats?startDate=${startDate}&endDate=${endDate}`
+    );
+    return data;
+  } catch (err) {
+    return {
+      err: err.response?.data.message || err.message,
+    };
+  }
+};
+
 const addTransaction = async ({
   amount,
   type,

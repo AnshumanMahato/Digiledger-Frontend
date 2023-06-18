@@ -58,7 +58,7 @@ function User() {
       <img src={pfp} alt="user-profile" className="rounded-full h-14 w-14" />
       <nav
         ref={refEl}
-        className={`absolute left-[-50%] z-10 transition-opacity transform translate-x-[-50%] ${
+        className={`absolute top-[120%] left-[-50%] z-10 transition-opacity transform translate-x-[-60%] ${
           !active ? "invisible opacity-0" : ""
         }`}
       >

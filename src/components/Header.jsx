@@ -1,18 +1,31 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import Button from "./utils/Button";
 import useUserContext from "../hooks/useUserContext";
 import User from "./User";
+
+const getTitle = (path, username) => {
+  switch (path) {
+    case "/dashboard":
+      return `Hey ${username?.split(" ")[0]}`;
+    case "/transactions":
+      return "Transaction Manager";
+    case "/analytics":
+      return "Analytics";
+    default:
+      return "Digiledger";
+  }
+};
 
 function Header() {
   const { currentUser } = useUserContext();
   const { pathname } = useLocation();
   return (
     <header className="flex justify-between items-center w-full mb-10">
-      <div className="logo ">
-        <h1 className="text-3xl font-bold">
-          <Link to="/">Digiledger</Link>
-        </h1>
+      <div className="logo w-[60%]">
+        <span className="text-3xl font-bold">
+          {getTitle(pathname, currentUser?.name)}
+        </span>
       </div>
 
       {pathname !== "/signin" && pathname !== "/signup" ? (

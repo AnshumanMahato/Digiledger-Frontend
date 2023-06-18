@@ -17,7 +17,7 @@ function Transactions() {
   };
 
   return (
-    <main className="flex flex-col justify-evenlt items-center w-full flex-grow">
+    <main className="flex flex-col items-center w-full flex-grow">
       <Section className="flex justify-evenly items-center">
         <Button
           success
