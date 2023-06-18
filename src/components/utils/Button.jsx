@@ -10,6 +10,7 @@ function Button({
   warning,
   danger,
   to,
+  active,
   ...rest
 }) {
   const classes = classnames(
@@ -18,8 +19,10 @@ function Button({
     {
       "rounded-full": rounded,
       border: !plain,
-      "border-white bg-white/5 bg-blur-[10px] hover:text-primary hover:border-primary active:text-primary active:border-primary":
+      "border-white bg-white/5 bg-blur-[10px] hover:text-primary hover:border-primary":
         !success && !warning && !danger && !plain,
+      "text-primary border-primary":
+        !success && !warning && !danger && !plain && active,
       "px-3 py-1.5 text-sm": small,
       "px-4 py-2 text-md": !small,
       "hover:text-primary active:text-primary": plain,

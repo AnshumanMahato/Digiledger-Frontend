@@ -109,6 +109,7 @@ const deleteTransaction = async (transactionId) => {
 export {
   getTransactions,
   getCurrentMonthStats,
+  getStats,
   addTransaction,
   updateTransaction,
   deleteTransaction,

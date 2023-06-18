@@ -17,7 +17,7 @@ function Logout() {
         console.log(err);
       }
     })();
-  });
+  }, [updateCurrentUser, navigate]);
   return;
 }
 
