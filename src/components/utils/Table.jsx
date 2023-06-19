@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-function Table({ data, config, keyFn, active, onClick: handleClick }) {
+function Table({ data, config, keyFn, rowClass, onClick: handleClick }) {
   const renderedRows = data.map((el) => {
     const cellClasses = classNames("py-4 first:pl-4 last:pr-4");
     const renderedCells = config.map((attr) => (
@@ -11,7 +11,7 @@ function Table({ data, config, keyFn, active, onClick: handleClick }) {
 
     return (
       <tr
-        className="transaction"
+        className={rowClass || ""}
         key={keyFn(el)}
         onClick={() => handleClick?.(el)}
       >

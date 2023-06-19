@@ -82,6 +82,7 @@ function TransactionTable({ transactions, onClick }) {
   return (
     <>
       <Table
+        rowClass="transaction"
         data={transactions}
         config={config}
         keyFn={keyFn}
