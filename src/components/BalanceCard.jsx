@@ -7,17 +7,17 @@ function BalanceCard({ income, expense }) {
         <div className="flex flex-col mb-5">
           <span className="text-md mb-1">Balance</span>
           <span className=" text-4xl font-bold">
-            {balance !== 0 && balanceState} ${Math.abs(balance)}
+            {balance !== 0 && balanceState} ₹{Math.abs(balance)}
           </span>
         </div>
         <div className="flex justify-between items-center">
           <div className="flex flex-col w-2/5">
             <span className="text-md mb-1">Expense</span>
-            <span className="text-xl font-medium">-${expense}</span>
+            <span className="text-xl font-medium">-₹{expense}</span>
           </div>
           <div className="flex flex-col w-2/5">
             <span className="text-md mb-1">Income</span>
-            <span className="text-xl font-medium">+${income}</span>
+            <span className="text-xl font-medium">+₹{income}</span>
           </div>
         </div>
       </div>

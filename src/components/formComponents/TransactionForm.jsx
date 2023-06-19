@@ -28,6 +28,8 @@ function TransactionForm({ type, onClose: close }) {
 
   const onSubmit = async (formData) => {
     const transaction = { ...formData, type };
+    transaction.category =
+      transaction.category !== "" ? transaction.category : undefined;
     const { data, err } = await addTransaction(transaction);
     if (err) {
       setError(err);

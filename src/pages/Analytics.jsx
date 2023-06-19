@@ -1,10 +1,12 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import Section from "../components/utils/Section";
 import SectionHeader from "../components/utils/SectionHeader";
 import Button from "../components/utils/Button";
 import Modal from "../components/Modal";
-import TransactionForm from "../components/formComponents/TransactionForm";
 import DateRangeForm from "../components/formComponents/DateRangeForm";
+import { getStats } from "../services/transactionServices";
+import AnalyticsTable from "../components/AnalyticsTable";
+import { useOutletContext } from "react-router-dom";
 
 const SET_CURRENT_MONTH = 1;
 const SET_PREV_MONTH = 2;
@@ -65,15 +67,38 @@ const reducer = (state, action) => {
 
 function Analytics() {
   const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState(null);
+  const { isFetching, setIsFetching } = useOutletContext();
+
+  const today = new Date();
+  const start = new Date(today.getFullYear(), today.getMonth(), 1);
   const [state, dispatch] = useReducer(reducer, {
-    startDate: Date.now(),
-    endDate: Date.now(),
-    view: "",
+    view: "current-month",
+    startDate: start.getTime(),
+    endDate: today.getTime(),
   });
 
+  const categoryData = useRef({ income: [], expense: [] });
+  const partyData = useRef({ income: [], expense: [] });
+  const overall = useRef({ income: 0, expense: 0 });
+
   useEffect(() => {
-    dispatch({ type: SET_CURRENT_MONTH });
-  }, [dispatch]);
+    (async () => {
+      const { data, err } = await getStats(state.startDate, state.endDate);
+      if (err) {
+        setError(err);
+      }
+      if (data) {
+        setError(null);
+        categoryData.current = data.categoryBased;
+        partyData.current = data.partyBased;
+        overall.current = data.overall;
+      }
+      setIsFetching(false);
+    })();
+
+    return () => setIsFetching(true);
+  }, [state, setIsFetching]);
 
   return (
     <main className="flex flex-col items-center w-full flex-grow">
@@ -82,7 +107,10 @@ function Analytics() {
           small
           rounded
           active={state.view === "current-month"}
-          onClick={() => dispatch({ type: SET_CURRENT_MONTH })}
+          onClick={() => {
+            setIsFetching(true);
+            dispatch({ type: SET_CURRENT_MONTH });
+          }}
         >
           Current Month
         </Button>
@@ -90,7 +118,10 @@ function Analytics() {
           small
           rounded
           active={state.view === "prev-month"}
-          onClick={() => dispatch({ type: SET_PREV_MONTH })}
+          onClick={() => {
+            setIsFetching(true);
+            dispatch({ type: SET_PREV_MONTH });
+          }}
         >
           Previous Month
         </Button>
@@ -98,7 +129,10 @@ function Analytics() {
           small
           rounded
           active={state.view === "3-month"}
-          onClick={() => dispatch({ type: SET_PREV_3_MONTH })}
+          onClick={() => {
+            setIsFetching(true);
+            dispatch({ type: SET_PREV_3_MONTH });
+          }}
         >
           Past 3 Month
         </Button>
@@ -117,38 +151,83 @@ function Analytics() {
           >
             <DateRangeForm
               onClose={() => setShowModal(false)}
-              onSubmit={(start, end) =>
+              onSubmit={(start, end) => {
+                setIsFetching(true);
                 dispatch({
                   type: SET_CUSTOM,
                   payload: {
                     start,
                     end,
                   },
-                })
-              }
+                });
+              }}
             />
             ;
           </Modal>
         )}
       </Section>
       <Section>
-        <SectionHeader>Expenses</SectionHeader>
-        <article>
-          <h3>By Category</h3>
-        </article>
-        <article>
-          <h3>By Party</h3>
-        </article>
+        <p className="text-slate-400 text-center text-lg">
+          {new Intl.DateTimeFormat("en-US", {
+            dateStyle: "long",
+          }).format(state.startDate)}{" "}
+          -{" "}
+          {new Intl.DateTimeFormat("en-US", {
+            dateStyle: "long",
+          }).format(state.endDate)}
+        </p>
       </Section>
-      <Section>
-        <SectionHeader>Income</SectionHeader>
-        <article>
-          <h3>By Category</h3>
-        </article>
-        <article>
-          <h3>By Party</h3>
-        </article>
-      </Section>
+      {error && <div>{error}</div>}
+      {!error && !isFetching && (
+        <>
+          <Section>
+            <SectionHeader>Expenses</SectionHeader>
+            {overall.current.expense ? (
+              <>
+                <article>
+                  <h3>By Category</h3>
+                  <AnalyticsTable
+                    data={categoryData.current.expense}
+                    type="expense"
+                  />
+                </article>
+                <article>
+                  <h3>By Party</h3>
+                  <AnalyticsTable
+                    data={partyData.current.expense}
+                    type="expense"
+                  />
+                </article>
+              </>
+            ) : (
+              <p>No expense data for the given period</p>
+            )}
+          </Section>
+          <Section>
+            <SectionHeader>Income</SectionHeader>
+            {overall.current.income ? (
+              <>
+                <article>
+                  <h3>By Category</h3>
+                  <AnalyticsTable
+                    data={categoryData.current.income}
+                    type="income"
+                  />
+                </article>
+                <article>
+                  <h3>By Party</h3>
+                  <AnalyticsTable
+                    data={partyData.current.income}
+                    type="income"
+                  />
+                </article>
+              </>
+            ) : (
+              <p>No income data for the given period</p>
+            )}
+          </Section>
+        </>
+      )}
     </main>
   );
 }

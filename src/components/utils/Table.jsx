@@ -13,7 +13,7 @@ function Table({ data, config, keyFn, active, onClick: handleClick }) {
       <tr
         className="transaction"
         key={keyFn(el)}
-        onClick={() => handleClick(el)}
+        onClick={() => handleClick?.(el)}
       >
         {renderedCells}
       </tr>

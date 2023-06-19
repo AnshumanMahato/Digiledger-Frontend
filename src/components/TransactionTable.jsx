@@ -37,7 +37,7 @@ function TransactionTable({ transactions, onClick }) {
       label: "Income",
       render: (transaction) => {
         const classes = classNames(
-          "flex justify-end items-center font-medium",
+          "flex justify-end items-center font-medium text-lg",
           {
             "sm:invisible": transaction.type === "expense",
           }
@@ -45,10 +45,10 @@ function TransactionTable({ transactions, onClick }) {
         return (
           <div className={classes}>
             {transaction.type === "income" && (
-              <p className="text-lg text-green-400">{`+$${transaction.amount}`}</p>
+              <p className=" text-green-400">{`+₹${transaction.amount}`}</p>
             )}
             {transaction.type === "expense" && (
-              <p className="text-lg text-red-400">{`-$${transaction.amount}`}</p>
+              <p className=" text-red-400">{`-₹${transaction.amount}`}</p>
             )}
           </div>
         );
@@ -66,10 +66,10 @@ function TransactionTable({ transactions, onClick }) {
         return (
           <div className={classes}>
             {transaction.type === "income" && (
-              <p className="text-lg text-green-400">{`+$${transaction.amount}`}</p>
+              <p className="text-lg text-green-400">{`+₹${transaction.amount}`}</p>
             )}
             {transaction.type === "expense" && (
-              <p className="text-lg text-red-400">{`-$${transaction.amount}`}</p>
+              <p className="text-lg text-red-400">{`-₹${transaction.amount}`}</p>
             )}
           </div>
         );
