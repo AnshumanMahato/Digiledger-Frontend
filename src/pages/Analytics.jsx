@@ -7,7 +7,7 @@ import DateRangeForm from "../components/formComponents/DateRangeForm";
 import { getStats } from "../services/transactionServices";
 import AnalyticsTable from "../components/AnalyticsTable";
 import { useOutletContext } from "react-router-dom";
-import ChartWrapper, { CategoryChart, PieChart } from "../components/Chart";
+import { PieChart } from "../components/Chart";
 
 const SET_CURRENT_MONTH = 1;
 const SET_PREV_MONTH = 2;
