@@ -1,39 +1,19 @@
 import { Chart } from "chart.js/auto";
 import classNames from "classnames";
 import { useEffect, useRef } from "react";
+import colors from "tailwindcss/colors";
 
-function ChartWrapper({ data, className }) {
+function ChartWrapper({ config, className }) {
   const chartRef = useRef(null);
   const canvasRef = useRef(null);
   const classes = classNames(className);
   useEffect(() => {
     (async function () {
-      const data = [
-        { year: 2010, count: 10 },
-        { year: 2011, count: 20 },
-        { year: 2012, count: 15 },
-        { year: 2013, count: 25 },
-        { year: 2014, count: 22 },
-        { year: 2015, count: 30 },
-        { year: 2016, count: 28 },
-      ];
-
-      chartRef.current = new Chart(canvasRef.current, {
-        type: "bar",
-        data: {
-          labels: data.map((row) => row.year),
-          datasets: [
-            {
-              label: "Acquisitions by year",
-              data: data.map((row) => row.count),
-            },
-          ],
-        },
-      });
+      chartRef.current = new Chart(canvasRef.current, config);
     })();
 
     return () => chartRef.current.destroy();
-  }, []);
+  }, [config]);
 
   return (
     <div className={classes}>
@@ -41,5 +21,38 @@ function ChartWrapper({ data, className }) {
     </div>
   );
 }
+
+function PieChart({ data }) {
+  const config = {
+    type: "doughnut",
+    data: {
+      labels: data.map((el) => el.category || el.party),
+      datasets: [
+        {
+          label: "Amount",
+          data: data.map((el) => el.amount),
+          backgroundColor: [
+            colors.amber[400],
+            colors.emerald[400],
+            colors.lime[400],
+            colors.sky[400],
+            colors.indigo[400],
+            colors.red[400],
+            colors.pink[400],
+            colors.rose[400],
+            colors.purple[400],
+            colors.violet[400],
+          ],
+          hoverOffset: 4,
+        },
+      ],
+    },
+  };
+
+  return <ChartWrapper config={config} />;
+}
+function PartyChart({ data }) {}
+
+export { PieChart, PartyChart };
 
 export default ChartWrapper;

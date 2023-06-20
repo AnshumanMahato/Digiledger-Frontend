@@ -42,13 +42,19 @@ function TransactionTable({ transactions, onClick }) {
             "sm:invisible": transaction.type === "expense",
           }
         );
+
+        const amount = new Intl.NumberFormat("en-IN", {
+          style: "currency",
+          currency: "INR",
+        }).format(transaction.amount);
+
         return (
           <div className={classes}>
             {transaction.type === "income" && (
-              <p className=" text-green-400">{`+₹${transaction.amount}`}</p>
+              <p className=" text-green-400">{`+${amount}`}</p>
             )}
             {transaction.type === "expense" && (
-              <p className=" text-red-400">{`-₹${transaction.amount}`}</p>
+              <p className=" text-red-400">{`-${amount}`}</p>
             )}
           </div>
         );
@@ -63,13 +69,19 @@ function TransactionTable({ transactions, onClick }) {
             "sm:invisible": transaction.type === "income",
           }
         );
+
+        const amount = new Intl.NumberFormat("en-IN", {
+          style: "currency",
+          currency: "INR",
+        }).format(transaction.amount);
+
         return (
           <div className={classes}>
             {transaction.type === "income" && (
-              <p className="text-lg text-green-400">{`+₹${transaction.amount}`}</p>
+              <p className="text-lg text-green-400">{`+${amount}`}</p>
             )}
             {transaction.type === "expense" && (
-              <p className="text-lg text-red-400">{`-₹${transaction.amount}`}</p>
+              <p className="text-lg text-red-400">{`-${amount}`}</p>
             )}
           </div>
         );

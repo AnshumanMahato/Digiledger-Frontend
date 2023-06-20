@@ -22,10 +22,15 @@ function AnalyticsTable({ type, data }) {
           }
         );
 
+        const amount = new Intl.NumberFormat("en-IN", {
+          style: "currency",
+          currency: "INR",
+        }).format(el.amount);
+
         return (
           <div className={classes}>
-            {type === "income" && <p>{`+₹${el.amount}`}</p>}
-            {type === "expense" && <p>{`-₹${el.amount}`}</p>}
+            {type === "income" && <p>{`+${amount}`}</p>}
+            {type === "expense" && <p>{`-${amount}`}</p>}
           </div>
         );
       },

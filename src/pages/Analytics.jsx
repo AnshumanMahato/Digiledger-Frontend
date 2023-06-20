@@ -7,7 +7,7 @@ import DateRangeForm from "../components/formComponents/DateRangeForm";
 import { getStats } from "../services/transactionServices";
 import AnalyticsTable from "../components/AnalyticsTable";
 import { useOutletContext } from "react-router-dom";
-import ChartWrapper from "../components/Chart";
+import ChartWrapper, { CategoryChart, PieChart } from "../components/Chart";
 
 const SET_CURRENT_MONTH = 1;
 const SET_PREV_MONTH = 2;
@@ -187,7 +187,7 @@ function Analytics() {
               <>
                 <article>
                   <h3>By Category</h3>
-                  <ChartWrapper className="constainer" />
+                  <PieChart data={categoryData.current.expense} />
                   <AnalyticsTable
                     data={categoryData.current.expense}
                     type="expense"
@@ -195,6 +195,7 @@ function Analytics() {
                 </article>
                 <article>
                   <h3>By Party</h3>
+                  <PieChart data={partyData.current.expense} />
                   <AnalyticsTable
                     data={partyData.current.expense}
                     type="expense"
@@ -211,6 +212,7 @@ function Analytics() {
               <>
                 <article>
                   <h3>By Category</h3>
+                  <PieChart data={categoryData.current.income} />
                   <AnalyticsTable
                     data={categoryData.current.income}
                     type="income"
@@ -218,6 +220,7 @@ function Analytics() {
                 </article>
                 <article>
                   <h3>By Party</h3>
+                  <PieChart data={partyData.current.income} />
                   <AnalyticsTable
                     data={partyData.current.income}
                     type="income"
