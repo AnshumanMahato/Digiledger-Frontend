@@ -170,11 +170,11 @@ function Analytics() {
       <Section>
         <p className="text-slate-400 text-center text-lg">
           {new Intl.DateTimeFormat("en-US", {
-            dateStyle: "long",
+            dateStyle: "medium",
           }).format(state.startDate)}{" "}
           -{" "}
           {new Intl.DateTimeFormat("en-US", {
-            dateStyle: "long",
+            dateStyle: "medium",
           }).format(state.endDate)}
         </p>
       </Section>
@@ -182,7 +182,7 @@ function Analytics() {
       {!error && !isFetching && (
         <>
           <Section>
-            <SectionHeader>Expenses</SectionHeader>
+            <SectionHeader className="mb-2">Expenses</SectionHeader>
             {overall.current.expense ? (
               <>
                 <article>
@@ -207,7 +207,7 @@ function Analytics() {
             )}
           </Section>
           <Section>
-            <SectionHeader>Income</SectionHeader>
+            <SectionHeader className="mb-2">Income</SectionHeader>
             {overall.current.income ? (
               <>
                 <article>
