@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
@@ -9,6 +9,8 @@ function Layout() {
   const { currentUser, updateCurrentUser } = useUserContext();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -22,10 +24,14 @@ function Layout() {
             updateCurrentUser(user);
           }
         } catch (e) {}
+      } else if (!currentUser.isConfigured && pathname !== "/configure") {
+        navigate("/configure", {
+          replace: true,
+        });
       }
       setIsLoaded(true);
     })();
-  }, [currentUser, updateCurrentUser]);
+  }, [currentUser, updateCurrentUser, pathname, navigate]);
 
   return (
     <div className="min-h-screen w-screen text-white bg-accent flex flex-col justify-between items-center pt-10 px-[10%] font-poppins">

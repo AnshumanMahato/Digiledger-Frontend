@@ -11,6 +11,7 @@ import Logout from "./pages/Logout";
 import { TransactionQueryProvider } from "./contexts/TransactionContext";
 import Analytics from "./pages/Analytics";
 import Protected from "./components/Protected";
+import Configure from "./pages/Configure";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,14 @@ const router = createBrowserRouter([
       { path: "signin", element: <Signin /> },
       { path: "signup", element: <Signup /> },
       { path: "logout", element: <Logout /> },
+      {
+        path: "configure",
+        element: (
+          <Protected>
+            <Configure />
+          </Protected>
+        ),
+      },
       {
         path: "dashboard",
         element: (
