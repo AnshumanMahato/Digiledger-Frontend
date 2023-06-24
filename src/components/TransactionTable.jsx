@@ -3,8 +3,10 @@ import Table from "./utils/Table";
 import classNames from "classnames";
 import Modal from "./Modal";
 import TransactionViewForm from "./formComponents/TransactionViewForm";
+import useUserContext from "../hooks/useUserContext";
 
 function TransactionTable({ transactions, onClick }) {
+  const { currentUser } = useUserContext();
   const [activeTransaction, setActiveTransaction] = useState(null);
 
   const showTransaction = (transaction) => setActiveTransaction(transaction);
@@ -43,9 +45,9 @@ function TransactionTable({ transactions, onClick }) {
           }
         );
 
-        const amount = new Intl.NumberFormat("en-IN", {
+        const amount = new Intl.NumberFormat(currentUser.valueSystem, {
           style: "currency",
-          currency: "INR",
+          currency: currentUser.currency,
         }).format(transaction.amount);
 
         return (
@@ -70,9 +72,9 @@ function TransactionTable({ transactions, onClick }) {
           }
         );
 
-        const amount = new Intl.NumberFormat("en-IN", {
+        const amount = new Intl.NumberFormat(currentUser.valueSystem, {
           style: "currency",
-          currency: "INR",
+          currency: currentUser.currency,
         }).format(transaction.amount);
 
         return (

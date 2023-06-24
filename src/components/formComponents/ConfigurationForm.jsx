@@ -3,9 +3,9 @@ import Button from "../utils/Button";
 import FormGroup from "./FormGroup";
 import useUserContext from "../../hooks/useUserContext";
 import { useEffect, useState } from "react";
-import currencies from "../../utils/currencyArray.json";
 import { useForm } from "react-hook-form";
 import { InputCurrency, InputValueSystem } from "./Input";
+import { updatePreferences } from "../../services/userServices";
 
 function ConfigurationForm() {
   const navigate = useNavigate();
@@ -22,13 +22,18 @@ function ConfigurationForm() {
   const [error, setError] = useState(null);
   const {
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    console.log(data);
+  const onSubmit = async (preferences) => {
+    const { data, err } = await updatePreferences(preferences);
+    if (err) {
+      setError(err);
+    }
+    if (data) {
+      updateCurrentUser(data.updatedUser);
+    }
   };
 
   return (
