@@ -2,9 +2,14 @@ import { forwardRef } from "react";
 import { Controller } from "react-hook-form";
 import DateTime from "./DateTime";
 import FormGroup from "./FormGroup";
+import useTransactionQuery from "../../hooks/useTransactionQuery";
+import currencies from "../../utils/currencyArray.json";
 
 const Input = forwardRef(
-  ({ label, type, id, name, errors, control, rules, ...rest }, ref) => (
+  (
+    { label, type, id, name, errors, control, rules, options, ...rest },
+    ref
+  ) => (
     <>
       <label htmlFor={id} className="block text-md font-bold mb-3">
         {label}
@@ -26,7 +31,22 @@ const Input = forwardRef(
           rules={rules}
         />
       )}
-      {type !== "textarea" && type !== "date" && (
+      {type === "select" && (
+        <select
+          id={id}
+          name={name}
+          className="form__input placeholder:text-slate-500"
+          ref={ref}
+          {...rest}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      )}
+      {type !== "textarea" && type !== "date" && type !== "select" && (
         <input
           type={type}
           id={id}
@@ -61,48 +81,66 @@ function InputAmount({ register, errors, ...rest }) {
 }
 
 function InputCategory({ register, errors, ...rest }) {
+  const { categories } = useTransactionQuery();
   return (
-    <Input
-      label="Category"
-      type="text"
-      id="category"
-      errors={errors}
-      {...register("category", {
-        maxLength: {
-          value: 10,
-          message: "This field must have no more than 10 characters",
-        },
-        minLength: {
-          value: 3,
-          message: "This field must have at least 3 characters",
-        },
-      })}
-      {...rest}
-    />
+    <>
+      <Input
+        label="Category"
+        type="text"
+        id="category"
+        errors={errors}
+        {...register("category", {
+          maxLength: {
+            value: 10,
+            message: "This field must have no more than 10 characters",
+          },
+          minLength: {
+            value: 3,
+            message: "This field must have at least 3 characters",
+          },
+        })}
+        list="categories"
+        {...rest}
+      />
+      <datalist id="categories">
+        {categories.current.map((category) => (
+          <option key={category} value={category} />
+        ))}
+      </datalist>
+    </>
   );
 }
 
 function InputParty({ register, errors, ...rest }) {
+  const { parties } = useTransactionQuery();
   return (
-    <Input
-      label="Party"
-      type="text"
-      id="party"
-      errors={errors}
-      className="form__input placeholder:text-slate-500"
-      {...register("party", {
-        required: "This field is required",
-        maxLength: {
-          value: 15,
-          message: "This field must have no more than 10 characters",
-        },
-        minLength: {
-          value: 3,
-          message: "This field must have at least 3 characters",
-        },
-      })}
-      {...rest}
-    />
+    <>
+      <Input
+        label="Party"
+        type="text"
+        id="party"
+        errors={errors}
+        className="form__input placeholder:text-slate-500"
+        {...register("party", {
+          required: "This field is required",
+          maxLength: {
+            value: 15,
+            message: "This field must have no more than 10 characters",
+          },
+          minLength: {
+            value: 3,
+            message: "This field must have at least 3 characters",
+          },
+        })}
+        list="parties"
+        {...rest}
+      />
+      <datalist id="parties">
+        {parties.current.map((party) => (
+          <option key={party} value={party} />
+        ))}
+      </datalist>
+    </>
   );
 }
 
@@ -271,6 +309,61 @@ function InputPasswordConfirm({ register, errors, getPasswordField }) {
   );
 }
 
+function InputCurrency({ register, errors, ...rest }) {
+  return (
+    <>
+      <Input
+        label="Currency"
+        type="text"
+        id="currency"
+        errors={errors}
+        className="form__input placeholder:text-slate-500"
+        {...register("currency", {
+          required: "This field is required",
+          validate: (value) =>
+            currencies.filter((currency) => currency.code === value.trim())
+              .length === 1 || "This field must be a valid currency code",
+        })}
+        list="currencies"
+        {...rest}
+      />
+      <datalist id="currencies">
+        {currencies.map((currency) => (
+          <option key={currency.code} value={currency.code}>
+            {currency.name}
+          </option>
+        ))}
+      </datalist>
+    </>
+  );
+}
+
+function InputValueSystem({ register, errors, ...rest }) {
+  const options = [
+    {
+      label: "International",
+      value: "en",
+    },
+    {
+      label: "Indian",
+      value: "en-IN",
+    },
+  ];
+  return (
+    <Input
+      label="Value System"
+      type="select"
+      id="valueSystem"
+      errors={errors}
+      {...register("valueSystem", {
+        required: "Thie field is required",
+      })}
+      options={options}
+      {...rest}
+    />
+  );
+}
+
 export {
   InputAmount,
   InputCategory,
@@ -282,5 +375,7 @@ export {
   InputEmail,
   InputPassword,
   InputPasswordConfirm,
+  InputCurrency,
+  InputValueSystem,
 };
 export default Input;

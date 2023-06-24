@@ -5,6 +5,7 @@ import useUserContext from "../../hooks/useUserContext";
 import { useEffect, useState } from "react";
 import currencies from "../../utils/currencyArray.json";
 import { useForm } from "react-hook-form";
+import { InputCurrency, InputValueSystem } from "./Input";
 
 function ConfigurationForm() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function ConfigurationForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(currencies);
+    console.log(data);
   };
 
   return (
@@ -36,9 +37,15 @@ function ConfigurationForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormGroup>{error && <p className="text-red-500">{error}</p>}</FormGroup>
+      <FormGroup>
+        <InputCurrency register={register} errors={errors} />
+      </FormGroup>
+      <FormGroup>
+        <InputValueSystem register={register} errors={errors} />
+      </FormGroup>
 
       <div className="flex justify-center items-center">
-        <Button success>Sign Up</Button>
+        <Button success>Save</Button>
       </div>
     </form>
   );
