@@ -10,7 +10,6 @@ const updatePreferences = async ({ currency, valueSystem }) => {
     const { data } = await apiRequest.patch("/user/updateMe", {
       currency,
       valueSystem,
-      isConfigured: true,
     });
     return data;
   } catch (err) {
