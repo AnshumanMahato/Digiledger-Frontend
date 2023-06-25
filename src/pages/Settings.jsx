@@ -1,3 +1,4 @@
+import AccountForm from "../components/formComponents/AccountForm";
 import ConfigurationForm from "../components/formComponents/ConfigurationForm";
 import ProfileForm from "../components/formComponents/ProfileForm";
 import Section from "../components/utils/Section";
@@ -13,6 +14,10 @@ function Settings() {
       <Section>
         <SectionHeader>Preferences</SectionHeader>
         <ConfigurationForm />
+      </Section>
+      <Section>
+        <SectionHeader>Account</SectionHeader>
+        <AccountForm />
       </Section>
     </main>
   );

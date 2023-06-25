@@ -270,15 +270,22 @@ function InputEmail({ register, errors, ...rest }) {
     />
   );
 }
-function InputPassword({ register, errors }) {
+function InputPassword({ register, errors, current, update }) {
+  const label = current
+    ? "Current Password"
+    : update
+    ? "New Password"
+    : "Password;";
+
+  const name = current ? "passwordCurrent" : "password";
   return (
     <Input
-      label="Password"
+      label={label}
       type="password"
-      id="password"
+      id={name}
       className="form__input placeholder:text-slate-500"
       errors={errors}
-      {...register("password", {
+      {...register(name, {
         required: "This field is required",
         maxLength: {
           value: 20,
@@ -292,6 +299,15 @@ function InputPassword({ register, errors }) {
     />
   );
 }
+
+InputPassword.propTypes = {
+  checkVariation: ({ current, update }) => {
+    const count = Number(!!current + !!update);
+    if (count > 1)
+      return new Error("Only one of current or update can be true");
+  },
+};
+
 function InputPasswordConfirm({ register, errors, getPasswordField }) {
   return (
     <Input

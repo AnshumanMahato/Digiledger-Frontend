@@ -3,33 +3,34 @@ import FormGroup from "./FormGroup";
 import useUserContext from "../../hooks/useUserContext";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { InputEmail, InputName } from "./Input";
-import { updateMe } from "../../services/userServices";
+import { InputPassword, InputPasswordConfirm } from "./Input";
+import {
+  updateMyPassword,
+  updatePreferences,
+} from "../../services/userServices";
 
-function ProfileForm() {
-  const { currentUser, updateCurrentUser } = useUserContext();
+function AccountForm() {
+  const { updateCurrentUser } = useUserContext();
 
   const [error, setError] = useState(null);
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: currentUser.name,
-      email: currentUser.email,
-    },
-  });
+  } = useForm();
 
-  const onSubmit = async (profile) => {
-    const { data, err } = await updateMe(profile);
+  const onSubmit = async (passwordUpdate) => {
+    const { data, err } = await updateMyPassword(passwordUpdate);
     if (err) {
       setError(err);
     }
     if (data) {
-      updateCurrentUser(data.updatedUser);
+      updateCurrentUser(data.user);
     }
   };
+
+  const getPasswordField = watch("password");
 
   return (
     <form
@@ -38,10 +39,17 @@ function ProfileForm() {
     >
       <FormGroup>{error && <p className="text-red-500">{error}</p>}</FormGroup>
       <FormGroup>
-        <InputName register={register} errors={errors} />
+        <InputPassword register={register} errors={errors} current />
       </FormGroup>
       <FormGroup>
-        <InputEmail register={register} errors={errors} />
+        <InputPassword register={register} errors={errors} update />
+      </FormGroup>
+      <FormGroup>
+        <InputPasswordConfirm
+          register={register}
+          errors={errors}
+          getPasswordField={getPasswordField}
+        />
       </FormGroup>
 
       <div className="flex justify-center items-center">
@@ -51,4 +59,4 @@ function ProfileForm() {
   );
 }
 
-export default ProfileForm;
+export default AccountForm;

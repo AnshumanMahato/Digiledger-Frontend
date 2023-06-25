@@ -1,8 +1,17 @@
 import apiRequest from "./apiRequest";
 
 const updateMe = async ({ name, email }) => {
-  const updates = { name, email };
-  console.log(updates);
+  try {
+    const { data } = await apiRequest.patch("/user/updateMe", {
+      name,
+      email,
+    });
+    return data;
+  } catch (err) {
+    return {
+      err: err.response?.data.message || err.message,
+    };
+  }
 };
 
 const updatePreferences = async ({ currency, valueSystem }) => {
@@ -19,7 +28,24 @@ const updatePreferences = async ({ currency, valueSystem }) => {
   }
 };
 
-const updateMyPassword = async ({ password, passwordConfirm }) => {};
+const updateMyPassword = async ({
+  passwordCurrent,
+  password,
+  passwordConfirm,
+}) => {
+  try {
+    const { data } = await apiRequest.patch("/user/updateMyPassword", {
+      passwordCurrent,
+      password,
+      passwordConfirm,
+    });
+    return data;
+  } catch (err) {
+    return {
+      err: err.response?.data.message || err.message,
+    };
+  }
+};
 
 const deleteMe = async () => {};
 
