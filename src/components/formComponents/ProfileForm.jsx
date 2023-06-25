@@ -3,10 +3,10 @@ import FormGroup from "./FormGroup";
 import useUserContext from "../../hooks/useUserContext";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { InputCurrency, InputValueSystem } from "./Input";
+import { InputEmail, InputName } from "./Input";
 import { updatePreferences } from "../../services/userServices";
 
-function ConfigurationForm() {
+function ProfileForm() {
   const { currentUser, updateCurrentUser } = useUserContext();
 
   const [error, setError] = useState(null);
@@ -16,8 +16,8 @@ function ConfigurationForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      currency: currentUser.currency,
-      calueSystem: currentUser.valueSystem,
+      name: currentUser.name,
+      email: currentUser.email,
     },
   });
 
@@ -38,10 +38,10 @@ function ConfigurationForm() {
     >
       <FormGroup>{error && <p className="text-red-500">{error}</p>}</FormGroup>
       <FormGroup>
-        <InputCurrency register={register} errors={errors} />
+        <InputName register={register} errors={errors} />
       </FormGroup>
       <FormGroup>
-        <InputValueSystem register={register} errors={errors} />
+        <InputEmail register={register} errors={errors} />
       </FormGroup>
 
       <div className="flex justify-center items-center">
@@ -51,4 +51,4 @@ function ConfigurationForm() {
   );
 }
 
-export default ConfigurationForm;
+export default ProfileForm;

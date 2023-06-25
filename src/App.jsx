@@ -12,6 +12,7 @@ import { TransactionQueryProvider } from "./contexts/TransactionContext";
 import Analytics from "./pages/Analytics";
 import Protected from "./components/Protected";
 import Configure from "./pages/Configure";
+import Settings from "./pages/Settings";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,14 @@ const router = createBrowserRouter([
         element: (
           <Protected>
             <Analytics />
+          </Protected>
+        ),
+      },
+      {
+        path: "settings",
+        element: (
+          <Protected>
+            <Settings />
           </Protected>
         ),
       },

@@ -35,6 +35,7 @@ function User() {
     { label: "Dashboard", to: "/dashboard" },
     { label: "Transactions", to: "/transactions" },
     { label: "Analytics", to: "/analytics" },
+    { label: "Settings", to: "/settings" },
     { label: "Logout", to: "/logout" },
   ];
 

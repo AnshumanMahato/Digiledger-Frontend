@@ -12,6 +12,8 @@ const getTitle = (path, username) => {
       return "Transaction Manager";
     case "/analytics":
       return "Analytics";
+    case "/settings":
+      return "Settings";
     default:
       return "Digiledger";
   }
