@@ -4,10 +4,7 @@ import useUserContext from "../../hooks/useUserContext";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputPassword, InputPasswordConfirm } from "./Input";
-import {
-  updateMyPassword,
-  updatePreferences,
-} from "../../services/userServices";
+import { updateMyPassword } from "../../services/userServices";
 
 function AccountForm() {
   const { updateCurrentUser } = useUserContext();
