@@ -1,7 +1,7 @@
 import Button from "../utils/Button";
 import FormGroup from "./FormGroup";
 import useUserContext from "../../hooks/useUserContext";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputCurrency, InputValueSystem } from "./Input";
 import { updatePreferences } from "../../services/userServices";

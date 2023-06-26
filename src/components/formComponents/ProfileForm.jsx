@@ -9,7 +9,7 @@ import { updateMe } from "../../services/userServices";
 function ProfileForm() {
   const { currentUser, updateCurrentUser } = useUserContext();
 
-  const [error, setError] = useState(null);
+  const [status, setStatus] = useState({ status: null, message: "" });
   const {
     register,
     handleSubmit,
@@ -24,10 +24,14 @@ function ProfileForm() {
   const onSubmit = async (profile) => {
     const { data, err } = await updateMe(profile);
     if (err) {
-      setError(err);
+      setStatus({ status: "error", message: err });
     }
     if (data) {
       updateCurrentUser(data.updatedUser);
+      setStatus({ status: "success", message: "Updated Successfully" });
+      setTimeout(() => {
+        setStatus({ status: null, message: "" });
+      }, 1500);
     }
   };
 
@@ -36,7 +40,14 @@ function ProfileForm() {
       className="w-1/2 min-w-[20rem] border-2 border-primary shadow-md shadow-primary/50 px-8 py-10 my-10 rounded-2xl"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <FormGroup>{error && <p className="text-red-500">{error}</p>}</FormGroup>
+      <FormGroup className="text-center">
+        {status.status === "error" && (
+          <p className="text-red-500">{status.message}</p>
+        )}
+        {status.status === "success" && (
+          <p className="text-green-500">{status.message}</p>
+        )}
+      </FormGroup>
       <FormGroup>
         <InputName register={register} errors={errors} />
       </FormGroup>
