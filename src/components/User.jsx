@@ -25,7 +25,7 @@ function User() {
   const handleClick = () => setActive((current) => !current);
 
   const classes = classNames(
-    "relative rounded-full transistion-all duration-100",
+    "relative rounded-full transistion-all duration-100 cursor-pointer",
     {
       "outline outline-4 outline-primary outline-offset-2": active,
     }
@@ -55,10 +55,9 @@ function User() {
   });
 
   return (
-    <div className={classes} onClick={handleClick}>
+    <div ref={refEl} className={classes} onClick={handleClick}>
       <img src={pfp} alt="user-profile" className="rounded-full h-14 w-14" />
       <nav
-        ref={refEl}
         className={`absolute top-[120%] right-0 z-10 transition-opacity transform ${
           !active ? "invisible opacity-0" : ""
         }`}
