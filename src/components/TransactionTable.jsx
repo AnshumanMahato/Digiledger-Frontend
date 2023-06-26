@@ -4,6 +4,7 @@ import classNames from "classnames";
 import Modal from "./Modal";
 import TransactionViewForm from "./formComponents/TransactionViewForm";
 import useUserContext from "../hooks/useUserContext";
+import formatCurrency from "../utils/formatCurrency";
 
 function TransactionTable({ transactions, onClick }) {
   const { currentUser } = useUserContext();
@@ -39,16 +40,17 @@ function TransactionTable({ transactions, onClick }) {
       label: "Income",
       render: (transaction) => {
         const classes = classNames(
-          "flex justify-end items-center font-medium text-lg",
+          "flex justify-end items-center font-medium text-md",
           {
             "sm:invisible": transaction.type === "expense",
           }
         );
 
-        const amount = new Intl.NumberFormat(currentUser.valueSystem, {
-          style: "currency",
-          currency: currentUser.currency,
-        }).format(transaction.amount);
+        const amount = formatCurrency(
+          transaction.amount,
+          currentUser.currency,
+          currentUser.valueSystem
+        );
 
         return (
           <div className={classes}>
@@ -66,16 +68,17 @@ function TransactionTable({ transactions, onClick }) {
       label: "Expense",
       render: (transaction) => {
         const classes = classNames(
-          "hidden sm:flex justify-end items-center font-medium",
+          "hidden sm:flex justify-end items-center text-md font-medium",
           {
             "sm:invisible": transaction.type === "income",
           }
         );
 
-        const amount = new Intl.NumberFormat(currentUser.valueSystem, {
-          style: "currency",
-          currency: currentUser.currency,
-        }).format(transaction.amount);
+        const amount = formatCurrency(
+          transaction.amount,
+          currentUser.currency,
+          currentUser.valueSystem
+        );
 
         return (
           <div className={classes}>
