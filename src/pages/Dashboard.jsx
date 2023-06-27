@@ -23,7 +23,7 @@ function Dashboard() {
 
   useEffect(() => {
     (async () => {
-      const limit = 5,
+      const limit = 3,
         sort = "-timestamp";
       const { docs } = await getTransactions({ limit, sort });
       const {
@@ -43,9 +43,9 @@ function Dashboard() {
 
   return (
     !isFetching && (
-      <main className="flex flex-col justify-evenly items-center w-full flex-grow">
+      <main className="flex flex-col justify-evenly items-center w-full flex-grow xl:flex-row xl:items-stretch">
         <Section className="flex flex-col items-center mb-8">
-          <SectionHeader className="relative z-1 mb-8 sm:mb-12 lg:mb-16">
+          <SectionHeader className="relative z-1 mb-8 sm:mb-12 lg:mb-16 xl:mb-auto">
             {new Intl.DateTimeFormat("en-US", {
               month: "long",
               year: "numeric",
@@ -58,7 +58,7 @@ function Dashboard() {
         </Section>
 
         <Section className="flex flex-col items-center">
-          <div className="container flex justify-between items-center mb-2">
+          <div className="container flex justify-between items-center mb-2 xl:mb-auto">
             <SectionHeader>Transactions</SectionHeader>
             <Link
               to="/transactions"
@@ -67,15 +67,16 @@ function Dashboard() {
               See All
             </Link>
           </div>
-
-          {transactions.current.length === 0 ? (
-            <NoTransactions />
-          ) : (
-            <TransactionTable
-              transactions={transactions.current}
-              onClick={handleClick}
-            />
-          )}
+          <div className="w-full xl:mb-auto">
+            {transactions.current.length === 0 ? (
+              <NoTransactions />
+            ) : (
+              <TransactionTable
+                transactions={transactions.current}
+                onClick={handleClick}
+              />
+            )}
+          </div>
         </Section>
       </main>
     )
