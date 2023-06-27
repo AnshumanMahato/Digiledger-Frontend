@@ -25,7 +25,7 @@ function Header() {
   return (
     <header className="flex justify-between items-center w-full mb-10">
       <div className="logo w-[60%]">
-        <span className="text-3xl font-bold">
+        <span className="text-3xl sm:text-4xl font-bold">
           {getTitle(pathname, currentUser?.name)}
         </span>
       </div>

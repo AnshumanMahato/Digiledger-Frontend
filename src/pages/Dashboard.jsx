@@ -45,7 +45,7 @@ function Dashboard() {
     !isFetching && (
       <main className="flex flex-col justify-evenly items-center w-full flex-grow">
         <Section className="flex flex-col items-center mb-8">
-          <SectionHeader className="relative z-1 mb-8">
+          <SectionHeader className="relative z-1 mb-8 sm:mb-12 lg:mb-16">
             {new Intl.DateTimeFormat("en-US", {
               month: "long",
               year: "numeric",
@@ -62,7 +62,7 @@ function Dashboard() {
             <SectionHeader>Transactions</SectionHeader>
             <Link
               to="/transactions"
-              className=" whitespace-nowrap hover:text-primary active:text-primary transition-colors"
+              className="whitespace-nowrap hover:text-primary active:text-primary transition-colors xs:text-lg"
             >
               See All
             </Link>

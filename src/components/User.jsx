@@ -41,7 +41,7 @@ function User() {
 
   const renderedOptions = options.map((option) => {
     const classes = ({ isActive }) => {
-      return classNames("inline-block", "p-4", {
+      return classNames("inline-block", "p-4 sm:p-6", "sm:text-lg", {
         "text-primary": isActive,
       });
     };
@@ -56,7 +56,11 @@ function User() {
 
   return (
     <div ref={refEl} className={classes} onClick={handleClick}>
-      <img src={pfp} alt="user-profile" className="rounded-full h-14 w-14" />
+      <img
+        src={pfp}
+        alt="user-profile"
+        className="rounded-full h-14 w-14 sm:h-20 sm:w-20"
+      />
       <nav
         className={`absolute top-[120%] right-0 z-10 transition-opacity transform ${
           !active ? "invisible opacity-0" : ""
