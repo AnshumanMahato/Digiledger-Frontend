@@ -11,7 +11,7 @@ const Input = forwardRef(
     ref
   ) => (
     <>
-      <label htmlFor={id} className="block text-md font-bold mb-3">
+      <label htmlFor={id} className="block text-base font-bold mb-3">
         {label}
       </label>
       {type === "textarea" && (

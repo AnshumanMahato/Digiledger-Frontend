@@ -46,12 +46,16 @@ function Transactions() {
         )}
       </Section>
       <Section className="flex flex-col justify-evenly items-center">
-        <SectionHeader className="mb-5">Transactions</SectionHeader>
+        <SectionHeader className="mb-2 xs:mb-3 sm:mb-5">
+          Transactions
+        </SectionHeader>
         <div className="container mx-auto">
           <div className="flex justify-between">
-            <div className="flex-grow"></div>
+            <div className="flex-grow">
+              {/* This div here is to show breadcrumbs to display all set filters. Yet to be implemented */}
+            </div>
             <Button
-              className="border-2 rounded-md ml-5 flex items-center"
+              className="border-2 rounded-md ml-4 flex items-center"
               onClick={handleFilterPanel}
             >
               <BsFilter />

@@ -19,10 +19,10 @@ function TransactionTable({ transactions, onClick }) {
         const date = new Date(transaction.timestamp * 1);
         return (
           <div className=" mr-3">
-            <p className="text-md sm:text-lg lg:text-xl font-medium whitespace-nowrap">
+            <p className="text-base sm:text-lg lg:text-xl font-medium whitespace-nowrap">
               {transaction.party}
             </p>
-            <p className="text-sm sm:text-md lg:text-lg text-slate-400">{`${new Intl.DateTimeFormat(
+            <p className="text-sm sm:text-base lg:text-lg text-slate-400">{`${new Intl.DateTimeFormat(
               "en-US",
               {
                 year: "numeric",
@@ -40,7 +40,7 @@ function TransactionTable({ transactions, onClick }) {
       label: "Income",
       render: (transaction) => {
         const classes = classNames(
-          "flex justify-end items-center font-medium text-md sm:text-lg lg:text-xl whitespace-nowrap sm:mr-3",
+          "flex justify-end items-center font-medium text-base sm:text-lg lg:text-xl whitespace-nowrap sm:mr-3",
           {
             "sm:invisible": transaction.type === "expense",
           }
@@ -68,7 +68,7 @@ function TransactionTable({ transactions, onClick }) {
       label: "Expense",
       render: (transaction) => {
         const classes = classNames(
-          "hidden sm:flex justify-end items-center text-md sm:text-lg lg:text-xl font-medium whitespace-nowrap",
+          "hidden sm:flex justify-end items-center text-base sm:text-lg lg:text-xl font-medium whitespace-nowrap",
           {
             "sm:invisible": transaction.type === "income",
           }

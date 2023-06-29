@@ -22,7 +22,7 @@ module.exports = {
       poppins: ["Poppins", "sans-serif"],
     },
     screens: {
-      xs: "475px",
+      xs: "375px",
       ...defaultTheme.screens,
     },
     extend: {},

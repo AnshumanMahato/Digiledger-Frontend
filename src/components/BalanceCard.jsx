@@ -8,7 +8,7 @@ function BalanceCard({ income, expense }) {
     <div className="w-full max-w-[18rem] xs:max-w-[22rem] lg:max-w-[27rem] relative h-min card xl:mb-auto">
       <div className="w-full p-5 xs:p-7 lg:p-10 relative rounded-3xl glass">
         <div className="flex flex-col mb-5 xs:mb-7 lg:mb-12">
-          <span className="text-md xs:text-lg lg:text-xl mb-1">Balance</span>
+          <span className="text-base xs:text-lg lg:text-xl mb-1">Balance</span>
           <span className=" text-2xl xs:text-3xl lg:text-4xl font-bold">
             {formatCurrency(
               balance,
@@ -19,7 +19,9 @@ function BalanceCard({ income, expense }) {
         </div>
         <div className="flex justify-between items-center">
           <div className="flex flex-col w-2/5">
-            <span className="text-md xs:text-lg lg:text-xl mb-1">Expense</span>
+            <span className="text-base xs:text-lg lg:text-xl mb-1">
+              Expense
+            </span>
             <span className="text-lg xs:text-xl lg:text-2xl font-medium">
               {formatCurrency(
                 expense,
@@ -29,7 +31,7 @@ function BalanceCard({ income, expense }) {
             </span>
           </div>
           <div className="flex flex-col w-2/5">
-            <span className="text-md xs:text-lg lg:text-xl mb-1">Income</span>
+            <span className="text-base xs:text-lg lg:text-xl mb-1">Income</span>
             <span className="text-lg xs:text-xl lg:text-2xl font-medium">
               {formatCurrency(
                 income,

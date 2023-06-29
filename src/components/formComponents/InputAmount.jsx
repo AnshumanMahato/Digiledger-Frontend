@@ -1,7 +1,7 @@
 function InputAmount(register, errors) {
   return (
     <>
-      <label htmlFor="amount" className="block text-md font-bold mb-3">
+      <label htmlFor="amount" className="block text-base font-bold mb-3">
         Amount
       </label>
       <input
