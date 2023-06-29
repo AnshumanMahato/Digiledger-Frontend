@@ -19,12 +19,12 @@
 }
 
 @layer components {
+  /* ===== Removing spinners from number input ==== */
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-
   /* Firefox */
   input[type="number"] {
     -moz-appearance: textfield;
@@ -41,11 +41,9 @@
   *::-webkit-scrollbar {
     width: 10px;
   }
-
   *::-webkit-scrollbar-track {
     background: theme(colors.accent);
   }
-
   *::-webkit-scrollbar-thumb {
     background-color: #4a4474;
     border-radius: 10px;
@@ -56,6 +54,7 @@
     border-radius: 10px;
   }
 
+  /* ==== Balance Card ==== */
   .glass {
     @apply bg-white/5;
     @apply backdrop-blur-[10px];
@@ -64,7 +63,6 @@
       inset 0 8px 10px 1px rgba(255, 255, 255, 0.13),
       4px 4px 30px rgba(0, 0, 0, 0.2);
   }
-
   .card::before {
     @apply content-[''];
     @apply absolute;
@@ -85,6 +83,11 @@
     box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.303);
   }
 
+  /* 
+  ==== Table Row Rounded Logic ====
+  As border does not apply to <tr> so applying this to td tags to 
+  simulate rounded edges in a row
+  */
   td {
     @apply border-white/25;
     @apply border-t-2;
@@ -98,12 +101,12 @@
     @apply border-r-2;
     @apply rounded-r-xl;
   }
-
   .transaction:hover td {
     @apply cursor-pointer;
     @apply border-primary;
   }
 
+  /* ==== Form Inputs ==== */
   .form__input {
     resize: none;
     display: block;
@@ -121,8 +124,6 @@
     border-radius: 4px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    /* Pseudo element (a visible thing that isn't really in the DOM).
-        Also needs -ms- */
   }
   .form__input:focus {
     outline: none;
@@ -133,66 +134,5 @@
   }
   .form__input::-webkit-input-placeholder {
     color: #bbb;
-  }
-
-  .form__group:not(:last-child) {
-    margin-bottom: 2.5rem;
-  }
-
-  .form__label {
-    display: block;
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-  }
-
-  .form__photo-upload {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    font-size: 1.6rem;
-  }
-
-  .form__user-photo {
-    height: 7.5rem;
-    width: 7.5rem;
-    border-radius: 50%;
-    margin-right: 2rem;
-  }
-
-  .form__upload {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-
-  .form__upload:focus + label {
-    outline: 3px solid #55c57a;
-    outline-offset: 3px;
-  }
-
-  .form__upload + label {
-    color: #55c57a;
-    display: inline-block;
-    text-decoration: none;
-    border-bottom: 1px solid #55c57a;
-    padding: 3px;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
-    cursor: pointer;
-  }
-  .form__upload + label:hover {
-    background-color: #55c57a;
-    color: #fff;
-    -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
   }
 }

@@ -12,6 +12,7 @@ import {
 import { addTransaction } from "../../services/transactionServices";
 import { useState } from "react";
 import useTransactionQuery from "../../hooks/useTransactionQuery";
+import FormPannel from "./components/FormPannel";
 
 function TransactionForm({ type, onClose: close }) {
   const [error, setError] = useState(null);
@@ -28,6 +29,10 @@ function TransactionForm({ type, onClose: close }) {
 
   const onSubmit = async (formData) => {
     const transaction = { ...formData, type };
+    /*
+      Setting category to undefined as this may saved in DB. Emty string is still a string. 
+      TODO: Need to set the backend to resolve this
+    */
     transaction.category =
       transaction.category !== "" ? transaction.category : undefined;
     const { data, err } = await addTransaction(transaction);
@@ -44,10 +49,7 @@ function TransactionForm({ type, onClose: close }) {
     }
   };
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="relative border-2 border-white shadow-white/50 shadow-md px-5 py-8 sm:px-8 sm:py-10 my-10 rounded-2xl bg-accent text-white font-poppins grid grid-cols-2 gap-x-4 sm:gap-x-6"
-    >
+    <FormPannel onSubmit={handleSubmit(onSubmit)}>
       <span
         onClick={close}
         className="text-white text-xl font-bold absolute right-[5%] top-[5%] p-1 hover:text-red-400 cursor-pointer"
@@ -76,7 +78,7 @@ function TransactionForm({ type, onClose: close }) {
         {type === "income" && <Button success>Add Income</Button>}
         {type === "expense" && <Button success>Add Expense</Button>}
       </div>
-    </form>
+    </FormPannel>
   );
 }
 

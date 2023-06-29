@@ -15,6 +15,7 @@ import {
   updateTransaction,
 } from "../../services/transactionServices";
 import useTransactionQuery from "../../hooks/useTransactionQuery";
+import FormPannel from "./components/FormPannel";
 
 function TransactionViewForm({ transaction, onClose: close }) {
   const [error, setError] = useState(null);
@@ -83,10 +84,7 @@ function TransactionViewForm({ transaction, onClose: close }) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className=" overflow-hidden relative border-2 border-white shadow-white/50 shadow-md px-5 py-8 sm:px-8 sm:py-10 my-10 rounded-2xl bg-accent text-white font-poppins grid grid-cols-2 gap-x-4 sm:gap-x-6"
-    >
+    <FormPannel onSubmit={handleSubmit(onSubmit)}>
       <span
         onClick={close}
         className="text-white text-xl font-bold absolute right-[5%] top-[5%] p-1 hover:text-red-400 cursor-pointer"
@@ -168,7 +166,7 @@ function TransactionViewForm({ transaction, onClose: close }) {
           </div>
         </div>
       )}
-    </form>
+    </FormPannel>
   );
 }
 

@@ -9,7 +9,9 @@ function Modal({ onClose, children, className }) {
   }, []);
 
   const classes = classNames(
-    "fixed top-[50%] left-[50%] w-4/6 min-w-[20rem] max-w-[35rem] transform -translate-x-[50%] -translate-y-[50%] rounded-2xl",
+    "fixed top-[50%] left-[50%]",
+    "w-[90%] max-w-[35rem] rounded-2xl",
+    "transform -translate-x-[50%] -translate-y-[50%]",
     className
   );
   return ReactDOM.createPortal(
