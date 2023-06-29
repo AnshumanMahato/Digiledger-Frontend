@@ -8,7 +8,9 @@ function Sidebar({
 }) {
   const renderedListItems = filterOptions.map((filter) => {
     const classes = classNames(
-      "py-6 text-lg border border-accent-dark/75 cursor-pointer",
+      "py-4 xs:py-6",
+      "text-base xs:text-lg",
+      "border border-accent-dark/75 cursor-pointer",
       {
         "bg-accent-dark/50": option === filter.option,
       }

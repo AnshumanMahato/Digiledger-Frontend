@@ -7,8 +7,8 @@ function RenderedOption({ options, current, update }) {
         const classes = classNames(
           "flex",
           "items-center",
-          "p-6",
-          "text-lg",
+          "p-4 xs:p-6",
+          "text-base xs:text-lg",
           "cursor-pointer",
           {
             "text-primary border border-y-primary": current === option.value,

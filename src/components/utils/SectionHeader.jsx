@@ -3,7 +3,7 @@ import classNames from "classnames";
 function SectionHeader({ children, className }) {
   const classes = classNames(
     className,
-    "text-xl xs:text-2xl",
+    "text-xl xs:text-2xl md:text-3xl",
     "font-bold",
     "w-full"
   );

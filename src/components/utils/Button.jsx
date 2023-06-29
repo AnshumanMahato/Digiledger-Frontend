@@ -23,8 +23,10 @@ function Button({
         !success && !warning && !danger && !plain,
       "text-primary border-primary":
         !success && !warning && !danger && !plain && active,
-      "p-1 xs:py-3 xs:py-1.5 text-sm": small,
-      "p-2 xs:px-4 xs:py-2 text-sm xs:text-base": !small,
+      "p-1 xs:px-3 md:px-4 xs:py-1.5 md:py-2 text-sm md:text-base lg:text-md":
+        small,
+      "p-2 xs:px-4 md:px-5 xs:py-2 md:py-3 text-sm xs:text-base md:text-lg lg:text-xl":
+        !small,
       "hover:text-primary active:text-primary": plain,
       "border-red-900 bg-gradient-to-r from-red-400 to-red-600": danger,
       "border-green-900 bg-gradient-to-r from-green-400 to-green-600": success,
