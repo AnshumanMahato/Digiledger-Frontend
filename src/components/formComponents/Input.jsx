@@ -9,56 +9,58 @@ const Input = forwardRef(
   (
     { label, type, id, name, errors, control, rules, options, ...rest },
     ref
-  ) => (
-    <>
-      <label htmlFor={id} className="block text-base font-bold mb-3">
-        {label}
-      </label>
-      {type === "textarea" && (
-        <textarea
-          name={name}
-          id={id}
-          className="form__input"
-          ref={ref}
-          {...rest}
-        />
-      )}
-      {type === "date" && (
-        <Controller
-          name={name}
-          render={({ field }) => <DateTime field={field} {...rest} />}
-          control={control}
-          rules={rules}
-        />
-      )}
-      {type === "select" && (
-        <select
-          id={id}
-          name={name}
-          className="form__input placeholder:text-slate-500"
-          ref={ref}
-          {...rest}
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      )}
-      {type !== "textarea" && type !== "date" && type !== "select" && (
-        <input
-          type={type}
-          id={id}
-          name={name}
-          className="form__input placeholder:text-slate-500"
-          ref={ref}
-          {...rest}
-        />
-      )}
-      {errors[name] && <p>{errors[name].message}</p>}
-    </>
-  )
+  ) => {
+    return (
+      <>
+        <label htmlFor={id} className="block text-base font-bold mb-3">
+          {label}
+        </label>
+        {type === "textarea" && (
+          <textarea
+            name={name}
+            id={id}
+            className="form__input"
+            ref={ref}
+            {...rest}
+          />
+        )}
+        {type === "date" && (
+          <Controller
+            name={name}
+            render={({ field }) => <DateTime field={field} {...rest} />}
+            control={control}
+            rules={rules}
+          />
+        )}
+        {type === "select" && (
+          <select
+            id={id}
+            name={name}
+            className="form__input placeholder:text-slate-500"
+            ref={ref}
+            {...rest}
+          >
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        )}
+        {type !== "textarea" && type !== "date" && type !== "select" && (
+          <input
+            type={type}
+            id={id}
+            name={name}
+            className="form__input placeholder:text-slate-500"
+            ref={ref}
+            {...rest}
+          />
+        )}
+        {errors[name] && <p>{errors[name].message}</p>}
+      </>
+    );
+  }
 );
 
 /* ************************** Transaction Form Fields ************************ */

@@ -109,10 +109,11 @@
   /* ==== Form Inputs ==== */
   .form__input {
     resize: none;
-    display: block;
     font-family: inherit;
     color: inherit;
-    padding: 0.25rem 0.5rem;
+    @apply block;
+    @apply px-2;
+    @apply py-1;
     font-size: 0.75rem;
     border: none;
     width: 100%;
