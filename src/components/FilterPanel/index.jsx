@@ -90,7 +90,9 @@ function FilterPanel({ showFilters, onClose }) {
   ];
 
   const classes = classNames(
-    "bg-accent fixed w-full h-screen top-0 left-0 transform transition-transform duration-300 grid grid-cols-[1fr_2fr] grid-rows-[10vh_80vh_10vh]",
+    "bg-accent fixed w-full h-screen top-0 left-0",
+    " transform transition-transform duration-300",
+    "grid grid-cols-[1fr_2fr] grid-rows-[10vh_80vh_10vh]",
     { "translate-x-[100%]": !showFilters }
   );
   return (
