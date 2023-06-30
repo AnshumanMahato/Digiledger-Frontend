@@ -1,13 +1,12 @@
 import { useEffect, useReducer, useRef, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import Section from "../components/utils/Section";
 import SectionHeader from "../components/utils/SectionHeader";
 import Button from "../components/utils/Button";
 import Modal from "../components/Modal";
 import DateRangeForm from "../components/formComponents/DateRangeForm";
 import { getStats } from "../services/transactionServices";
-import AnalyticsTable from "../components/AnalyticsTable";
-import { useOutletContext } from "react-router-dom";
-import { PieChart } from "../components/Chart";
+import AnalyticsPreview from "../components/AnalyticsPreview";
 
 const SET_CURRENT_MONTH = 1;
 const SET_PREV_MONTH = 2;
@@ -168,7 +167,7 @@ function Analytics() {
         )}
       </Section>
       <Section>
-        <p className="text-slate-400 text-center text-lg">
+        <p className="text-slate-400 text-center text-lg md:text-xl xl:text-2xl">
           {new Intl.DateTimeFormat("en-US", {
             dateStyle: "medium",
           }).format(state.startDate)}{" "}
@@ -185,22 +184,16 @@ function Analytics() {
             <SectionHeader className="mb-2">Expenses</SectionHeader>
             {overall.current.expense ? (
               <>
-                <article>
-                  <h3>By Category</h3>
-                  <PieChart data={categoryData.current.expense} />
-                  <AnalyticsTable
-                    data={categoryData.current.expense}
-                    type="expense"
-                  />
-                </article>
-                <article>
-                  <h3>By Party</h3>
-                  <PieChart data={partyData.current.expense} />
-                  <AnalyticsTable
-                    data={partyData.current.expense}
-                    type="expense"
-                  />
-                </article>
+                <AnalyticsPreview
+                  title="By Category"
+                  type="expense"
+                  data={categoryData.current.expense}
+                />
+                <AnalyticsPreview
+                  title="By Party"
+                  type="expense"
+                  data={partyData.current.expense}
+                />
               </>
             ) : (
               <p>No expense data for the given period</p>
@@ -210,22 +203,16 @@ function Analytics() {
             <SectionHeader className="mb-2">Income</SectionHeader>
             {overall.current.income ? (
               <>
-                <article>
-                  <h3>By Category</h3>
-                  <PieChart data={categoryData.current.income} />
-                  <AnalyticsTable
-                    data={categoryData.current.income}
-                    type="income"
-                  />
-                </article>
-                <article>
-                  <h3>By Party</h3>
-                  <PieChart data={partyData.current.income} />
-                  <AnalyticsTable
-                    data={partyData.current.income}
-                    type="income"
-                  />
-                </article>
+                <AnalyticsPreview
+                  title="By Category"
+                  type="income"
+                  data={categoryData.current.income}
+                />
+                <AnalyticsPreview
+                  title="By Party"
+                  type="income"
+                  data={partyData.current.income}
+                />
               </>
             ) : (
               <p>No income data for the given period</p>

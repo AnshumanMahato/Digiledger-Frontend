@@ -6,7 +6,7 @@ function AnalyticsTable({ type, data }) {
     {
       label: "Name",
       render: (el) => (
-        <p className="text-base text-white font-medium">
+        <p className="text-sm sm:text-base lg:text-xl text-white font-medium">
           {el.category || el.party}
         </p>
       ),
@@ -15,7 +15,7 @@ function AnalyticsTable({ type, data }) {
       label: "Amount",
       render: (el) => {
         const classes = classNames(
-          "flex justify-end items-center text-lg font-medium",
+          "flex justify-end items-center text-sm sm:text-base lg:text-xl whitespace-nowrap font-medium",
           {
             "text-red-400": type === "expense",
             "text-green-400": type === "income",

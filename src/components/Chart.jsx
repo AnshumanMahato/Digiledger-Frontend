@@ -22,7 +22,7 @@ function ChartWrapper({ config, className }) {
   );
 }
 
-function PieChart({ data }) {
+function PieChart({ data, className }) {
   const config = {
     type: "doughnut",
     data: {
@@ -50,6 +50,7 @@ function PieChart({ data }) {
       ],
     },
     options: {
+      responsive: true,
       layout: {
         padding: 10,
       },
@@ -58,13 +59,16 @@ function PieChart({ data }) {
           display: true,
           labels: {
             color: "#fff",
+            font: {
+              size: 20,
+            },
           },
         },
       },
     },
   };
 
-  return <ChartWrapper config={config} />;
+  return <ChartWrapper config={config} className={className} />;
 }
 function PartyChart({ data }) {}
 
