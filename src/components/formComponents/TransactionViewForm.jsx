@@ -1,7 +1,6 @@
 import FormGroup from "./FormGroup";
 import Button from "../utils/Button";
 import { useForm } from "react-hook-form";
-import { AiOutlineClose } from "react-icons/ai";
 import {
   InputAmount,
   InputCategory,
@@ -16,6 +15,8 @@ import {
 } from "../../services/transactionServices";
 import useTransactionQuery from "../../hooks/useTransactionQuery";
 import FormPannel from "./components/FormPannel";
+import CloseButton from "./components/CloseButton";
+import ConfirmDeletePrompt from "./components/ConfirmDeletePrompt";
 
 function TransactionViewForm({ transaction, onClose: close }) {
   const [error, setError] = useState(null);
@@ -85,12 +86,7 @@ function TransactionViewForm({ transaction, onClose: close }) {
 
   return (
     <FormPannel onSubmit={handleSubmit(onSubmit)}>
-      <span
-        onClick={close}
-        className="text-white text-xl font-bold absolute right-[5%] top-[5%] p-1 hover:text-red-400 cursor-pointer"
-      >
-        <AiOutlineClose />
-      </span>
+      <CloseButton onClick={close} />
       <FormGroup className="col-span-full">
         {error && <p className="text-red-500">{error}</p>}
       </FormGroup>
@@ -152,19 +148,10 @@ function TransactionViewForm({ transaction, onClose: close }) {
         )}
       </div>
       {deleteMode && (
-        <div className="absolute h-full w-full p-12 flex justify-center items-center bg-accent/30">
-          <div className="bg-accent p-5 border-2 rounded-lg text-center  text-sm">
-            <p>Are you sure you want to delete this transaction?</p>
-            <div className="container flex justify-evenly mt-5">
-              <Button small success onClick={handleDeleteConfirm}>
-                Confirm
-              </Button>
-              <Button small danger onClick={handleCancelClick}>
-                Cancel
-              </Button>
-            </div>
-          </div>
-        </div>
+        <ConfirmDeletePrompt
+          onConfirm={handleDeleteConfirm}
+          onCancel={handleCancelClick}
+        />
       )}
     </FormPannel>
   );

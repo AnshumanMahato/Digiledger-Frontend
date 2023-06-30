@@ -1,7 +1,6 @@
 import FormGroup from "./FormGroup";
 import Button from "../utils/Button";
 import { useForm } from "react-hook-form";
-import { AiOutlineClose } from "react-icons/ai";
 import {
   InputAmount,
   InputCategory,
@@ -13,6 +12,8 @@ import { addTransaction } from "../../services/transactionServices";
 import { useState } from "react";
 import useTransactionQuery from "../../hooks/useTransactionQuery";
 import FormPannel from "./components/FormPannel";
+import Status from "./components/Error";
+import CloseButton from "./components/CloseButton";
 
 function TransactionForm({ type, onClose: close }) {
   const [error, setError] = useState(null);
@@ -50,14 +51,9 @@ function TransactionForm({ type, onClose: close }) {
   };
   return (
     <FormPannel onSubmit={handleSubmit(onSubmit)}>
-      <span
-        onClick={close}
-        className="text-white text-xl font-bold absolute right-[5%] top-[5%] p-1 hover:text-red-400 cursor-pointer"
-      >
-        <AiOutlineClose />
-      </span>
+      <CloseButton onClick={close} />
       <FormGroup className="col-span-full">
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <Status type="success">Hello workld go to hell</Status>}
       </FormGroup>
       <FormGroup>
         <InputAmount register={register} errors={errors} />

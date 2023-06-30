@@ -5,10 +5,7 @@ import TransactionTable from "../components/TransactionTable";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import NoTransactions from "../components/NoTransactions";
 import { useEffect, useRef } from "react";
-import {
-  getCurrentMonthStats,
-  getTransactions,
-} from "../services/transactionServices";
+import { getStats, getTransactions } from "../services/transactionServices";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -25,10 +22,16 @@ function Dashboard() {
     (async () => {
       const limit = 3,
         sort = "-timestamp";
+
+      const today = new Date();
+      const monthStart = new Date(today.getFullYear(), today.getMonth(), 1),
+        monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
       const { docs } = await getTransactions({ limit, sort });
       const {
         data: { overall },
-      } = await getCurrentMonthStats();
+      } = await getStats(monthStart.getTime(), monthEnd.getTime());
+
       transactions.current = docs;
       monthlydata.current = overall;
       setIsFetching(false);

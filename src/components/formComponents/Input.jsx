@@ -12,17 +12,17 @@ const Input = forwardRef(
     ref
   ) => {
     const inputClasses = classNames(
-      "block w-full px-2 py-1.5 sm:px-5 sm:py-3 lg:px-6 lg:py-4",
+      "block w-full px-2 py-1.5 sm:px-4",
       "bg-accent-dark resize-none",
       "border-x-0 border-y-[3px] border-transparent rounded",
       "focus:outline-none focus:border-b-primary focus:invalid:border-b-red-400",
       "transition-all duration-[0.3s]",
-      "text-white placeholder:text-slate-500 text-xs sm:text-lg lg:text-xl"
+      "text-white placeholder:text-slate-500 text-xs sm:text-base"
     );
 
     const labelClasses = classNames(
       "block mb-3",
-      "text-base sm:text-xl lg:text-2xl font-bold"
+      "text-base sm:text-lg font-bold"
     );
 
     return (
