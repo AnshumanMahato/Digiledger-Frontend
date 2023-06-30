@@ -10,7 +10,7 @@ function Pagination({ currentPage, totalPages, updatePage }) {
   };
 
   return (
-    <div className="flex justify-center mt-4">
+    <div className="flex justify-center items-center mt-4">
       <Button
         className=" rounded-l-full"
         onClick={handleClickPrev}
@@ -18,7 +18,7 @@ function Pagination({ currentPage, totalPages, updatePage }) {
       >
         Prev
       </Button>
-      <span className="bg-blue-500 text-white font-bold py-2 px-4">
+      <span className="text-white font-bold mx-4 sm:text-lg lg:text-xl">
         {currentPage}
       </span>
       <Button
