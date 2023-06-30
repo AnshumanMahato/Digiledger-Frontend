@@ -4,22 +4,37 @@ import DateTime from "./DateTime";
 import FormGroup from "./FormGroup";
 import useTransactionQuery from "../../hooks/useTransactionQuery";
 import currencies from "../../utils/currencyArray.json";
+import classNames from "classnames";
 
 const Input = forwardRef(
   (
     { label, type, id, name, errors, control, rules, options, ...rest },
     ref
   ) => {
+    const inputClasses = classNames(
+      "block w-full px-2 py-1.5 sm:px-5 sm:py-3 lg:px-6 lg:py-4",
+      "bg-accent-dark resize-none",
+      "border-x-0 border-y-[3px] border-transparent rounded",
+      "focus:outline-none focus:border-b-primary focus:invalid:border-b-red-400",
+      "transition-all duration-[0.3s]",
+      "text-white placeholder:text-slate-500 text-xs sm:text-lg lg:text-xl"
+    );
+
+    const labelClasses = classNames(
+      "block mb-3",
+      "text-base sm:text-xl lg:text-2xl font-bold"
+    );
+
     return (
       <>
-        <label htmlFor={id} className="block text-base font-bold mb-3">
+        <label htmlFor={id} className={labelClasses}>
           {label}
         </label>
         {type === "textarea" && (
           <textarea
             name={name}
             id={id}
-            className="form__input"
+            className={inputClasses}
             ref={ref}
             {...rest}
           />
@@ -27,7 +42,9 @@ const Input = forwardRef(
         {type === "date" && (
           <Controller
             name={name}
-            render={({ field }) => <DateTime field={field} {...rest} />}
+            render={({ field }) => (
+              <DateTime className={inputClasses} field={field} {...rest} />
+            )}
             control={control}
             rules={rules}
           />
@@ -36,7 +53,7 @@ const Input = forwardRef(
           <select
             id={id}
             name={name}
-            className="form__input placeholder:text-slate-500"
+            className={inputClasses}
             ref={ref}
             {...rest}
           >
@@ -52,7 +69,7 @@ const Input = forwardRef(
             type={type}
             id={id}
             name={name}
-            className="form__input placeholder:text-slate-500"
+            className={inputClasses}
             ref={ref}
             {...rest}
           />
@@ -122,7 +139,6 @@ function InputParty({ register, errors, ...rest }) {
         type="text"
         id="party"
         errors={errors}
-        className="form__input placeholder:text-slate-500"
         {...register("party", {
           required: "This field is required",
           maxLength: {
@@ -237,7 +253,6 @@ function InputName({ register, errors }) {
       label="Name"
       type="text"
       id="name"
-      className="form__input placeholder:text-slate-500"
       errors={errors}
       {...register("name", {
         required: '"This field is required"',
@@ -259,7 +274,6 @@ function InputEmail({ register, errors, ...rest }) {
       label="Email"
       type="email"
       id="email"
-      className="form__input placeholder:text-slate-500"
       errors={errors}
       {...register("email", {
         required: "This field is required",
@@ -285,7 +299,6 @@ function InputPassword({ register, errors, current, update }) {
       label={label}
       type="password"
       id={name}
-      className="form__input placeholder:text-slate-500"
       errors={errors}
       {...register(name, {
         required: "This field is required",
@@ -317,7 +330,6 @@ function InputPasswordConfirm({ register, errors, getPasswordField }) {
       type="password"
       id="passwordConfirm"
       errors={errors}
-      className="form__input placeholder:text-slate-500"
       {...register("passwordConfirm", {
         required: "This field is required",
         validate: (value) =>
@@ -335,7 +347,6 @@ function InputCurrency({ register, errors, ...rest }) {
         type="text"
         id="currency"
         errors={errors}
-        className="form__input placeholder:text-slate-500"
         {...register("currency", {
           required: "This field is required",
           validate: (value) =>

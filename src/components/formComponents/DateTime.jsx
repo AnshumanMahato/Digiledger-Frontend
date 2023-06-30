@@ -2,13 +2,13 @@ import { forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function DateTime({ field, disabled }) {
+function DateTime({ field, disabled, className }) {
   const RefInput = forwardRef(({ value, onClick, onChange }, ref) => (
     <input
       type="text"
       name="timesatmp"
       id="timestamp"
-      className="form__input placeholder:text-slate-500"
+      className={className}
       value={value}
       ref={ref}
       onClick={onClick}

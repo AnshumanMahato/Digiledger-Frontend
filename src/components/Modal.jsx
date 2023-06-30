@@ -10,7 +10,7 @@ function Modal({ onClose, children, className }) {
 
   const classes = classNames(
     "fixed top-[50%] left-[50%]",
-    "w-[90%] max-w-[35rem] rounded-2xl",
+    "w-[90%] max-w-[35rem] lg:max-w-[40rem] rounded-2xl",
     "transform -translate-x-[50%] -translate-y-[50%]",
     className
   );
