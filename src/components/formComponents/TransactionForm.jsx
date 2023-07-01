@@ -50,7 +50,10 @@ function TransactionForm({ type, onClose: close }) {
     }
   };
   return (
-    <FormPannel onSubmit={handleSubmit(onSubmit)}>
+    <FormPannel
+      onSubmit={handleSubmit(onSubmit)}
+      className="grid grid-cols-2 gap-x-4 sm:gap-x-6"
+    >
       <CloseButton onClick={close} />
       <FormGroup className="col-span-full">
         {error && <Status type="success">Hello workld go to hell</Status>}

@@ -85,7 +85,10 @@ function TransactionViewForm({ transaction, onClose: close }) {
   };
 
   return (
-    <FormPannel onSubmit={handleSubmit(onSubmit)}>
+    <FormPannel
+      onSubmit={handleSubmit(onSubmit)}
+      className="grid grid-cols-2 gap-x-4 sm:gap-x-6"
+    >
       <CloseButton onClick={close} />
       <FormGroup className="col-span-full">
         {error && <p className="text-red-500">{error}</p>}

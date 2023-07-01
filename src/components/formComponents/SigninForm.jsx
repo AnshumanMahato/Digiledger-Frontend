@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import useUserContext from "../../hooks/useUserContext";
 import { useNavigate } from "react-router-dom";
 import { InputEmail, InputPassword } from "./Input";
+import FormPannel from "./components/FormPannel";
 
 function SigninForm() {
   const navigate = useNavigate();
@@ -39,9 +40,9 @@ function SigninForm() {
   };
 
   return (
-    <form
-      className="w-1/2 min-w-[20rem] border-2 border-primary shadow-md shadow-primary/50 px-8 py-10 my-10 rounded-2xl"
+    <FormPannel
       onSubmit={handleSubmit(onSubmit)}
+      className="w-11/12 sm:w-3/5 xl:w-2/5"
     >
       <FormGroup>{error && <p className="text-red-500">{error}</p>}</FormGroup>
       <FormGroup>
@@ -53,7 +54,7 @@ function SigninForm() {
       <div className="flex justify-center items-center">
         <Button success>Sign In</Button>
       </div>
-    </form>
+    </FormPannel>
   );
 }
 
