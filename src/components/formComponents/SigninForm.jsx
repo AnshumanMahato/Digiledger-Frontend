@@ -42,7 +42,7 @@ function SigninForm() {
   return (
     <FormPannel
       onSubmit={handleSubmit(onSubmit)}
-      className="w-11/12 sm:w-3/5 xl:w-2/5"
+      className="w-11/12 sm:w-3/5 xl:w-1/2"
     >
       <FormGroup>{error && <p className="text-red-500">{error}</p>}</FormGroup>
       <FormGroup>

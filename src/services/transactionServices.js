@@ -21,6 +21,10 @@ const getTransactions = async (filters) => {
         totalPages: 0,
         docs: [],
       };
+    } else {
+      return {
+        err: err.response?.data.message || err.message,
+      };
     }
   }
 };

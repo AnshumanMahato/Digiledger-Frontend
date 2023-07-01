@@ -11,9 +11,10 @@ function Configure() {
       navigate("/dashboard");
     }
   }, [currentUser, navigate]);
+
   return (
     <main className="flex flex-col justify-between items-center w-full py-10">
-      <h1 className="font-bold text-3xl text-center">
+      <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl text-center">
         Before you begin, let's setup your preferences
       </h1>
       <ConfigurationForm />

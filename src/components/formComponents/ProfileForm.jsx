@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputEmail, InputName } from "./Input";
 import { updateMe } from "../../services/userServices";
+import FormPannel from "./components/FormPannel";
 
 function ProfileForm() {
   const { currentUser, updateCurrentUser } = useUserContext();
@@ -36,9 +37,9 @@ function ProfileForm() {
   };
 
   return (
-    <form
-      className="w-1/2 min-w-[20rem] border-2 border-primary shadow-md shadow-primary/50 px-8 py-10 my-10 rounded-2xl"
+    <FormPannel
       onSubmit={handleSubmit(onSubmit)}
+      className="w-11/12 sm:w-3/5 xl:w-1/2"
     >
       <FormGroup className="text-center">
         {status.status === "error" && (
@@ -58,7 +59,7 @@ function ProfileForm() {
       <div className="flex justify-center items-center">
         <Button success>Save</Button>
       </div>
-    </form>
+    </FormPannel>
   );
 }
 
