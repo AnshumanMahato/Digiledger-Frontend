@@ -21,7 +21,7 @@ function Settings() {
         <ConfigurationForm />
       </Section>
       <Section className={sectionClasses}>
-        <SectionHeader>Account</SectionHeader>
+        <SectionHeader>Password</SectionHeader>
         <AccountForm />
       </Section>
     </main>

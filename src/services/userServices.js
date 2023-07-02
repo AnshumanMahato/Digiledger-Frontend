@@ -1,10 +1,11 @@
 import apiRequest from "./apiRequest";
 
-const updateMe = async ({ name, email }) => {
+const updateMe = async ({ name, email, photo }) => {
   try {
     const { data } = await apiRequest.patch("/user/updateMe", {
       name,
       email,
+      photo,
     });
     return data;
   } catch (err) {

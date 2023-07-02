@@ -15,11 +15,13 @@ function ProfileForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
       name: currentUser.name,
       email: currentUser.email,
+      photo: currentUser.photo,
     },
   });
 
@@ -57,7 +59,10 @@ function ProfileForm() {
         <InputEmail register={register} errors={errors} />
       </FormGroup>
       <FormGroup>
-        <AvatarPanel />
+        <label className="block mb-3 text-base sm:text-lg font-bold">
+          Avatar
+        </label>
+        <AvatarPanel register={register} value={watch("photo")} />
       </FormGroup>
 
       <div className="flex justify-center items-center">
