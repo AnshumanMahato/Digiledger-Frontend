@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import pfp from "../assets/pfp_f_1.jpg";
+import pfpDefault from "../assets/default.jpg";
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
-
-function User() {
+function User({ pfp }) {
   const [active, setActive] = useState(false);
 
   const refEl = useRef();
@@ -57,7 +56,7 @@ function User() {
   return (
     <div ref={refEl} className={classes} onClick={handleClick}>
       <img
-        src={pfp}
+        src={pfp || pfpDefault}
         alt="user-profile"
         className="rounded-full h-14 w-14 sm:h-20 sm:w-20"
       />

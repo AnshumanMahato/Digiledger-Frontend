@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { InputEmail, InputName } from "./Input";
 import { updateMe } from "../../services/userServices";
 import FormPannel from "./components/FormPannel";
+import AvatarPanel from "./components/AvatarPanel";
 
 function ProfileForm() {
   const { currentUser, updateCurrentUser } = useUserContext();
@@ -54,6 +55,9 @@ function ProfileForm() {
       </FormGroup>
       <FormGroup>
         <InputEmail register={register} errors={errors} />
+      </FormGroup>
+      <FormGroup>
+        <AvatarPanel />
       </FormGroup>
 
       <div className="flex justify-center items-center">
