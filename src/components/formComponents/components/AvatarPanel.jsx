@@ -7,7 +7,7 @@ function AvatarPanel({ register, value }) {
 
   const renderedPfps = options.map((option) => {
     const classes = classNames(
-      "relative inline-block rounded-full transistion-all duration-100 cursor-pointer mx-4 my-2",
+      "relative inline-block rounded-full transistion-all duration-100 cursor-pointer m-2",
       {
         "outline outline-4 outline-primary outline-offset-2": value === option,
       }
@@ -18,7 +18,7 @@ function AvatarPanel({ register, value }) {
           <img
             src={avatars.get(option)}
             alt="user-profile"
-            className="rounded-full h-12 w-12 sm:h-18 sm:w-18"
+            className="rounded-full h-14 w-14 sm:h-20 sm:w-20"
           />
         </label>
         <input
@@ -32,7 +32,11 @@ function AvatarPanel({ register, value }) {
     );
   });
 
-  return <div className="whitespace-nowrap overflow-auto">{renderedPfps}</div>;
+  return (
+    <div className="whitespace-nowrap overflow-auto bg-accent-dark/50 p-1 rounded-lg">
+      {renderedPfps}
+    </div>
+  );
 }
 
 export default AvatarPanel;
