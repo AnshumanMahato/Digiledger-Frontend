@@ -13,10 +13,17 @@ import Analytics from "./pages/Analytics";
 import Protected from "./components/Protected";
 import Configure from "./pages/Configure";
 import Settings from "./pages/Settings";
+import { UIProvider } from "./contexts/UIContext";
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: (
+      <UIProvider>
+        <UserProvider>
+          <Layout />
+        </UserProvider>
+      </UIProvider>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -73,11 +80,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <UserProvider>
-      <RouterProvider router={router} />
-    </UserProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -4,9 +4,11 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import { initLogin } from "../services/authServices";
 import useUserContext from "../hooks/useUserContext";
-import { UIProvider } from "../contexts/UIContext";
+import useUIContext from "../hooks/useUIContext";
+import Status from "../components/Status";
 
 function Layout() {
+  const { status } = useUIContext();
   const { currentUser, updateCurrentUser } = useUserContext();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
@@ -37,11 +39,12 @@ function Layout() {
   return (
     <div className="min-h-screen w-screen text-white bg-accent flex flex-col justify-between items-center pt-10 px-[7%] sm:pt-14 font-poppins">
       {isLoaded && (
-        <UIProvider>
+        <>
           <Header />
           <Outlet context={{ isFetching, setIsFetching }} />
           <Footer />
-        </UIProvider>
+          {status.status && <Status {...status} />}
+        </>
       )}
     </div>
   );
