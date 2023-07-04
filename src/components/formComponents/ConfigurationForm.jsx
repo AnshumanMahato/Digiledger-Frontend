@@ -25,8 +25,7 @@ function ConfigurationForm() {
     const { data, err } = await updatePreferences(preferences);
     if (err) {
       setErrorStatus(err);
-    }
-    if (data) {
+    } else {
       updateCurrentUser(data.updatedUser);
       setSuccessStatus("Preferences Updated Successfully");
     }

@@ -88,8 +88,7 @@ function Analytics() {
       const { data, err } = await getStats(state.startDate, state.endDate);
       if (err) {
         setErrorStatus(err);
-      }
-      if (data) {
+      } else {
         categoryData.current = data.categoryBased;
         partyData.current = data.partyBased;
         overall.current = data.overall;

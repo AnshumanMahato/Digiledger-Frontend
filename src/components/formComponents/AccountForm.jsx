@@ -23,8 +23,7 @@ function AccountForm() {
     const { data, err } = await updateMyPassword(passwordUpdate);
     if (err) {
       setErrorStatus(err);
-    }
-    if (data) {
+    } else {
       updateCurrentUser(data.user);
       reset();
       setSuccessStatus("Password Updated Successfully");

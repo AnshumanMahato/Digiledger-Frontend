@@ -38,8 +38,7 @@ function TransactionForm({ type, onClose: close }) {
     const { data, err } = await addTransaction(transaction);
     if (err) {
       setErrorStatus(err);
-    }
-    if (data) {
+    } else {
       if (data.updates) {
         updateCategories(data.updates.categories);
         updateParties(data.updates.parties);

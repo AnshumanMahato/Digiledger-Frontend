@@ -48,8 +48,7 @@ function TransactionViewForm({ transaction, onClose: close }) {
     const { data, err } = await updateTransaction(transaction._id, formData);
     if (err) {
       setErrorStatus(err);
-    }
-    if (data) {
+    } else {
       if (data.updates) {
         updateCategories(data.updates.categories);
         updateParties(data.updates.parties);
@@ -75,12 +74,11 @@ function TransactionViewForm({ transaction, onClose: close }) {
 
   const handleDeleteConfirm = async (e) => {
     e.preventDefault();
-    const { data, err } = await deleteTransaction(transaction._id);
+    const { err } = await deleteTransaction(transaction._id);
     if (err) {
       setErrorStatus(err);
       setDeleteMode(false);
-    }
-    if (data) {
+    } else {
       resetFilters();
       setSuccessStatus("Transaction Deleted Successfully");
       close();

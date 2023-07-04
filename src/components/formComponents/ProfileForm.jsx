@@ -28,8 +28,7 @@ function ProfileForm() {
     const { data, err } = await updateMe(profile);
     if (err) {
       setErrorStatus(err);
-    }
-    if (data) {
+    } else {
       updateCurrentUser(data.updatedUser);
       setSuccessStatus("Profile Updated Successfully");
     }

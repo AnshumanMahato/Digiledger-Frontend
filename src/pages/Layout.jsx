@@ -18,15 +18,11 @@ function Layout() {
   useEffect(() => {
     (async () => {
       if (!currentUser) {
-        try {
-          const {
-            data: { user },
-          } = await initLogin();
-          console.log(currentUser, user);
-          if (user) {
-            updateCurrentUser(user);
-          }
-        } catch (e) {}
+        const { data } = await initLogin();
+        console.log(currentUser, data?.user);
+        if (data?.user) {
+          updateCurrentUser(data.user);
+        }
       } else if (!currentUser.isConfigured && pathname !== "/configure") {
         navigate("/configure", {
           replace: true,
