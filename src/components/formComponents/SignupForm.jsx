@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import FormGroup from "./FormGroup";
 import Button from "../utils/Button";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { signupRequest } from "../../services/authServices";
 import useUserContext from "../../hooks/useUserContext";
 import { useNavigate } from "react-router-dom";
@@ -12,10 +12,12 @@ import {
   InputPasswordConfirm,
 } from "./Input";
 import FormPannel from "./components/FormPannel";
+import useUIContext from "../../hooks/useUIContext";
 
 function SignupForm() {
   const navigate = useNavigate();
   const { currentUser, updateCurrentUser } = useUserContext();
+  const { setErrorStatus, setSuccessStatus } = useUIContext();
 
   useEffect(() => {
     if (currentUser) {
@@ -25,7 +27,6 @@ function SignupForm() {
     }
   }, [currentUser, navigate]);
 
-  const [error, setError] = useState(null);
   const {
     register,
     watch,
@@ -33,17 +34,16 @@ function SignupForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    try {
-      const {
-        data: { user },
-      } = await signupRequest(data);
-      updateCurrentUser(user);
-      setError(null);
-    } catch (e) {
-      setError(e.response.data.message);
+  const onSubmit = async (info) => {
+    const { data, err } = await signupRequest(info);
+    if (err) {
+      setErrorStatus(err);
+    } else {
+      setTimeout(() => updateCurrentUser(data.user), 1500);
+      setSuccessStatus("Account Created Successfully!!!");
     }
   };
+
   const getPasswordField = watch("password");
 
   return (
@@ -51,7 +51,6 @@ function SignupForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="w-11/12 sm:w-3/5 xl:w-1/2"
     >
-      <FormGroup>{error && <p className="text-red-500">{error}</p>}</FormGroup>
       <FormGroup>
         <InputName register={register} errors={errors} />
       </FormGroup>
