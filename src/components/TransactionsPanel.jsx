@@ -22,13 +22,12 @@ function TransactionsPanel() {
         ...filters,
         page: currentPage,
       });
-      console.log(data, err);
+
       if (err) {
         setErrorStatus(err);
         transactions.current = [];
         totalPages.current = null;
-      }
-      if (data) {
+      } else {
         transactions.current = data.docs;
         totalPages.current = data.totalPages;
       }

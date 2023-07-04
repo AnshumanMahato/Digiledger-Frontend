@@ -6,11 +6,12 @@ import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import NoTransactions from "../components/NoTransactions";
 import { useEffect, useRef } from "react";
 import { getStats, getTransactions } from "../services/transactionServices";
+import useUIContext from "../hooks/useUIContext";
 
 function Dashboard() {
   const navigate = useNavigate();
   const { isFetching, setIsFetching } = useOutletContext();
-  // const { transactions, overall } = useLoaderData();
+  const { setErrorStatus } = useUIContext();
 
   const transactions = useRef([]),
     monthlydata = useRef({
@@ -27,18 +28,27 @@ function Dashboard() {
       const monthStart = new Date(today.getFullYear(), today.getMonth(), 1),
         monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
-      const { docs } = await getTransactions({ limit, sort });
+      const {
+        data: { docs },
+        err: e1,
+      } = await getTransactions({ limit, sort });
+
       const {
         data: { overall },
+        err: e2,
       } = await getStats(monthStart.getTime(), monthEnd.getTime());
 
-      transactions.current = docs;
-      monthlydata.current = overall;
+      if (e1 || e2) {
+        setErrorStatus(e1 || e2);
+      } else {
+        transactions.current = docs;
+        monthlydata.current = overall;
+      }
       setIsFetching(false);
     })();
 
     return () => setIsFetching(true);
-  }, [setIsFetching]);
+  }, [setIsFetching, setErrorStatus]);
 
   const handleClick = () => {
     navigate("/transactions");
