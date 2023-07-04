@@ -7,6 +7,7 @@ import Modal from "../components/Modal";
 import DateRangeForm from "../components/formComponents/DateRangeForm";
 import { getStats } from "../services/transactionServices";
 import AnalyticsPreview from "../components/AnalyticsPreview";
+import useUIContext from "../hooks/useUIContext";
 
 const SET_CURRENT_MONTH = 1;
 const SET_PREV_MONTH = 2;
@@ -67,7 +68,7 @@ const reducer = (state, action) => {
 
 function Analytics() {
   const [showModal, setShowModal] = useState(false);
-  const [error, setError] = useState(null);
+  const { setErrorStatus } = useUIContext();
   const { isFetching, setIsFetching } = useOutletContext();
 
   const today = new Date();
@@ -86,10 +87,9 @@ function Analytics() {
     (async () => {
       const { data, err } = await getStats(state.startDate, state.endDate);
       if (err) {
-        setError(err);
+        setErrorStatus(err);
       }
       if (data) {
-        setError(null);
         categoryData.current = data.categoryBased;
         partyData.current = data.partyBased;
         overall.current = data.overall;
@@ -98,7 +98,7 @@ function Analytics() {
     })();
 
     return () => setIsFetching(true);
-  }, [state, setIsFetching]);
+  }, [state, setIsFetching, setErrorStatus]);
 
   return (
     <main className="flex flex-col items-center w-full flex-grow">
@@ -177,8 +177,7 @@ function Analytics() {
           }).format(state.endDate)}
         </p>
       </Section>
-      {error && <div>{error}</div>}
-      {!error && !isFetching && (
+      {!isFetching && (
         <>
           <Section>
             <SectionHeader className="mb-2">Expenses</SectionHeader>

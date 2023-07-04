@@ -13,7 +13,7 @@ const getTransactions = async (filters) => {
     const { data } = await apiRequest(`/transaction?${query}`);
     return data;
   } catch (err) {
-    if (err.response.status === 404) {
+    if (err.response?.status === 404) {
       return {
         data: {
           count: 0,

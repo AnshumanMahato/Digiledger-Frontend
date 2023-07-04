@@ -28,21 +28,21 @@ function Dashboard() {
       const monthStart = new Date(today.getFullYear(), today.getMonth(), 1),
         monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
-      const {
-        data: { docs },
-        err: e1,
-      } = await getTransactions({ limit, sort });
+      const { data: transactionData, err: e1 } = await getTransactions({
+        limit,
+        sort,
+      });
 
-      const {
-        data: { overall },
-        err: e2,
-      } = await getStats(monthStart.getTime(), monthEnd.getTime());
+      const { data: stats, err: e2 } = await getStats(
+        monthStart.getTime(),
+        monthEnd.getTime()
+      );
 
       if (e1 || e2) {
         setErrorStatus(e1 || e2);
       } else {
-        transactions.current = docs;
-        monthlydata.current = overall;
+        transactions.current = transactionData.docs;
+        monthlydata.current = stats.overall;
       }
       setIsFetching(false);
     })();
