@@ -10,16 +10,16 @@ const getTransactions = async (filters) => {
         }
       });
     }
-    const {
-      data: { data },
-    } = await apiRequest(`/transaction?${query}`);
+    const { data } = await apiRequest(`/transaction?${query}`);
     return data;
   } catch (err) {
     if (err.response.status === 404) {
       return {
-        count: 0,
-        totalPages: 0,
-        docs: [],
+        data: {
+          count: 0,
+          totalPages: 0,
+          docs: [],
+        },
       };
     } else {
       return {

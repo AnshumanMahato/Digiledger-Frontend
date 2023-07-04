@@ -5,9 +5,11 @@ import { getTransactions } from "../services/transactionServices";
 import NoTransactions from "./NoTransactions";
 import useTransactionQuery from "../hooks/useTransactionQuery";
 import { useOutletContext } from "react-router-dom";
+import useUIContext from "../hooks/useUIContext";
 
 function TransactionsPanel() {
   const { isFetching, setIsFetching } = useOutletContext();
+  const { setErrorStatus } = useUIContext();
 
   const { currentPage, filters, updatePage } = useTransactionQuery();
 
@@ -16,20 +18,31 @@ function TransactionsPanel() {
 
   useEffect(() => {
     (async () => {
-      const data = await getTransactions({ ...filters, page: currentPage });
-      transactions.current = data.docs;
-      totalPages.current = data.totalPages;
+      const { data, err } = await getTransactions({
+        ...filters,
+        page: currentPage,
+      });
+      console.log(data, err);
+      if (err) {
+        setErrorStatus(err);
+        transactions.current = [];
+        totalPages.current = null;
+      }
+      if (data) {
+        transactions.current = data.docs;
+        totalPages.current = data.totalPages;
+      }
       setIsFetching(false);
     })();
 
     return () => setIsFetching(true);
-  }, [currentPage, filters, setIsFetching]);
+  }, [currentPage, filters, setIsFetching, setErrorStatus]);
 
   return (
     <>
       {!totalPages.current && <NoTransactions />}
 
-      {!isFetching && totalPages.current !== 0 && (
+      {!isFetching && !!totalPages.current && (
         <>
           <TransactionTable transactions={transactions.current} />
           <Pagination

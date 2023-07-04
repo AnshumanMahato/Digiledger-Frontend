@@ -9,14 +9,13 @@ import {
   InputParty,
 } from "./Input";
 import { addTransaction } from "../../services/transactionServices";
-import { useState } from "react";
 import useTransactionQuery from "../../hooks/useTransactionQuery";
 import FormPannel from "./components/FormPannel";
-import Status from "./components/Error";
 import CloseButton from "./components/CloseButton";
+import useUIContext from "../../hooks/useUIContext";
 
 function TransactionForm({ type, onClose: close }) {
-  const [error, setError] = useState(null);
+  const { setSuccessStatus, setErrorStatus } = useUIContext();
 
   const {
     control,
@@ -38,7 +37,7 @@ function TransactionForm({ type, onClose: close }) {
       transaction.category !== "" ? transaction.category : undefined;
     const { data, err } = await addTransaction(transaction);
     if (err) {
-      setError(err);
+      setErrorStatus(err);
     }
     if (data) {
       if (data.updates) {
@@ -46,6 +45,7 @@ function TransactionForm({ type, onClose: close }) {
         updateParties(data.updates.parties);
       }
       resetFilters();
+      setSuccessStatus("Transaction Created");
       close();
     }
   };
@@ -55,9 +55,6 @@ function TransactionForm({ type, onClose: close }) {
       className="grid grid-cols-2 gap-x-4 sm:gap-x-6"
     >
       <CloseButton onClick={close} />
-      <FormGroup className="col-span-full">
-        {error && <Status type="success">Hello workld go to hell</Status>}
-      </FormGroup>
       <FormGroup>
         <InputAmount register={register} errors={errors} />
       </FormGroup>

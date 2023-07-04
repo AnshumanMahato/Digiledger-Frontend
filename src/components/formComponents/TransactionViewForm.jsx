@@ -17,9 +17,10 @@ import useTransactionQuery from "../../hooks/useTransactionQuery";
 import FormPannel from "./components/FormPannel";
 import CloseButton from "./components/CloseButton";
 import ConfirmDeletePrompt from "./components/ConfirmDeletePrompt";
+import useUIContext from "../../hooks/useUIContext";
 
 function TransactionViewForm({ transaction, onClose: close }) {
-  const [error, setError] = useState(null);
+  const { setSuccessStatus, setErrorStatus } = useUIContext();
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
 
@@ -46,13 +47,14 @@ function TransactionViewForm({ transaction, onClose: close }) {
   const onSubmit = async (formData) => {
     const { data, err } = await updateTransaction(transaction._id, formData);
     if (err) {
-      setError(err);
+      setErrorStatus(err);
     }
     if (data) {
       if (data.updates) {
         updateCategories(data.updates.categories);
         updateParties(data.updates.parties);
       }
+      setSuccessStatus("Transaction Updated Successfully");
       resetFilters();
       close();
     }
@@ -75,11 +77,12 @@ function TransactionViewForm({ transaction, onClose: close }) {
     e.preventDefault();
     const { data, err } = await deleteTransaction(transaction._id);
     if (err) {
-      setError(err);
+      setErrorStatus(err);
       setDeleteMode(false);
     }
     if (data) {
       resetFilters();
+      setSuccessStatus("Transaction Deleted Successfully");
       close();
     }
   };
@@ -90,9 +93,6 @@ function TransactionViewForm({ transaction, onClose: close }) {
       className="grid grid-cols-2 gap-x-4 sm:gap-x-6"
     >
       <CloseButton onClick={close} />
-      <FormGroup className="col-span-full">
-        {error && <p className="text-red-500">{error}</p>}
-      </FormGroup>
       <FormGroup>
         <InputAmount register={register} errors={errors} disabled={!editMode} />
       </FormGroup>
