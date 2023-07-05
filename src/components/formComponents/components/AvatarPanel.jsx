@@ -1,8 +1,8 @@
-import useUIContext from "../../../hooks/useUIContext";
+import useUtilityContext from "../../../hooks/useUtilityContext";
 import classNames from "classnames";
 
 function AvatarPanel({ register, value }) {
-  const { avatars } = useUIContext();
+  const { avatars } = useUtilityContext();
   const options = Array.from(avatars.keys());
 
   const renderedPfps = options.map((option) => {

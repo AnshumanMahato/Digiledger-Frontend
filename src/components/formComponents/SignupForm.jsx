@@ -12,12 +12,12 @@ import {
   InputPasswordConfirm,
 } from "./Input";
 import FormPannel from "./components/FormPannel";
-import useUIContext from "../../hooks/useUIContext";
+import useUtilityContext from "../../hooks/useUtilityContext";
 
 function SignupForm() {
   const navigate = useNavigate();
   const { currentUser, updateCurrentUser } = useUserContext();
-  const { setErrorStatus, setSuccessStatus } = useUIContext();
+  const { setErrorStatus, setSuccessStatus } = useUtilityContext();
 
   useEffect(() => {
     if (currentUser) {

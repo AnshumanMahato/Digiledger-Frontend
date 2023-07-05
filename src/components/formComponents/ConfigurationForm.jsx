@@ -5,11 +5,11 @@ import { useForm } from "react-hook-form";
 import { InputCurrency, InputValueSystem } from "./Input";
 import { updatePreferences } from "../../services/userServices";
 import FormPannel from "./components/FormPannel";
-import useUIContext from "../../hooks/useUIContext";
+import useUtilityContext from "../../hooks/useUtilityContext";
 
 function ConfigurationForm() {
   const { currentUser, updateCurrentUser } = useUserContext();
-  const { setSuccessStatus, setErrorStatus } = useUIContext();
+  const { setSuccessStatus, setErrorStatus } = useUtilityContext();
   const {
     register,
     handleSubmit,

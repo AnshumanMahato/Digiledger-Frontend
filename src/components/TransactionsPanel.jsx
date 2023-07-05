@@ -4,13 +4,12 @@ import Pagination from "./Pagination";
 import { getTransactions } from "../services/transactionServices";
 import NoTransactions from "./NoTransactions";
 import useTransactionQuery from "../hooks/useTransactionQuery";
-import { useOutletContext } from "react-router-dom";
-import useUIContext from "../hooks/useUIContext";
+import useUtilityContext from "../hooks/useUtilityContext";
 import Loading from "./Loading";
 
 function TransactionsPanel() {
-  const { isFetching, setIsFetching } = useOutletContext();
-  const { setErrorStatus } = useUIContext();
+  const { isFetching, setErrorStatus, startFetching, stopFetching } =
+    useUtilityContext();
 
   const { currentPage, filters, updatePage } = useTransactionQuery();
 
@@ -32,11 +31,11 @@ function TransactionsPanel() {
         transactions.current = data.docs;
         totalPages.current = data.totalPages;
       }
-      setIsFetching(false);
+      stopFetching();
     })();
 
-    return () => setIsFetching(true);
-  }, [currentPage, filters, setIsFetching, setErrorStatus]);
+    return () => startFetching();
+  }, [currentPage, filters, startFetching, stopFetching, setErrorStatus]);
 
   return (
     <>

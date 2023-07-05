@@ -17,10 +17,10 @@ import useTransactionQuery from "../../hooks/useTransactionQuery";
 import FormPannel from "./components/FormPannel";
 import CloseButton from "./components/CloseButton";
 import ConfirmDeletePrompt from "./components/ConfirmDeletePrompt";
-import useUIContext from "../../hooks/useUIContext";
+import useUtilityContext from "../../hooks/useUtilityContext";
 
 function TransactionViewForm({ transaction, onClose: close }) {
-  const { setSuccessStatus, setErrorStatus } = useUIContext();
+  const { setSuccessStatus, setErrorStatus } = useUtilityContext();
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
 

@@ -13,16 +13,16 @@ import Analytics from "./pages/Analytics";
 import Protected from "./components/Protected";
 import Configure from "./pages/Configure";
 import Settings from "./pages/Settings";
-import { UIProvider } from "./contexts/UIContext";
+import { UtilityProvider } from "./contexts/UtilityContext";
 
 const router = createBrowserRouter([
   {
     element: (
-      <UIProvider>
+      <UtilityProvider>
         <UserProvider>
           <Layout />
         </UserProvider>
-      </UIProvider>
+      </UtilityProvider>
     ),
     errorElement: <ErrorPage />,
     children: [

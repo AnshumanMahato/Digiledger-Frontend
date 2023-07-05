@@ -5,11 +5,11 @@ import { useForm } from "react-hook-form";
 import { InputPassword, InputPasswordConfirm } from "./Input";
 import { updateMyPassword } from "../../services/userServices";
 import FormPannel from "./components/FormPannel";
-import useUIContext from "../../hooks/useUIContext";
+import useUtilityContext from "../../hooks/useUtilityContext";
 
 function AccountForm() {
   const { updateCurrentUser } = useUserContext();
-  const { setSuccessStatus, setErrorStatus } = useUIContext();
+  const { setSuccessStatus, setErrorStatus } = useUtilityContext();
 
   const {
     register,

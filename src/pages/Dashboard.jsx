@@ -2,17 +2,17 @@ import BalanceCard from "../components/BalanceCard";
 import SectionHeader from "../components/utils/SectionHeader";
 import Section from "../components/utils/Section";
 import TransactionTable from "../components/TransactionTable";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NoTransactions from "../components/NoTransactions";
 import { useEffect, useRef } from "react";
 import { getStats, getTransactions } from "../services/transactionServices";
-import useUIContext from "../hooks/useUIContext";
+import useUtilityContext from "../hooks/useUtilityContext";
 import Loading from "../components/Loading";
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { isFetching, setIsFetching } = useOutletContext();
-  const { setErrorStatus } = useUIContext();
+  const { isFetching, setErrorStatus, startFetching, stopFetching } =
+    useUtilityContext();
 
   const transactions = useRef([]),
     monthlydata = useRef({
@@ -45,11 +45,11 @@ function Dashboard() {
         transactions.current = transactionData.docs;
         monthlydata.current = stats.overall;
       }
-      setIsFetching(false);
+      stopFetching();
     })();
 
-    return () => setIsFetching(true);
-  }, [setIsFetching, setErrorStatus]);
+    return () => startFetching();
+  }, [startFetching, stopFetching, setErrorStatus]);
 
   const handleClick = () => {
     navigate("/transactions");

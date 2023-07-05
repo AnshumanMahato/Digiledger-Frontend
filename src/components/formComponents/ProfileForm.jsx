@@ -6,11 +6,11 @@ import { InputEmail, InputName } from "./Input";
 import { updateMe } from "../../services/userServices";
 import FormPannel from "./components/FormPannel";
 import AvatarPanel from "./components/AvatarPanel";
-import useUIContext from "../../hooks/useUIContext";
+import useUtilityContext from "../../hooks/useUtilityContext";
 
 function ProfileForm() {
   const { currentUser, updateCurrentUser } = useUserContext();
-  const { setSuccessStatus, setErrorStatus } = useUIContext();
+  const { setSuccessStatus, setErrorStatus } = useUtilityContext();
   const {
     register,
     handleSubmit,

@@ -1,12 +1,12 @@
 import { createContext, useRef, useState } from "react";
 import useUserContext from "../hooks/useUserContext";
-import { useOutletContext } from "react-router-dom";
+import useUtilityContext from "../hooks/useUtilityContext";
 
 const TransactionQueryContext = createContext(null);
 
 function TransactionQueryProvider({ children }) {
   const { currentUser } = useUserContext();
-  const { setIsFetching } = useOutletContext();
+  const { startFetching } = useUtilityContext();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
@@ -23,11 +23,11 @@ function TransactionQueryProvider({ children }) {
   const updateFilters = (newFilters) => {
     setFilters(newFilters);
     setCurrentPage(1);
-    setIsFetching(true);
+    startFetching();
   };
   const updatePage = (newPage) => {
     setCurrentPage(newPage);
-    setIsFetching(true);
+    startFetching();
   };
 
   const resetFilters = () =>

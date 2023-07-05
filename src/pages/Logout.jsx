@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { logoutRequest } from "../services/authServices";
 import useUserContext from "../hooks/useUserContext";
 import { useNavigate } from "react-router-dom";
-import useUIContext from "../hooks/useUIContext";
+import useUtilityContext from "../hooks/useUtilityContext";
 
 function Logout() {
   const navigate = useNavigate();
   const { updateCurrentUser } = useUserContext();
-  const { setErrorStatus } = useUIContext();
+  const { setErrorStatus } = useUtilityContext();
 
   useEffect(() => {
     (async () => {

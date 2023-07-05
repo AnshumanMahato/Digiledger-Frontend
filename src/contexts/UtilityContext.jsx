@@ -1,10 +1,14 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-const UIContext = createContext(null);
+const UtilityContext = createContext(null);
 
-function UIProvider({ children }) {
+function UtilityProvider({ children }) {
   const { pathname } = useLocation();
+  const statusTimeout = useRef(null);
+  const fetchTimeout = useRef(null);
+  const [status, setStatus] = useState({ status: null, message: "" }); //Status Logging
+  const [isFetching, setIsFetching] = useState(true); // Data Fetching
 
   //Loading avatars from directory dynamically
   const images = require.context("../assets/", true);
@@ -16,30 +20,38 @@ function UIProvider({ children }) {
   });
   const avatars = new Map(imagePairs);
 
-  //Status logging interface
-  const timeout = useRef(null);
-  const [status, setStatus] = useState({ status: null, message: "" });
-
   /* 
   These functions are being used as dependencies to useEffect hooks in many places. As change in 
-  'status' will rerender the UIContext, normal functions would be redeclared causing the useEffect 
+  'status' will rerender the UtilityContext, normal functions would be redeclared causing the useEffect 
   to execute again. Thus creating an endless loop. So these are declared as references.
   */
+
+  //Status logging interface
   const resetStatus = useRef(() => {
     setStatus({ status: null, message: "" });
-    clearTimeout(timeout.current);
+    clearTimeout(statusTimeout.current);
   });
   const setErrorStatus = useRef((message) => {
     setStatus({ status: "error", message });
-    timeout.current = setTimeout(() => {
+    statusTimeout.current = setTimeout(() => {
       resetStatus.current();
     }, 1500);
   });
   const setSuccessStatus = useRef((message) => {
     setStatus({ status: "success", message });
-    timeout.current = setTimeout(() => {
+    statusTimeout.current = setTimeout(() => {
       resetStatus.current();
     }, 1500);
+  });
+
+  //Data Fetching Interface
+  const startFetching = useRef(() => {
+    clearTimeout(fetchTimeout.current);
+    setIsFetching(true);
+  });
+
+  const stopFetching = useRef(() => {
+    fetchTimeout.current = setTimeout(() => setIsFetching(false), 2000);
   });
 
   //Reset Status on path change
@@ -50,12 +62,17 @@ function UIProvider({ children }) {
   const values = {
     avatars,
     status,
+    isFetching,
     setErrorStatus: setErrorStatus.current,
     setSuccessStatus: setSuccessStatus.current,
     resetStatus: resetStatus.current,
+    startFetching: startFetching.current,
+    stopFetching: stopFetching.current,
   };
-  return <UIContext.Provider value={values}>{children}</UIContext.Provider>;
+  return (
+    <UtilityContext.Provider value={values}>{children}</UtilityContext.Provider>
+  );
 }
 
-export { UIProvider };
-export default UIContext;
+export { UtilityProvider };
+export default UtilityContext;

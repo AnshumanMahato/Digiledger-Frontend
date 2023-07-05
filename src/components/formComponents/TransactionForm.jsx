@@ -12,10 +12,10 @@ import { addTransaction } from "../../services/transactionServices";
 import useTransactionQuery from "../../hooks/useTransactionQuery";
 import FormPannel from "./components/FormPannel";
 import CloseButton from "./components/CloseButton";
-import useUIContext from "../../hooks/useUIContext";
+import useUtilityContext from "../../hooks/useUtilityContext";
 
 function TransactionForm({ type, onClose: close }) {
-  const { setSuccessStatus, setErrorStatus } = useUIContext();
+  const { setSuccessStatus, setErrorStatus } = useUtilityContext();
 
   const {
     control,

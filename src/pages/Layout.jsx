@@ -4,14 +4,13 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import { initLogin } from "../services/authServices";
 import useUserContext from "../hooks/useUserContext";
-import useUIContext from "../hooks/useUIContext";
+import useUtilityContext from "../hooks/useUtilityContext";
 import Status from "../components/Status";
 
 function Layout() {
-  const { status } = useUIContext();
+  const { status } = useUtilityContext();
   const { currentUser, updateCurrentUser } = useUserContext();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isFetching, setIsFetching] = useState(true);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -37,7 +36,7 @@ function Layout() {
       {isLoaded && (
         <>
           <Header />
-          <Outlet context={{ isFetching, setIsFetching }} />
+          <Outlet />
           <Footer />
           {status.status && <Status {...status} />}
         </>

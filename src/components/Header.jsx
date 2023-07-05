@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import Button from "./utils/Button";
 import useUserContext from "../hooks/useUserContext";
 import User from "./User";
-import useUIContext from "../hooks/useUIContext";
+import useUtilityContext from "../hooks/useUtilityContext";
 
 const getTitle = (path, username) => {
   switch (path) {
@@ -21,7 +21,7 @@ const getTitle = (path, username) => {
 
 function Header() {
   const { currentUser } = useUserContext();
-  const { avatars } = useUIContext();
+  const { avatars } = useUtilityContext();
   const { pathname } = useLocation();
   return (
     <header className="flex justify-between items-center w-full mb-10">

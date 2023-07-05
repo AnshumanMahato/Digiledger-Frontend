@@ -1,5 +1,4 @@
 import { useEffect, useReducer, useRef, useState } from "react";
-import { useOutletContext } from "react-router-dom";
 import Section from "../components/utils/Section";
 import SectionHeader from "../components/utils/SectionHeader";
 import Button from "../components/utils/Button";
@@ -7,7 +6,7 @@ import Modal from "../components/Modal";
 import DateRangeForm from "../components/formComponents/DateRangeForm";
 import { getStats } from "../services/transactionServices";
 import AnalyticsPreview from "../components/AnalyticsPreview";
-import useUIContext from "../hooks/useUIContext";
+import useUtilityContext from "../hooks/useUtilityContext";
 import Loading from "../components/Loading";
 
 const SET_CURRENT_MONTH = 1;
@@ -69,8 +68,8 @@ const reducer = (state, action) => {
 
 function Analytics() {
   const [showModal, setShowModal] = useState(false);
-  const { setErrorStatus } = useUIContext();
-  const { isFetching, setIsFetching } = useOutletContext();
+  const { isFetching, setErrorStatus, startFetching, stopFetching } =
+    useUtilityContext();
 
   const today = new Date();
   const start = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -94,11 +93,11 @@ function Analytics() {
         partyData.current = data.partyBased;
         overall.current = data.overall;
       }
-      setIsFetching(false);
+      stopFetching();
     })();
 
-    return () => setIsFetching(true);
-  }, [state, setIsFetching, setErrorStatus]);
+    return () => startFetching();
+  }, [state, startFetching, stopFetching, setErrorStatus]);
 
   return (
     <main className="flex flex-col items-center w-full flex-grow">
@@ -108,7 +107,7 @@ function Analytics() {
           rounded
           active={state.view === "current-month"}
           onClick={() => {
-            setIsFetching(true);
+            startFetching();
             dispatch({ type: SET_CURRENT_MONTH });
           }}
         >
@@ -119,7 +118,7 @@ function Analytics() {
           rounded
           active={state.view === "prev-month"}
           onClick={() => {
-            setIsFetching(true);
+            startFetching();
             dispatch({ type: SET_PREV_MONTH });
           }}
         >
@@ -130,7 +129,7 @@ function Analytics() {
           rounded
           active={state.view === "3-month"}
           onClick={() => {
-            setIsFetching(true);
+            startFetching();
             dispatch({ type: SET_PREV_3_MONTH });
           }}
         >
@@ -152,7 +151,7 @@ function Analytics() {
             <DateRangeForm
               onClose={() => setShowModal(false)}
               onSubmit={(start, end) => {
-                setIsFetching(true);
+                startFetching();
                 dispatch({
                   type: SET_CUSTOM,
                   payload: {
