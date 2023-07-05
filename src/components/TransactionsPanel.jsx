@@ -6,6 +6,7 @@ import NoTransactions from "./NoTransactions";
 import useTransactionQuery from "../hooks/useTransactionQuery";
 import { useOutletContext } from "react-router-dom";
 import useUIContext from "../hooks/useUIContext";
+import Loading from "./Loading";
 
 function TransactionsPanel() {
   const { isFetching, setIsFetching } = useOutletContext();
@@ -39,7 +40,9 @@ function TransactionsPanel() {
 
   return (
     <>
-      {!totalPages.current && <NoTransactions />}
+      {isFetching && <Loading />}
+
+      {!isFetching && !totalPages.current && <NoTransactions />}
 
       {!isFetching && !!totalPages.current && (
         <>

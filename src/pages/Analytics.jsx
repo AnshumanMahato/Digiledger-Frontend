@@ -8,6 +8,7 @@ import DateRangeForm from "../components/formComponents/DateRangeForm";
 import { getStats } from "../services/transactionServices";
 import AnalyticsPreview from "../components/AnalyticsPreview";
 import useUIContext from "../hooks/useUIContext";
+import Loading from "../components/Loading";
 
 const SET_CURRENT_MONTH = 1;
 const SET_PREV_MONTH = 2;
@@ -176,6 +177,7 @@ function Analytics() {
           }).format(state.endDate)}
         </p>
       </Section>
+      {isFetching && <Loading />}
       {!isFetching && (
         <>
           <Section>

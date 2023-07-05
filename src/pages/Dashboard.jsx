@@ -7,6 +7,7 @@ import NoTransactions from "../components/NoTransactions";
 import { useEffect, useRef } from "react";
 import { getStats, getTransactions } from "../services/transactionServices";
 import useUIContext from "../hooks/useUIContext";
+import Loading from "../components/Loading";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -55,44 +56,47 @@ function Dashboard() {
   };
 
   return (
-    !isFetching && (
-      <main className="flex flex-col justify-evenly items-center w-full flex-grow xl:flex-row xl:items-stretch">
-        <Section className="flex flex-col items-center mb-8">
-          <SectionHeader className="relative z-1 mb-8 sm:mb-12 lg:mb-16 xl:mb-[minmax(4rem,auto)]">
-            {new Intl.DateTimeFormat("en-US", {
-              month: "long",
-              year: "numeric",
-            }).format(new Date())}
-          </SectionHeader>
-          <BalanceCard
-            income={monthlydata.current.income || 0}
-            expense={monthlydata.current.expense || 0}
-          />
-        </Section>
+    <>
+      {isFetching && <Loading />}
+      {!isFetching && (
+        <main className="flex flex-col justify-evenly items-center w-full flex-grow xl:flex-row xl:items-stretch">
+          <Section className="flex flex-col items-center mb-8">
+            <SectionHeader className="relative z-1 mb-8 sm:mb-12 lg:mb-16 xl:mb-[minmax(4rem,auto)]">
+              {new Intl.DateTimeFormat("en-US", {
+                month: "long",
+                year: "numeric",
+              }).format(new Date())}
+            </SectionHeader>
+            <BalanceCard
+              income={monthlydata.current.income || 0}
+              expense={monthlydata.current.expense || 0}
+            />
+          </Section>
 
-        <Section className="flex flex-col items-center">
-          <div className="container flex justify-between items-center mb-2 xl:mb-auto">
-            <SectionHeader>Transactions</SectionHeader>
-            <Link
-              to="/transactions"
-              className="whitespace-nowrap hover:text-primary active:text-primary transition-colors xs:text-lg"
-            >
-              See All
-            </Link>
-          </div>
-          <div className="w-full xl:mb-auto">
-            {transactions.current.length === 0 ? (
-              <NoTransactions />
-            ) : (
-              <TransactionTable
-                transactions={transactions.current}
-                onClick={handleClick}
-              />
-            )}
-          </div>
-        </Section>
-      </main>
-    )
+          <Section className="flex flex-col items-center">
+            <div className="container flex justify-between items-center mb-2 xl:mb-auto">
+              <SectionHeader>Transactions</SectionHeader>
+              <Link
+                to="/transactions"
+                className="whitespace-nowrap hover:text-primary active:text-primary transition-colors xs:text-lg"
+              >
+                See All
+              </Link>
+            </div>
+            <div className="w-full xl:mb-auto">
+              {transactions.current.length === 0 ? (
+                <NoTransactions />
+              ) : (
+                <TransactionTable
+                  transactions={transactions.current}
+                  onClick={handleClick}
+                />
+              )}
+            </div>
+          </Section>
+        </main>
+      )}
+    </>
   );
 }
 
