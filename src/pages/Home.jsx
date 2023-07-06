@@ -1,171 +1,114 @@
+import hero from "../assets/hero.svg";
+import Button from "../components/utils/Button";
+import useUserContext from "../hooks/useUserContext";
+
 const LandingPage = () => {
+  const { currentUser } = useUserContext();
+
   return (
-    <div className="text-primary min-h-screen">
-      {/* Navbar */}
-      <nav className="bg-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-gray-800">Digiledger</h1>
-            </div>
-            <div className="hidden md:block">
-              <ul className="flex space-x-4">
-                <li className="text-gray-600 hover:text-gray-800">Features</li>
-                <li className="text-gray-600 hover:text-gray-800">Pricing</li>
-                <li className="text-gray-600 hover:text-gray-800">Contact</li>
-              </ul>
-            </div>
+    <>
+      <div className="container mx-2">
+        <div className="min-h-[70vh] flex flex-col xl:flex-row items-center justify-evenly py-14">
+          <div className="w-full xl:w-2/3 border-b-4">
+            <img src={hero} alt="woman-budgeting-hero" />
           </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <div className="bg-blue-500 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-white text-center">
-            <h2 className="text-4xl font-bold mb-4">
-              Take Control of Your Finances
-            </h2>
-            <p className="text-lg mb-8">
-              Track your expenses, manage your budget, and save money.
+          <div className="text-white text-center flex flex-col items-center justify-between my-10 px-5">
+            <h1 className="text-4xl sm:text-6xl font-bold">Digiledger</h1>
+            <p className="text-xl sm:text-2xl my-6 ">
+              The smart and simple way to track your budget
             </p>
-            <button className="bg-white text-blue-500 font-semibold py-2 px-6 rounded-full shadow-lg">
-              Get Started
-            </button>
+            {currentUser ? (
+              <Button success rounded to="/dashboard">
+                Go To Dashboard
+              </Button>
+            ) : (
+              <Button success rounded to="/signup">
+                Get started for free
+              </Button>
+            )}
           </div>
         </div>
+
+        <div class="py-16 bg-gray-100">
+          <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center">About Digiledger</h2>
+            <p class="text-2xl text-center mt-4">
+              Digiledger is a budget tracking app that helps you manage your
+              money better.
+            </p>
+            <div class="flex items-center justify-center mt-8">
+              <img
+                src="https://images.unsplash.com/photo-1556745757-b9a8d0f5f9c6"
+                alt="team"
+                class="w-1/2 rounded-lg shadow-lg"
+              />
+              <div class="w-1/2 ml-8">
+                <p class="text-xl">
+                  We are a team of passionate developers and designers who love
+                  creating useful and beautiful products. We believe that
+                  budgeting should be easy and fun, not stressful and boring.
+                  That's why we created Digiledger, a smart and simple app that
+                  helps you track your income and expenses, visualize your
+                  spending habits, and save more money.
+                </p>
+                <p class="text-xl mt-4">
+                  Our mission is to help you achieve your financial goals and
+                  live a happier life. Whether you want to pay off debt, save
+                  for a vacation, or just have more control over your money,
+                  Digiledger can help you get there.
+                </p>
+                <p class="text-xl mt-4">
+                  We hope you enjoy using Digiledger as much as we enjoyed
+                  making it. If you have any feedback or questions, please feel
+                  free to contact us. We'd love to hear from you.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="py-16 grid grid-cols-3 gap-8">
+          <div className="text-center">
+            <img
+              src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calculator-icon.png"
+              alt="calculator"
+              className="w-24 h-24 mx-auto"
+            />
+            <h3 className="text-2xl font-bold mt-4">Easy to use</h3>
+            <p className="text-xl mt-4">
+              Just enter your income and expenses and let Digiledger do the rest
+            </p>
+          </div>
+          <div className="text-center">
+            <img
+              src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/pie-chart-icon.png"
+              alt="pie chart"
+              className="w-24 h-24 mx-auto"
+            />
+            <h3 className="text-2xl font-bold mt-4">Visualize your spending</h3>
+            <p className="text-xl mt-4">
+              See where your money goes with colorful charts and graphs
+            </p>
+          </div>
+          <div className="text-center">
+            <img
+              src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/money-bag-icon.png"
+              alt="money bag"
+              className="w-24 h-24 mx-auto"
+            />
+            <h3 className="text-2xl font-bold mt-4">Save more money</h3>
+            <p className="text-xl mt-4">
+              Set goals and track your progress with Digiledger's smart tips
+            </p>
+          </div>
+        </div>
+        <div className="bg-blue-500 py-8">
+          <p className="text-white text-center">
+            &copy; Digiledger. All rights reserved.
+          </p>
+        </div>*/}
       </div>
-
-      {/* Features Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">Features</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <div className="p-8 bg-white rounded-lg shadow">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                Expense Tracking
-              </h3>
-              <p className="text-gray-600">
-                Keep track of your spending with our intuitive expense tracking
-                feature. Categorize your expenses and see where your money goes.
-              </p>
-            </div>
-            <div className="p-8 bg-white rounded-lg shadow">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                Budget Management
-              </h3>
-              <p className="text-gray-600">
-                Set and manage your budget easily. Get insights into your
-                spending habits and make informed financial decisions.
-              </p>
-            </div>
-            <div className="p-8 bg-white rounded-lg shadow">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                Goal Setting
-              </h3>
-              <p className="text-gray-600">
-                Define your financial goals and track your progress. Stay
-                motivated and achieve your desired financial milestones.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="bg-gray-200 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">Pricing</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <div className="p-8 bg-white rounded-lg shadow">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                Basic
-              </h3>
-              <p className="text-gray-600">Free</p>
-              <ul className="text-gray-600 mt-4">
-                <li>Expense Tracking</li>
-                <li>Budget Management</li>
-                <li>1 Financial Goal</li>
-              </ul>
-              <button className="mt-8 bg-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg">
-                Get Started
-              </button>
-            </div>
-            <div className="p-8 bg-white rounded-lg shadow">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                Premium
-              </h3>
-              <p className="text-gray-600">$9.99/month</p>
-              <ul className="text-gray-600 mt-4">
-                <li>Expense Tracking</li>
-                <li>Budget Management</li>
-                <li>Unlimited Financial Goals</li>
-                <li>Customizable Reports</li>
-              </ul>
-              <button className="mt-8 bg-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg">
-                Get Started
-              </button>
-            </div>
-            <div className="p-8 bg-white rounded-lg shadow">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                Business
-              </h3>
-              <p className="text-gray-600">Contact us for pricing</p>
-              <ul className="text-gray-600 mt-4">
-                <li>Expense Tracking</li>
-                <li>Budget Management</li>
-                <li>Advanced Analytics</li>
-                <li>Team Collaboration</li>
-              </ul>
-              <button className="mt-8 bg-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg">
-                Contact Us
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">Contact</h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Have questions or need support? Contact our friendly team.
-          </p>
-          <form>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="Name"
-                className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 block w-full p-3 rounded-md"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 block w-full p-3 rounded-md"
-              />
-            </div>
-            <textarea
-              placeholder="Message"
-              className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 block w-full p-3 mt-4 rounded-md"
-              rows="4"
-            ></textarea>
-            <button className="mt-6 bg-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg">
-              Send Message
-            </button>
-          </form>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-800 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-500">
-            &copy; 2023 Digiledger. All rights reserved.
-          </p>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 };
 

@@ -11,7 +11,7 @@ function UtilityProvider({ children }) {
   const [isFetching, setIsFetching] = useState(true); // Data Fetching
 
   //Loading avatars from directory dynamically
-  const images = require.context("../assets/", true);
+  const images = require.context("../assets/pfps");
   const imagePairs = images.keys().map((image) => {
     const key = image.split("/").pop();
     const value = images(image);

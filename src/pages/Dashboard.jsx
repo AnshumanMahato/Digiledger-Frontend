@@ -61,16 +61,18 @@ function Dashboard() {
       {!isFetching && (
         <main className="flex flex-col justify-evenly items-center w-full flex-grow xl:flex-row xl:items-stretch">
           <Section className="flex flex-col items-center mb-8">
-            <SectionHeader className="relative z-1 mb-8 sm:mb-12 lg:mb-16 xl:mb-[minmax(4rem,auto)]">
+            <SectionHeader className="relative z-1 mb-8 sm:mb-12 lg:mb-16 xl:mb-0">
               {new Intl.DateTimeFormat("en-US", {
                 month: "long",
                 year: "numeric",
               }).format(new Date())}
             </SectionHeader>
-            <BalanceCard
-              income={monthlydata.current.income || 0}
-              expense={monthlydata.current.expense || 0}
-            />
+            <div className="w-full flex flex-grow justify-center items-center">
+              <BalanceCard
+                income={monthlydata.current.income || 0}
+                expense={monthlydata.current.expense || 0}
+              />
+            </div>
           </Section>
 
           <Section className="flex flex-col items-center">
