@@ -3,6 +3,7 @@ import Button from "../components/utils/Button";
 import useUserContext from "../hooks/useUserContext";
 import screenshots from "../assets/screen@2x.png";
 import Section from "../components/utils/Section";
+import SectionHeader from "../components/utils/SectionHeader";
 
 const LandingPage = () => {
   const { currentUser } = useUserContext();
@@ -13,7 +14,7 @@ const LandingPage = () => {
         <div className="w-full xl:w-2/3 border-b-4">
           <img src={hero} alt="woman-budgeting-hero" />
         </div>
-        <div className="text-white text-center flex flex-col items-center justify-between my-10 px-5">
+        <div className="text-white text-center flex flex-col items-center justify-between my-auto px-5">
           <h1 className="text-4xl sm:text-6xl font-bold">Digiledger</h1>
           <p className="text-xl sm:text-2xl my-6 ">
             The smart and simple way to track your budget
@@ -30,10 +31,12 @@ const LandingPage = () => {
         </div>
       </Section>
 
-      <div className="py-16 bg-gray-100">
+      <Section className="flex flex-col xl:flex-row items-center justify-evenly bg-accent-dark/50">
         <div className="w-full mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center">About Digiledger</h2>
-          <p className="text-2xl text-center mt-4">
+          <SectionHeader className="text-center">
+            About Digiledger
+          </SectionHeader>
+          <p className="mt-4">
             Digiledger is a budget tracking app that helps you manage your money
             better.
           </p>
@@ -66,7 +69,7 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Section>
 
       {/* <div className="py-16 grid grid-cols-3 gap-8">
           <div className="text-center">

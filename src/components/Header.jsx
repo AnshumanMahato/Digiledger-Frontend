@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from "./utils/Button";
 import useUserContext from "../hooks/useUserContext";
 import User from "./User";
@@ -15,7 +15,7 @@ const getTitle = (path, username) => {
     case "/settings":
       return "Settings";
     default:
-      return "Digiledger";
+      return <Link to="/">Digiledger</Link>;
   }
 };
 
@@ -24,7 +24,7 @@ function Header() {
   const { avatars } = useUtilityContext();
   const { pathname } = useLocation();
   return (
-    <header className="flex justify-between items-center w-full mb-10 p-[7%] bg-accent-dark/50">
+    <header className="flex justify-between items-center w-full mb-10 p-[7%] sm:py-[5%] lg:py-[3%] bg-accent-dark/50">
       <div className="logo w-[60%]">
         <span className="text-3xl sm:text-4xl font-bold">
           {getTitle(pathname, currentUser?.name)}
