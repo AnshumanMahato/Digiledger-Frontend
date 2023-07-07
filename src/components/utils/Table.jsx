@@ -25,7 +25,7 @@ function Table({ data, config, keyFn, rowClass, onClick: handleClick }) {
   });
 
   return (
-    <table className="container my-4 border-separate border-spacing-x-0 border-spacing-y-2">
+    <table className="w-full my-4 border-separate border-spacing-x-0 border-spacing-y-2">
       <tbody className="my-4">{renderedRows}</tbody>
     </table>
   );

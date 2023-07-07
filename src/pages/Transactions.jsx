@@ -17,7 +17,7 @@ function Transactions() {
   };
 
   return (
-    <main className="flex flex-col items-center w-full flex-grow">
+    <main className="flex flex-col w-full flex-grow">
       <Section className="flex justify-evenly items-center">
         <Button
           success
@@ -49,7 +49,7 @@ function Transactions() {
         <SectionHeader className="mb-2 xs:mb-3 sm:mb-5">
           Transactions
         </SectionHeader>
-        <div className="container mx-auto">
+        <div className="w-full">
           <div className="flex justify-between">
             <div className="flex-grow">
               {/* This div here is to show breadcrumbs to display all set filters. Yet to be implemented */}

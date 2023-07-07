@@ -31,7 +31,7 @@ const LandingPage = () => {
       </Section>
 
       <div className="py-16 bg-gray-100">
-        <div className="container mx-auto px-4">
+        <div className="w-full mx-auto px-4">
           <h2 className="text-4xl font-bold text-center">About Digiledger</h2>
           <p className="text-2xl text-center mt-4">
             Digiledger is a budget tracking app that helps you manage your money

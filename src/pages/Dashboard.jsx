@@ -76,7 +76,7 @@ function Dashboard() {
           </Section>
 
           <Section className="flex flex-col items-center">
-            <div className="container flex justify-between items-center mb-2 xl:mb-auto">
+            <div className="w-full flex justify-between items-center mb-2 xl:mb-auto">
               <SectionHeader>Transactions</SectionHeader>
               <Link
                 to="/transactions"
