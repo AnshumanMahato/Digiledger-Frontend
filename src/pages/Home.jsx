@@ -43,7 +43,7 @@ const LandingPage = () => {
           />
         </div>
         <div className="mt-4 lg:mt-0 lg:flex lg:justify-center lg:items-center xl:px-12">
-          <p className="text-center lg:text-justify lg:text-lg">
+          <p className="text-center lg:text-justify lg:text-xl">
             Digiledger is a budget tracking app that helps you manage your money
             better. We believe that budgeting should be easy and fun, not
             stressful and boring. That's why we created Digiledger, a smart and
@@ -53,46 +53,41 @@ const LandingPage = () => {
         </div>
       </Section>
 
-      {/* <div className="py-16 grid grid-cols-3 gap-8">
-          <div className="text-center">
-            <img
-              src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calculator-icon.png"
-              alt="calculator"
-              className="w-24 h-24 mx-auto"
-            />
-            <h3 className="text-2xl font-bold mt-4">Easy to use</h3>
-            <p className="text-xl mt-4">
-              Just enter your income and expenses and let Digiledger do the rest
-            </p>
-          </div>
-          <div className="text-center">
-            <img
-              src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/pie-chart-icon.png"
-              alt="pie chart"
-              className="w-24 h-24 mx-auto"
-            />
-            <h3 className="text-2xl font-bold mt-4">Visualize your spending</h3>
-            <p className="text-xl mt-4">
-              See where your money goes with colorful charts and graphs
-            </p>
-          </div>
-          <div className="text-center">
-            <img
-              src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/money-bag-icon.png"
-              alt="money bag"
-              className="w-24 h-24 mx-auto"
-            />
-            <h3 className="text-2xl font-bold mt-4">Save more money</h3>
-            <p className="text-xl mt-4">
-              Set goals and track your progress with Digiledger's smart tips
-            </p>
-          </div>
-        </div>
-        <div className="bg-blue-500 py-8">
-          <p className="text-white text-center">
-            &copy; Digiledger. All rights reserved.
+      <Section className="py-16 grid grid-cols-3 gap-8">
+        <div className="text-center">
+          <img
+            src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calculator-icon.png"
+            alt="calculator"
+            className="w-24 h-24 mx-auto"
+          />
+          <h3 className="text-2xl font-bold mt-4">Easy to use</h3>
+          <p className="text-xl mt-4">
+            Just enter your income and expenses and let Digiledger do the rest
           </p>
-        </div>*/}
+        </div>
+        <div className="text-center">
+          <img
+            src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/pie-chart-icon.png"
+            alt="pie chart"
+            className="w-24 h-24 mx-auto"
+          />
+          <h3 className="text-2xl font-bold mt-4">Visualize your spending</h3>
+          <p className="text-xl mt-4">
+            See where your money goes with colorful charts and graphs
+          </p>
+        </div>
+        <div className="text-center">
+          <img
+            src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/money-bag-icon.png"
+            alt="money bag"
+            className="w-24 h-24 mx-auto"
+          />
+          <h3 className="text-2xl font-bold mt-4">Save more money</h3>
+          <p className="text-xl mt-4">
+            Set goals and track your progress with Digiledger's smart tips
+          </p>
+        </div>
+      </Section>
     </>
   );
 };
