@@ -17,7 +17,7 @@ function Transactions() {
   };
 
   return (
-    <main className="flex flex-col w-full flex-grow">
+    <main className="flex flex-col w-full flex-grow py-5">
       <Section className="flex justify-evenly items-center">
         <Button
           success

@@ -10,7 +10,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <Section className="min-h-[70vh] flex flex-col xl:flex-row items-center justify-evenly">
+      <Section className="min-h-[75vh] flex flex-col xl:flex-row items-center justify-evenly">
         <div className="w-full xl:w-2/3 border-b-4">
           <img src={hero} alt="woman-budgeting-hero" />
         </div>
@@ -31,43 +31,25 @@ const LandingPage = () => {
         </div>
       </Section>
 
-      <Section className="flex flex-col xl:flex-row items-center justify-evenly bg-accent-dark/50">
-        <div className="w-full mx-auto px-4">
-          <SectionHeader className="text-center">
-            About Digiledger
-          </SectionHeader>
-          <p className="mt-4">
+      <Section className="grid gap-6 grid-cols-1 grid-rows-[repeat(3,min-content)] lg:grid-rows-[repeat(2,min-content)] lg:grid-cols-2 justify-evenly bg-accent-dark/50 py-[7%]">
+        <SectionHeader className="text-center col-span-full">
+          About Digiledger
+        </SectionHeader>
+        <div className="flex items-center justify-center mt-8 ">
+          <img
+            src={screenshots}
+            alt="team"
+            className="w-4/5 lg:w-full rounded-lg shadow-lg"
+          />
+        </div>
+        <div className="mt-4 lg:mt-0 lg:flex lg:justify-center lg:items-center xl:px-12">
+          <p className="text-center lg:text-justify lg:text-lg">
             Digiledger is a budget tracking app that helps you manage your money
-            better.
+            better. We believe that budgeting should be easy and fun, not
+            stressful and boring. That's why we created Digiledger, a smart and
+            simple app that helps you track your income and expenses, visualize
+            your spending habits, and save more money.
           </p>
-          <div className="flex items-center justify-center mt-8">
-            <img
-              src={screenshots}
-              alt="team"
-              className="w-1/2 rounded-lg shadow-lg"
-            />
-            <div className="w-1/2 ml-8">
-              <p className="text-xl">
-                We are a team of passionate developers and designers who love
-                creating useful and beautiful products. We believe that
-                budgeting should be easy and fun, not stressful and boring.
-                That's why we created Digiledger, a smart and simple app that
-                helps you track your income and expenses, visualize your
-                spending habits, and save more money.
-              </p>
-              <p className="text-xl mt-4">
-                Our mission is to help you achieve your financial goals and live
-                a happier life. Whether you want to pay off debt, save for a
-                vacation, or just have more control over your money, Digiledger
-                can help you get there.
-              </p>
-              <p className="text-xl mt-4">
-                We hope you enjoy using Digiledger as much as we enjoyed making
-                it. If you have any feedback or questions, please feel free to
-                contact us. We'd love to hear from you.
-              </p>
-            </div>
-          </div>
         </div>
       </Section>
 

@@ -59,8 +59,8 @@ function Dashboard() {
     <>
       {isFetching && <Loading />}
       {!isFetching && (
-        <main className="flex flex-col justify-evenly items-center w-full flex-grow xl:flex-row xl:items-stretch">
-          <Section className="flex flex-col items-center mb-8">
+        <main className="flex flex-col justify-evenly items-center w-full flex-grow xl:flex-row xl:items-stretch xl:px-[7%]">
+          <Section className="flex flex-col items-center mb-8 xl:p-0">
             <SectionHeader className="relative z-1 mb-8 sm:mb-12 lg:mb-16 xl:mb-0">
               {new Intl.DateTimeFormat("en-US", {
                 month: "long",
@@ -75,7 +75,7 @@ function Dashboard() {
             </div>
           </Section>
 
-          <Section className="flex flex-col items-center">
+          <Section className="flex flex-col items-center xl:p-0">
             <div className="w-full flex justify-between items-center mb-2 xl:mb-auto">
               <SectionHeader>Transactions</SectionHeader>
               <Link
