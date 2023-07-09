@@ -1,7 +1,9 @@
 import classNames from "classnames";
 import Table from "./utils/Table";
+import useUtilityContext from "../hooks/useUtilityContext";
 
 function AnalyticsTable({ type, data }) {
+  const { formatCurrency } = useUtilityContext();
   const config = [
     {
       label: "Name",
@@ -22,10 +24,7 @@ function AnalyticsTable({ type, data }) {
           }
         );
 
-        const amount = new Intl.NumberFormat("en-IN", {
-          style: "currency",
-          currency: "INR",
-        }).format(el.amount);
+        const amount = formatCurrency(el.amount);
 
         return (
           <div className={classes}>

@@ -18,11 +18,11 @@ import { UtilityProvider } from "./contexts/UtilityContext";
 const router = createBrowserRouter([
   {
     element: (
-      <UtilityProvider>
-        <UserProvider>
+      <UserProvider>
+        <UtilityProvider>
           <Layout />
-        </UserProvider>
-      </UtilityProvider>
+        </UtilityProvider>
+      </UserProvider>
     ),
     errorElement: <ErrorPage />,
     children: [

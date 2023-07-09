@@ -340,29 +340,24 @@ function InputPasswordConfirm({ register, errors, getPasswordField }) {
 }
 
 function InputCurrency({ register, errors, ...rest }) {
+  const options = currencies.map((currency) => ({
+    label: currency.name,
+    value: currency.code,
+  }));
+
   return (
     <>
       <Input
         label="Currency"
-        type="text"
+        type="select"
         id="currency"
         errors={errors}
         {...register("currency", {
           required: "This field is required",
-          validate: (value) =>
-            currencies.filter((currency) => currency.code === value.trim())
-              .length === 1 || "This field must be a valid currency code",
         })}
-        list="currencies"
+        options={options}
         {...rest}
       />
-      <datalist id="currencies">
-        {currencies.map((currency) => (
-          <option key={currency.code} value={currency.code}>
-            {currency.name}
-          </option>
-        ))}
-      </datalist>
     </>
   );
 }

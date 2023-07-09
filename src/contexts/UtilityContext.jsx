@@ -1,24 +1,41 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
+import useUserContext from "../hooks/useUserContext";
 
 const UtilityContext = createContext(null);
 
+/*
+Following variables are declared in the global context of this module
+as these contains map iterations on an Array(Array.map()). This way the
+iteration will happen only once at imports and not at rerenders of the 
+provider making the code more performant.
+*/
+
+//Loading avatars from directory dynamically
+const images = require.context("../assets/pfps");
+const imagePairs = images.keys().map((image) => {
+  const key = image.split("/").pop();
+  const value = images(image);
+
+  return [key, value];
+});
+const avatars = new Map(imagePairs);
+
 function UtilityProvider({ children }) {
   const { pathname } = useLocation();
+  const { currentUser } = useUserContext();
   const statusTimeout = useRef(null);
   const fetchTimeout = useRef(null);
   const [status, setStatus] = useState({ status: null, message: "" }); //Status Logging
   const [isFetching, setIsFetching] = useState(true); // Data Fetching
 
-  //Loading avatars from directory dynamically
-  const images = require.context("../assets/pfps");
-  const imagePairs = images.keys().map((image) => {
-    const key = image.split("/").pop();
-    const value = images(image);
-
-    return [key, value];
-  });
-  const avatars = new Map(imagePairs);
+  //Format currency values with based on the user currency.
+  const formatCurrency = (amount) =>
+    new Intl.NumberFormat(currentUser.valueSystem, {
+      style: "currency",
+      currency: currentUser.currency,
+      currencyDisplay: "narrowSymbol",
+    }).format(amount);
 
   /* 
   These functions are being used as dependencies to useEffect hooks in many places. As change in 
@@ -63,6 +80,7 @@ function UtilityProvider({ children }) {
     avatars,
     status,
     isFetching,
+    formatCurrency,
     setErrorStatus: setErrorStatus.current,
     setSuccessStatus: setSuccessStatus.current,
     resetStatus: resetStatus.current,

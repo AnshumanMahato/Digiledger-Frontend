@@ -3,11 +3,10 @@ import Table from "./utils/Table";
 import classNames from "classnames";
 import Modal from "./Modal";
 import TransactionViewForm from "./formComponents/TransactionViewForm";
-import useUserContext from "../hooks/useUserContext";
-import formatCurrency from "../utils/formatCurrency";
+import useUtilityContext from "../hooks/useUtilityContext";
 
 function TransactionTable({ transactions, onClick }) {
-  const { currentUser } = useUserContext();
+  const { formatCurrency } = useUtilityContext();
   const [activeTransaction, setActiveTransaction] = useState(null);
 
   const showTransaction = (transaction) => setActiveTransaction(transaction);
@@ -46,11 +45,7 @@ function TransactionTable({ transactions, onClick }) {
           }
         );
 
-        const amount = formatCurrency(
-          transaction.amount,
-          currentUser.currency,
-          currentUser.valueSystem
-        );
+        const amount = formatCurrency(transaction.amount);
 
         return (
           <div className={classes}>
@@ -74,11 +69,7 @@ function TransactionTable({ transactions, onClick }) {
           }
         );
 
-        const amount = formatCurrency(
-          transaction.amount,
-          currentUser.currency,
-          currentUser.valueSystem
-        );
+        const amount = formatCurrency(transaction.amount);
 
         return (
           <div className={classes}>
