@@ -4,6 +4,9 @@ import useUserContext from "../hooks/useUserContext";
 import screenshots from "../assets/screen@2x.png";
 import Section from "../components/utils/Section";
 import SectionHeader from "../components/utils/SectionHeader";
+import { AiOutlineTransaction, AiTwotonePieChart } from "react-icons/ai";
+import { GiReceiveMoney } from "react-icons/gi";
+import FeatureCard from "../components/FeatureCard";
 
 const LandingPage = () => {
   const { currentUser } = useUserContext();
@@ -53,40 +56,23 @@ const LandingPage = () => {
         </div>
       </Section>
 
-      <Section className="py-16 grid grid-cols-3 gap-8">
-        <div className="text-center">
-          <img
-            src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/calculator-icon.png"
-            alt="calculator"
-            className="w-24 h-24 mx-auto"
-          />
-          <h3 className="text-2xl font-bold mt-4">Easy to use</h3>
-          <p className="text-xl mt-4">
-            Just enter your income and expenses and let Digiledger do the rest
-          </p>
-        </div>
-        <div className="text-center">
-          <img
-            src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/pie-chart-icon.png"
-            alt="pie chart"
-            className="w-24 h-24 mx-auto"
-          />
-          <h3 className="text-2xl font-bold mt-4">Visualize your spending</h3>
-          <p className="text-xl mt-4">
-            See where your money goes with colorful charts and graphs
-          </p>
-        </div>
-        <div className="text-center">
-          <img
-            src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/money-bag-icon.png"
-            alt="money bag"
-            className="w-24 h-24 mx-auto"
-          />
-          <h3 className="text-2xl font-bold mt-4">Save more money</h3>
-          <p className="text-xl mt-4">
-            Set goals and track your progress with Digiledger's smart tips
-          </p>
-        </div>
+      <Section className="py-[7%] grid grid-cols-1 grid-rows-[min-content_repeat(3,1fr)] sm:grid-cols-3 sm:grid-rows-[min-content_1fr] gap-8">
+        <SectionHeader className="sm:col-span-full text-center">
+          Features
+        </SectionHeader>
+        <FeatureCard icon={<AiOutlineTransaction />} title="Easy to Use">
+          Just enter your income and expenses and let Digiledger do the rest
+        </FeatureCard>
+        <FeatureCard
+          icon={<AiTwotonePieChart />}
+          title="Visualize your spending"
+        >
+          See where your money goes with colorful charts and graphs
+        </FeatureCard>
+        <FeatureCard icon={<GiReceiveMoney />} title="Save more money">
+          Set goals and track your progress with Digiledger's Goals
+          Tracker.(works in progress)
+        </FeatureCard>
       </Section>
     </>
   );
