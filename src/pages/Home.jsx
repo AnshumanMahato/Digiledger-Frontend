@@ -82,6 +82,21 @@ const LandingPage = () => {
           Tracker.(works in progress)
         </FeatureCard>
       </Section>
+      {/* CTA Section */}
+      <Section className="py-[7%] flex flex-col justify-center items-center bg-accent-dark/50">
+        <SectionHeader className="text-center mb-[5%]">
+          So what are you waiting for? Try it out
+        </SectionHeader>
+        {currentUser ? (
+          <Button success rounded to="/dashboard">
+            Go To Dashboard
+          </Button>
+        ) : (
+          <Button success rounded to="/signup">
+            Get started for free
+          </Button>
+        )}
+      </Section>
     </>
   );
 };
