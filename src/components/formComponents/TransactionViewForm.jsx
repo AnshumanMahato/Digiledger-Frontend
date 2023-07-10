@@ -1,4 +1,4 @@
-import FormGroup from "./FormGroup";
+import FormGroup from "./components/FormGroup";
 import Button from "../utils/Button";
 import { useForm } from "react-hook-form";
 import {
@@ -7,7 +7,7 @@ import {
   InputDate,
   InputDescription,
   InputParty,
-} from "./Input";
+} from "./components/inputs/Input";
 import { useState } from "react";
 import {
   deleteTransaction,
@@ -44,8 +44,11 @@ function TransactionViewForm({ transaction, onClose: close }) {
     defaultValues,
   });
 
-  const onSubmit = async (formData) => {
-    const { data, err } = await updateTransaction(transaction._id, formData);
+  const onSubmit = async (transactionData) => {
+    const { data, err } = await updateTransaction(
+      transaction._id,
+      transactionData
+    );
     if (err) {
       setErrorStatus(err);
     } else {

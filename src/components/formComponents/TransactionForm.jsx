@@ -1,4 +1,4 @@
-import FormGroup from "./FormGroup";
+import FormGroup from "./components/FormGroup";
 import Button from "../utils/Button";
 import { useForm } from "react-hook-form";
 import {
@@ -7,7 +7,7 @@ import {
   InputDate,
   InputDescription,
   InputParty,
-} from "./Input";
+} from "./components/inputs/Input";
 import { addTransaction } from "../../services/transactionServices";
 import useTransactionQuery from "../../hooks/useTransactionQuery";
 import FormPannel from "./components/FormPannel";
@@ -27,8 +27,8 @@ function TransactionForm({ type, onClose: close }) {
   const { updateCategories, updateParties, resetFilters } =
     useTransactionQuery();
 
-  const onSubmit = async (formData) => {
-    const transaction = { ...formData, type };
+  const onSubmit = async (transactionData) => {
+    const transaction = { ...transactionData, type };
     const { data, err } = await addTransaction(transaction);
     if (err) {
       setErrorStatus(err);

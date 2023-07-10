@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import FormGroup from "./FormGroup";
+import FormGroup from "./components/FormGroup";
 import Button from "../utils/Button";
 import { loginRequest } from "../../services/authServices";
 import { useEffect } from "react";
 import useUserContext from "../../hooks/useUserContext";
 import { useNavigate } from "react-router-dom";
-import { InputEmail, InputPassword } from "./Input";
+import { InputEmail, InputPassword } from "./components/inputs/Input";
 import FormPannel from "./components/FormPannel";
 import useUtilityContext from "../../hooks/useUtilityContext";
 

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import FormGroup from "./FormGroup";
+import FormGroup from "./components/FormGroup";
 import Button from "../utils/Button";
 import { useEffect } from "react";
 import { signupRequest } from "../../services/authServices";
@@ -10,7 +10,7 @@ import {
   InputName,
   InputPassword,
   InputPasswordConfirm,
-} from "./Input";
+} from "./components/inputs/Input";
 import FormPannel from "./components/FormPannel";
 import useUtilityContext from "../../hooks/useUtilityContext";
 

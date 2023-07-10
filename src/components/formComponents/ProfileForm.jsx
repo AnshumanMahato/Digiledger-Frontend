@@ -1,8 +1,8 @@
 import Button from "../utils/Button";
-import FormGroup from "./FormGroup";
+import FormGroup from "./components/FormGroup";
 import useUserContext from "../../hooks/useUserContext";
 import { useForm } from "react-hook-form";
-import { InputEmail, InputName } from "./Input";
+import { InputEmail, InputName } from "./components/inputs/Input";
 import { updateMe } from "../../services/userServices";
 import FormPannel from "./components/FormPannel";
 import AvatarPanel from "./components/AvatarPanel";
