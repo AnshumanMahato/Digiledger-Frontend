@@ -4,7 +4,7 @@ import SectionHeader from "../components/utils/SectionHeader";
 import Button from "../components/utils/Button";
 import Modal from "../components/Modal";
 import { useState } from "react";
-import TransactionForm from "../components/formComponents/TransactionForm";
+import TransactionForm from "../components/forms/TransactionForm";
 import { BsFilter } from "react-icons/bs";
 import FilterPanel from "../components/FilterPanel";
 

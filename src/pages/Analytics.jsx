@@ -3,7 +3,7 @@ import Section from "../components/utils/Section";
 import SectionHeader from "../components/utils/SectionHeader";
 import Button from "../components/utils/Button";
 import Modal from "../components/Modal";
-import DateRangeForm from "../components/formComponents/DateRangeForm";
+import DateRangeForm from "../components/forms/DateRangeForm";
 import { getStats } from "../services/transactionServices";
 import AnalyticsPreview from "../components/AnalyticsPreview";
 import useUtilityContext from "../hooks/useUtilityContext";

@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import AccountForm from "../components/formComponents/AccountForm";
-import ConfigurationForm from "../components/formComponents/ConfigurationForm";
-import ProfileForm from "../components/formComponents/ProfileForm";
+import AccountForm from "../components/forms/AccountForm";
+import ConfigurationForm from "../components/forms/ConfigurationForm";
+import ProfileForm from "../components/forms/ProfileForm";
 import Section from "../components/utils/Section";
 import SectionHeader from "../components/utils/SectionHeader";
 

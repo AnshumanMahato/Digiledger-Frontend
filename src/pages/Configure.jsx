@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserContext from "../hooks/useUserContext";
-import ConfigurationForm from "../components/formComponents/ConfigurationForm";
+import ConfigurationForm from "../components/forms/ConfigurationForm";
 
 function Configure() {
   const { currentUser } = useUserContext();
