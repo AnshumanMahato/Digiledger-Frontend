@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import TransactionTable from "./TransactionTable";
+import TransactionTable from "../tables/TransactionTable";
 import Pagination from "./Pagination";
-import { getTransactions } from "../services/transactionServices";
-import NoTransactions from "./NoTransactions";
-import useTransactionQuery from "../hooks/useTransactionQuery";
-import useUtilityContext from "../hooks/useUtilityContext";
-import Loading from "./Loading";
+import { getTransactions } from "../../services/transactionServices";
+import NoTransactions from "../utils/NoTransactions";
+import useTransactionQuery from "../../hooks/useTransactionQuery";
+import useUtilityContext from "../../hooks/useUtilityContext";
+import Loading from "../utils/Loading";
 
 function TransactionsPanel() {
   const { isFetching, setErrorStatus, startFetching, stopFetching } =

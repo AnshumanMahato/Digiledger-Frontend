@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import Table from "./utils/Table";
-import useUtilityContext from "../hooks/useUtilityContext";
+import Table from "./Table";
+import useUtilityContext from "../../hooks/useUtilityContext";
 
 function AnalyticsTable({ type, data }) {
   const { formatCurrency } = useUtilityContext();

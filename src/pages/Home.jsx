@@ -2,11 +2,11 @@ import hero from "../assets/hero.svg";
 import Button from "../components/utils/Button";
 import useUserContext from "../hooks/useUserContext";
 import screenshots from "../assets/screen@2x.png";
-import Section from "../components/utils/Section";
+import Section from "../components/layouts/Section";
 import SectionHeader from "../components/utils/SectionHeader";
 import { AiOutlineTransaction, AiTwotonePieChart } from "react-icons/ai";
 import { GiReceiveMoney } from "react-icons/gi";
-import FeatureCard from "../components/FeatureCard";
+import FeatureCard from "../components/compoundCoponents/FeatureCard";
 
 /*
 I have put all sections of this in a single component as none of these seem reusable

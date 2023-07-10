@@ -1,13 +1,13 @@
 import { useEffect, useReducer, useRef, useState } from "react";
-import Section from "../components/utils/Section";
+import Section from "../components/layouts/Section";
 import SectionHeader from "../components/utils/SectionHeader";
 import Button from "../components/utils/Button";
-import Modal from "../components/Modal";
+import Modal from "../components/layouts/Modal";
 import DateRangeForm from "../components/forms/DateRangeForm";
 import { getStats } from "../services/transactionServices";
-import AnalyticsPreview from "../components/AnalyticsPreview";
+import AnalyticsPreview from "../components/compoundCoponents/AnalyticsPreview";
 import useUtilityContext from "../hooks/useUtilityContext";
-import Loading from "../components/Loading";
+import Loading from "../components/utils/Loading";
 
 const SET_CURRENT_MONTH = 1;
 const SET_PREV_MONTH = 2;

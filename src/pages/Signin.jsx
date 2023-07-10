@@ -1,6 +1,6 @@
 import SigninForm from "../components/forms/SigninForm";
 import Button from "../components/utils/Button";
-import Section from "../components/utils/Section";
+import Section from "../components/layouts/Section";
 
 function Signin(params) {
   return (

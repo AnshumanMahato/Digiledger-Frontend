@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import pfpDefault from "../assets/pfps/default.jpg";
+import pfpDefault from "../../assets/pfps/default.jpg";
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 function User({ pfp }) {

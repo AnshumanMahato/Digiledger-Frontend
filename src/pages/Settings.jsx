@@ -2,7 +2,7 @@ import classNames from "classnames";
 import AccountForm from "../components/forms/AccountForm";
 import ConfigurationForm from "../components/forms/ConfigurationForm";
 import ProfileForm from "../components/forms/ProfileForm";
-import Section from "../components/utils/Section";
+import Section from "../components/layouts/Section";
 import SectionHeader from "../components/utils/SectionHeader";
 
 function Settings() {

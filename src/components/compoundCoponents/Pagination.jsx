@@ -1,4 +1,4 @@
-import Button from "./utils/Button";
+import Button from "../utils/Button";
 
 function Pagination({ currentPage, totalPages, updatePage }) {
   const handleClickPrev = () => {

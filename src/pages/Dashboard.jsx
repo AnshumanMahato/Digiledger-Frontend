@@ -1,13 +1,13 @@
-import BalanceCard from "../components/BalanceCard";
+import BalanceCard from "../components/compoundCoponents/BalanceCard";
 import SectionHeader from "../components/utils/SectionHeader";
-import Section from "../components/utils/Section";
-import TransactionTable from "../components/TransactionTable";
+import Section from "../components/layouts/Section";
+import TransactionTable from "../components/tables/TransactionTable";
 import { Link, useNavigate } from "react-router-dom";
-import NoTransactions from "../components/NoTransactions";
+import NoTransactions from "../components/utils/NoTransactions";
 import { useEffect, useRef } from "react";
 import { getStats, getTransactions } from "../services/transactionServices";
 import useUtilityContext from "../hooks/useUtilityContext";
-import Loading from "../components/Loading";
+import Loading from "../components/utils/Loading";
 
 function Dashboard() {
   const navigate = useNavigate();

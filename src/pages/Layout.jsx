@@ -1,11 +1,11 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/layouts/Header";
+import Footer from "../components/layouts/Footer";
 import { useEffect, useState } from "react";
 import { initLogin } from "../services/authServices";
 import useUserContext from "../hooks/useUserContext";
 import useUtilityContext from "../hooks/useUtilityContext";
-import Status from "../components/Status";
+import Status from "../components/utils/Status";
 
 function Layout() {
   const { status } = useUtilityContext();

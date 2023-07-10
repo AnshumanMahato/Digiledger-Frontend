@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import Button from "./utils/Button";
-import useUserContext from "../hooks/useUserContext";
-import User from "./User";
-import useUtilityContext from "../hooks/useUtilityContext";
+import Button from "../utils/Button";
+import useUserContext from "../../hooks/useUserContext";
+import User from "../compoundCoponents/User";
+import useUtilityContext from "../../hooks/useUtilityContext";
 
 const getTitle = (path, username) => {
   switch (path) {

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Table from "./utils/Table";
+import Table from "./Table";
 import classNames from "classnames";
-import Modal from "./Modal";
-import TransactionViewForm from "./forms/TransactionViewForm";
-import useUtilityContext from "../hooks/useUtilityContext";
+import Modal from "../layouts/Modal";
+import TransactionViewForm from "../forms/TransactionViewForm";
+import useUtilityContext from "../../hooks/useUtilityContext";
 
 function TransactionTable({ transactions, onClick }) {
   const { formatCurrency } = useUtilityContext();

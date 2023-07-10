@@ -1,6 +1,6 @@
 import SignupForm from "../components/forms/SignupForm";
 import Button from "../components/utils/Button";
-import Section from "../components/utils/Section";
+import Section from "../components/layouts/Section";
 
 function Signup() {
   return (

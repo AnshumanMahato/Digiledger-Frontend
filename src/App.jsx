@@ -10,7 +10,7 @@ import Signin from "./pages/Signin";
 import Logout from "./pages/Logout";
 import { TransactionQueryProvider } from "./contexts/TransactionContext";
 import Analytics from "./pages/Analytics";
-import Protected from "./components/Protected";
+import Protected from "./components/utils/Protected";
 import Configure from "./pages/Configure";
 import Settings from "./pages/Settings";
 import { UtilityProvider } from "./contexts/UtilityContext";

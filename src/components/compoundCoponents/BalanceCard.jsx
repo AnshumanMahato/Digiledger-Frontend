@@ -1,4 +1,4 @@
-import useUtilityContext from "../hooks/useUtilityContext";
+import useUtilityContext from "../../hooks/useUtilityContext";
 
 function BalanceCard({ income, expense }) {
   const { formatCurrency } = useUtilityContext();

@@ -1,12 +1,12 @@
-import Section from "../components/utils/Section";
-import TransactionsPanel from "../components/TransactionsPanel";
+import Section from "../components/layouts/Section";
+import TransactionsPanel from "../components/compoundCoponents/TransactionsPanel";
 import SectionHeader from "../components/utils/SectionHeader";
 import Button from "../components/utils/Button";
-import Modal from "../components/Modal";
+import Modal from "../components/layouts/Modal";
 import { useState } from "react";
 import TransactionForm from "../components/forms/TransactionForm";
 import { BsFilter } from "react-icons/bs";
-import FilterPanel from "../components/FilterPanel";
+import FilterPanel from "../components/compoundCoponents/FilterPanel";
 
 function Transactions() {
   const [showModal, setShowModal] = useState(null);

@@ -1,16 +1,20 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useUserContext from "./useUserContext";
+import useUserContext from "../../hooks/useUserContext";
 
-function useAuthorization() {
+function Protected({ children }) {
   const { currentUser } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!currentUser) {
-      navigate("/signin");
+      navigate("/signin", {
+        replace: true,
+      });
     }
   }, [currentUser, navigate]);
+
+  return <>{currentUser && children}</>;
 }
 
-export default useAuthorization;
+export default Protected;

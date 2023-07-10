@@ -1,6 +1,6 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import SectionHeader from "../../utils/SectionHeader";
-import Button from "../..//utils/Button";
+import SectionHeader from "../../../utils/SectionHeader";
+import Button from "../../../utils/Button";
 
 function Header({ onClick }) {
   return (

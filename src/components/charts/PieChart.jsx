@@ -1,26 +1,5 @@
-import { Chart } from "chart.js/auto";
-import classNames from "classnames";
-import { useEffect, useRef } from "react";
 import colors from "tailwindcss/colors";
-
-function ChartWrapper({ config, className }) {
-  const chartRef = useRef(null);
-  const canvasRef = useRef(null);
-  const classes = classNames("p-2", className);
-  useEffect(() => {
-    (async function () {
-      chartRef.current = new Chart(canvasRef.current, config);
-    })();
-
-    return () => chartRef.current.destroy();
-  }, [config]);
-
-  return (
-    <div className={classes}>
-      <canvas ref={canvasRef}></canvas>
-    </div>
-  );
-}
+import ChartWrapper from "./ChartWrapper";
 
 function PieChart({ data, className }) {
   const config = {
@@ -70,8 +49,4 @@ function PieChart({ data, className }) {
 
   return <ChartWrapper config={config} className={className} />;
 }
-function PartyChart({ data }) {}
-
-export { PieChart, PartyChart };
-
-export default ChartWrapper;
+export default PieChart;

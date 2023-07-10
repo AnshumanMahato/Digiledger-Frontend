@@ -1,5 +1,5 @@
-import AnalyticsTable from "./AnalyticsTable";
-import { PieChart } from "./Chart";
+import PieChart from "../charts/PieChart";
+import AnalyticsTable from "../tables/AnalyticsTable";
 
 function AnalyticsPreview({ type, title, data }) {
   return (
