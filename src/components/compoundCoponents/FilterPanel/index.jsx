@@ -7,12 +7,14 @@ import SortOptions from "./components/SortOptions";
 import CategoryOptions from "./components/CategoryOptions";
 import PartyOptions from "./components/PartyOptions";
 import useTransactionQuery from "../../../hooks/useTransactionQuery";
+import TypeOptions from "./components/TypeOptions";
 
 const SET_PREV_FILTERS = -1;
 const RESET = 0;
 const SET_SORT_FIELD = 1;
 const SET_CATEGORY_FIELD = 2;
 const SET_PARTY_FIELD = 3;
+const SET_TYPE_FIELD = 4;
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -32,6 +34,8 @@ const reducer = (state, action) => {
       return { ...state, category: action.value };
     case SET_PARTY_FIELD:
       return { ...state, party: action.value };
+    case SET_TYPE_FIELD:
+      return { ...state, type: action.value };
     default:
       return { ...state };
   }
@@ -54,6 +58,7 @@ function FilterPanel({ showFilters, onClose }) {
     dispatch({ type: SET_CATEGORY_FIELD, value });
   const updatePartyField = (value) =>
     dispatch({ type: SET_PARTY_FIELD, value });
+  const updateTypeField = (value) => dispatch({ type: SET_TYPE_FIELD, value });
 
   const handleSidebarClick = (option) => setOption(option);
   const handleClose = () => {
@@ -86,6 +91,10 @@ function FilterPanel({ showFilters, onClose }) {
     {
       label: "Party",
       option: "party",
+    },
+    {
+      label: "Type",
+      option: "type",
     },
   ];
 
@@ -124,6 +133,13 @@ function FilterPanel({ showFilters, onClose }) {
             current={selectedFilters.party}
             update={updatePartyField}
             options={parties.current}
+          />
+        )}
+
+        {option === "type" && (
+          <TypeOptions
+            current={selectedFilters.type}
+            update={updateTypeField}
           />
         )}
       </div>

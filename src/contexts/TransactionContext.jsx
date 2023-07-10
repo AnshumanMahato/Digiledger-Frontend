@@ -15,6 +15,7 @@ function TransactionQueryProvider({ children }) {
     party: null,
     startDate: null,
     endDate: null,
+    type: null,
   });
 
   const categories = useRef(currentUser.categories);
@@ -37,6 +38,7 @@ function TransactionQueryProvider({ children }) {
       party: null,
       startDate: null,
       endDate: null,
+      type: null,
     });
 
   const updateCategories = (newCategories) =>
