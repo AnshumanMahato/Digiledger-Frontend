@@ -24,3 +24,5 @@ yarn-error.log*
 
 .vscode
 certs
+
+style-guide.md
