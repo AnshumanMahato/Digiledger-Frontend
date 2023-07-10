@@ -1,11 +1,11 @@
 import Button from "../utils/Button";
-import FormGroup from "./components/FormGroup";
+import FormGroup from "../forms/components/FormGroup";
 import useUserContext from "../../hooks/useUserContext";
 import { useForm } from "react-hook-form";
-import InputPassword from "./components/inputs/InputPassword";
-import InputPasswordConfirm from "./components/inputs/InputPasswordConfirm";
+import InputPassword from "../forms/components/inputs/InputPassword";
+import InputPasswordConfirm from "../forms/components/inputs/InputPasswordConfirm";
 import { updateMyPassword } from "../../services/userServices";
-import FormPannel from "./components/FormPannel";
+import FormPannel from "../forms/components/FormPannel";
 import useUtilityContext from "../../hooks/useUtilityContext";
 
 function AccountForm() {

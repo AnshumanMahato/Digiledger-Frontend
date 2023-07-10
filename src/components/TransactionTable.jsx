@@ -2,7 +2,7 @@ import { useState } from "react";
 import Table from "./utils/Table";
 import classNames from "classnames";
 import Modal from "./Modal";
-import TransactionViewForm from "./formComponents/TransactionViewForm";
+import TransactionViewForm from "./forms/TransactionViewForm";
 import useUtilityContext from "../hooks/useUtilityContext";
 
 function TransactionTable({ transactions, onClick }) {
