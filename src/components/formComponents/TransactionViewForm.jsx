@@ -1,13 +1,11 @@
 import FormGroup from "./components/FormGroup";
 import Button from "../utils/Button";
 import { useForm } from "react-hook-form";
-import {
-  InputAmount,
-  InputCategory,
-  InputDate,
-  InputDescription,
-  InputParty,
-} from "./components/inputs/Input";
+import InputAmount from "./components/inputs/InputAmount";
+import InputCategory from "./components/inputs/InputCategory";
+import InputDate from "./components/inputs/InputDate";
+import InputDescription from "./components/inputs/InputDescription";
+import InputParty from "./components/inputs/InputParty";
 import { useState } from "react";
 import {
   deleteTransaction,

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { AiOutlineClose } from "react-icons/ai";
 import FormGroup from "./components/FormGroup";
-import { InputDateRange } from "./components/inputs/Input";
+import InputDateRange from "./components/inputs/InputDateRange";
 import Button from "../utils/Button";
 
 function DateRangeForm({ onSubmit: submit, onClose: close }) {

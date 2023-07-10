@@ -5,12 +5,10 @@ import { useEffect } from "react";
 import { signupRequest } from "../../services/authServices";
 import useUserContext from "../../hooks/useUserContext";
 import { useNavigate } from "react-router-dom";
-import {
-  InputEmail,
-  InputName,
-  InputPassword,
-  InputPasswordConfirm,
-} from "./components/inputs/Input";
+import InputEmail from "./components/inputs/InputEmail";
+import InputName from "./components/inputs/InputName";
+import InputPassword from "./components/inputs/InputPassword";
+import InputPasswordConfirm from "./components/inputs/InputPasswordConfirm";
 import FormPannel from "./components/FormPannel";
 import useUtilityContext from "../../hooks/useUtilityContext";
 

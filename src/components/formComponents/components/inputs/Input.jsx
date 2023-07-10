@@ -388,18 +388,18 @@ function InputValueSystem({ register, errors, ...rest }) {
   );
 }
 
-export {
-  InputAmount,
-  InputCategory,
-  InputDate,
-  InputDateRange,
-  InputDescription,
-  InputParty,
-  InputName,
-  InputEmail,
-  InputPassword,
-  InputPasswordConfirm,
-  InputCurrency,
-  InputValueSystem,
-};
+// export {
+//   InputAmount,
+//   InputCategory,
+//   InputDate,
+//   InputDateRange,
+//   InputDescription,
+//   InputParty,
+//   InputName,
+//   InputEmail,
+//   InputPassword,
+//   InputPasswordConfirm,
+//   InputCurrency,
+//   InputValueSystem,
+// };
 export default Input;

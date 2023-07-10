@@ -5,7 +5,8 @@ import { loginRequest } from "../../services/authServices";
 import { useEffect } from "react";
 import useUserContext from "../../hooks/useUserContext";
 import { useNavigate } from "react-router-dom";
-import { InputEmail, InputPassword } from "./components/inputs/Input";
+import InputEmail from "./components/inputs/InputEmail";
+import InputPassword from "./components/inputs/InputPassword";
 import FormPannel from "./components/FormPannel";
 import useUtilityContext from "../../hooks/useUtilityContext";
 
