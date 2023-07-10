@@ -52,7 +52,7 @@ function Transactions() {
         <div className="w-full">
           <div className="flex justify-between">
             <div className="flex-grow">
-              {/* This div here is to show breadcrumbs to display all set filters. Yet to be implemented */}
+              {/* TODO This div here is to show breadcrumbs to display all set filters. Yet to be implemented */}
             </div>
             <Button
               className="border-2 rounded-md ml-4 flex items-center"

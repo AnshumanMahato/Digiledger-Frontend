@@ -33,8 +33,8 @@ function Header() {
 
       {pathname !== "/signin" && pathname !== "/signup" ? (
         !currentUser ? (
-          <Button className="rounded-md" to="/signin" small>
-            Sign In
+          <Button className="rounded-md" to="/signup" small>
+            Sign Up
           </Button>
         ) : (
           <User pfp={avatars.get(currentUser.photo)} />

@@ -291,7 +291,7 @@ function InputPassword({ register, errors, current, update }) {
     ? "Current Password"
     : update
     ? "New Password"
-    : "Password;";
+    : "Password";
 
   const name = current ? "passwordCurrent" : "password";
   return (

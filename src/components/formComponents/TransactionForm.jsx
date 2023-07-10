@@ -29,12 +29,6 @@ function TransactionForm({ type, onClose: close }) {
 
   const onSubmit = async (formData) => {
     const transaction = { ...formData, type };
-    /*
-      Setting category to undefined as this may saved in DB. Emty string is still a string. 
-      TODO: Need to set the backend to resolve this
-    */
-    transaction.category =
-      transaction.category !== "" ? transaction.category : undefined;
     const { data, err } = await addTransaction(transaction);
     if (err) {
       setErrorStatus(err);

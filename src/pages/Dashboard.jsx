@@ -61,7 +61,7 @@ function Dashboard() {
       {!isFetching && (
         <main className="flex flex-col justify-evenly items-center w-full flex-grow xl:flex-row xl:items-stretch xl:px-[7%]">
           <Section className="flex flex-col items-center mb-8 xl:p-0">
-            <SectionHeader className="relative z-1 mb-8 sm:mb-12 lg:mb-16 xl:mb-0">
+            <SectionHeader className="relative z-1 mb-8 sm:mb-12 lg:mb-16 xl:mb-[minmax(4rem,auto)]">
               {new Intl.DateTimeFormat("en-US", {
                 month: "long",
                 year: "numeric",

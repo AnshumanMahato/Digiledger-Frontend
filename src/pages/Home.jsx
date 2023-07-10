@@ -34,7 +34,7 @@ const LandingPage = () => {
             </Button>
           ) : (
             <Button success rounded to="/signup">
-              Get started for free
+              Get started
             </Button>
           )}
         </div>
@@ -93,7 +93,7 @@ const LandingPage = () => {
           </Button>
         ) : (
           <Button success rounded to="/signup">
-            Get started for free
+            Get started
           </Button>
         )}
       </Section>
