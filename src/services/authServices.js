@@ -25,7 +25,8 @@ const logoutRequest = async () => {
   }
 };
 
-const initLogin = async () => {
+const initLogin = async (path) => {
+  console.log(path);
   try {
     const { data } = await apiRequest.get(`/user/loginStatus`);
     return data;
