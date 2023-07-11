@@ -89,8 +89,7 @@ const updateTransaction = async (transactionId, updatedData) => {
 
 const deleteTransaction = async (transactionId) => {
   try {
-    const res = await apiRequest.delete(`/transaction/${transactionId}`);
-    console.log(res);
+    await apiRequest.delete(`/transaction/${transactionId}`);
     return {
       data: "success",
     };

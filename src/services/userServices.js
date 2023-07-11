@@ -48,6 +48,7 @@ const updateMyPassword = async ({
   }
 };
 
+//To be implemented
 const deleteMe = async () => {};
 
 export { updateMe, updatePreferences, updateMyPassword, deleteMe };

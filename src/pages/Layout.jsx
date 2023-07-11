@@ -18,7 +18,6 @@ function Layout() {
     (async () => {
       if (!currentUser) {
         const { data } = await initLogin();
-        console.log(currentUser, data?.user);
         if (data?.user) {
           updateCurrentUser(data.user);
         }
