@@ -10,7 +10,7 @@ function Pagination({ currentPage, totalPages, updatePage }) {
   };
 
   return (
-    <div className="flex justify-center items-center mt-4">
+    <div className="flex justify-center items-center mt-auto">
       <Button
         className=" rounded-l-full"
         onClick={handleClickPrev}

@@ -45,11 +45,11 @@ function Transactions() {
           </Modal>
         )}
       </Section>
-      <Section className="flex flex-col justify-evenly items-center">
+      <Section className="flex flex-col flex-grow items-center">
         <SectionHeader className="mb-2 xs:mb-3 sm:mb-5">
           Transactions
         </SectionHeader>
-        <div className="w-full">
+        <div className="w-full flex flex-col flex-grow">
           <div className="flex justify-between">
             <div className="flex-grow">
               {/* TODO This div here is to show breadcrumbs to display all set filters. Yet to be implemented */}
