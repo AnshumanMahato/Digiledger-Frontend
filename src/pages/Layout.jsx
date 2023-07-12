@@ -16,8 +16,8 @@ function Layout() {
 
   useEffect(() => {
     (async () => {
-      if (!currentUser && pathname !== "/logout") {
-        const { data } = await initLogin(pathname);
+      if (!currentUser) {
+        const { data } = await initLogin();
         if (data?.user) {
           updateCurrentUser(data.user);
         }
