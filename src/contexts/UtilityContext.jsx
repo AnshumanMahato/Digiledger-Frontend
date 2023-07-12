@@ -28,6 +28,7 @@ function UtilityProvider({ children }) {
   const fetchTimeout = useRef(null);
   const [status, setStatus] = useState({ status: null, message: "" }); //Status Logging
   const [isFetching, setIsFetching] = useState(true); // Data Fetching
+  const [isProcessing, setIsProcessing] = useState(null); //initate process for user requests(login,signup,updates...)
 
   //Format currency values with based on the user currency.
   const formatCurrency = (amount) =>
@@ -60,7 +61,6 @@ function UtilityProvider({ children }) {
       resetStatus.current();
     }, 1500);
   });
-
   //Data Fetching Interface
   const startFetching = useRef(() => {
     clearTimeout(fetchTimeout.current);
@@ -71,18 +71,27 @@ function UtilityProvider({ children }) {
     fetchTimeout.current = setTimeout(() => setIsFetching(false), 2000);
   });
 
+  //Process initiators
+
+  const startProcessing = useRef(() => setIsProcessing(true));
+  const stopProcessing = useRef(() => setIsProcessing(false));
+
   //Reset Status on path change
   useEffect(() => {
     resetStatus.current();
+    stopProcessing.current();
   }, [pathname]);
 
   const values = {
     avatars,
     status,
     isFetching,
+    isProcessing,
     formatCurrency,
     setErrorStatus: setErrorStatus.current,
     setSuccessStatus: setSuccessStatus.current,
+    startProcessing: startProcessing.current,
+    stopProcessing: stopProcessing.current,
     resetStatus: resetStatus.current,
     startFetching: startFetching.current,
     stopFetching: stopFetching.current,

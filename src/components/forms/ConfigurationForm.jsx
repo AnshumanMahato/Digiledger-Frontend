@@ -10,7 +10,8 @@ import useUtilityContext from "../../hooks/useUtilityContext";
 
 function ConfigurationForm() {
   const { currentUser, updateCurrentUser } = useUserContext();
-  const { setSuccessStatus, setErrorStatus } = useUtilityContext();
+  const { startProcessing, stopProcessing, setSuccessStatus, setErrorStatus } =
+    useUtilityContext();
   const {
     register,
     handleSubmit,
@@ -23,6 +24,7 @@ function ConfigurationForm() {
   });
 
   const onSubmit = async (preferences) => {
+    startProcessing();
     const { data, err } = await updatePreferences(preferences);
     if (err) {
       setErrorStatus(err);
@@ -30,6 +32,7 @@ function ConfigurationForm() {
       updateCurrentUser(data.updatedUser);
       setSuccessStatus("Preferences Updated Successfully");
     }
+    stopProcessing();
   };
 
   return (

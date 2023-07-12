@@ -16,9 +16,16 @@ import FormPannel from "./components/FormPannel";
 import CloseButton from "./components/CloseButton";
 import ConfirmDeletePrompt from "./components/ConfirmDeletePrompt";
 import useUtilityContext from "../../hooks/useUtilityContext";
+import Loading from "../utils/Loading";
 
 function TransactionViewForm({ transaction, onClose: close }) {
-  const { setSuccessStatus, setErrorStatus } = useUtilityContext();
+  const {
+    isProcessing,
+    startProcessing,
+    stopProcessing,
+    setSuccessStatus,
+    setErrorStatus,
+  } = useUtilityContext();
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
 
@@ -43,6 +50,7 @@ function TransactionViewForm({ transaction, onClose: close }) {
   });
 
   const onSubmit = async (transactionData) => {
+    startProcessing();
     const { data, err } = await updateTransaction(
       transaction._id,
       transactionData
@@ -58,6 +66,7 @@ function TransactionViewForm({ transaction, onClose: close }) {
       resetFilters();
       close();
     }
+    stopProcessing();
   };
   const handleEditClick = (e) => {
     e.preventDefault();
@@ -75,6 +84,7 @@ function TransactionViewForm({ transaction, onClose: close }) {
 
   const handleDeleteConfirm = async (e) => {
     e.preventDefault();
+    startProcessing();
     const { err } = await deleteTransaction(transaction._id);
     if (err) {
       setErrorStatus(err);
@@ -84,6 +94,7 @@ function TransactionViewForm({ transaction, onClose: close }) {
       setSuccessStatus("Transaction Deleted Successfully");
       close();
     }
+    stopProcessing();
   };
 
   return (
@@ -149,11 +160,24 @@ function TransactionViewForm({ transaction, onClose: close }) {
           </>
         )}
       </div>
+
+      {/*
+        Display ldelete prompt
+       */}
       {deleteMode && (
         <ConfirmDeletePrompt
           onConfirm={handleDeleteConfirm}
           onCancel={handleCancelClick}
         />
+      )}
+
+      {/*
+        Display loading screen upon processing initiation
+       */}
+      {isProcessing && (
+        <div className="absolute h-full w-full p-12 flex justify-center items-center bg-accent/30">
+          <Loading />
+        </div>
       )}
     </FormPannel>
   );

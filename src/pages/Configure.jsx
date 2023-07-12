@@ -2,8 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserContext from "../hooks/useUserContext";
 import ConfigurationForm from "../components/forms/ConfigurationForm";
+import useUtilityContext from "../hooks/useUtilityContext";
+import Modal from "../components/layouts/Modal";
+import Loading from "../components/utils/Loading";
 
 function Configure() {
+  const { isProcessing } = useUtilityContext();
   const { currentUser } = useUserContext();
   const navigate = useNavigate();
   useEffect(() => {
@@ -18,6 +22,11 @@ function Configure() {
         Before you begin, let's setup your preferences
       </h1>
       <ConfigurationForm />
+      {isProcessing && (
+        <Modal>
+          <Loading />
+        </Modal>
+      )}
     </main>
   );
 }

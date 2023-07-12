@@ -15,7 +15,13 @@ import useUtilityContext from "../../hooks/useUtilityContext";
 function SignupForm() {
   const navigate = useNavigate();
   const { currentUser, updateCurrentUser } = useUserContext();
-  const { setErrorStatus, setSuccessStatus } = useUtilityContext();
+  const {
+    isProcessing,
+    startProcessing,
+    stopProcessing,
+    setErrorStatus,
+    setSuccessStatus,
+  } = useUtilityContext();
 
   useEffect(() => {
     if (currentUser) {
@@ -33,9 +39,11 @@ function SignupForm() {
   } = useForm();
 
   const onSubmit = async (info) => {
+    startProcessing();
     const { data, err } = await signupRequest(info);
     if (err) {
       setErrorStatus(err);
+      stopProcessing();
     } else {
       setTimeout(() => updateCurrentUser(data.user), 1500);
       setSuccessStatus("Account Created Successfully!!!");
@@ -66,7 +74,12 @@ function SignupForm() {
         />
       </FormGroup>
       <div className="flex justify-center items-center">
-        <Button success>Sign Up</Button>
+        {isProcessing && (
+          <div className="p-2 xs:px-4 md:px-5 xs:py-2 md:py-3 text-sm xs:text-base md:text-lg lg:text-xl border-2 border-white rounded-lg">
+            Signing Up ...
+          </div>
+        )}
+        {!isProcessing && <Button success>Sign Up</Button>}
       </div>
     </FormPannel>
   );

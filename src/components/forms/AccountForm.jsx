@@ -10,7 +10,8 @@ import useUtilityContext from "../../hooks/useUtilityContext";
 
 function AccountForm() {
   const { updateCurrentUser } = useUserContext();
-  const { setSuccessStatus, setErrorStatus } = useUtilityContext();
+  const { startProcessing, stopProcessing, setSuccessStatus, setErrorStatus } =
+    useUtilityContext();
 
   const {
     register,
@@ -21,6 +22,7 @@ function AccountForm() {
   } = useForm();
 
   const onSubmit = async (passwordUpdate) => {
+    startProcessing();
     const { data, err } = await updateMyPassword(passwordUpdate);
     if (err) {
       setErrorStatus(err);
@@ -29,6 +31,7 @@ function AccountForm() {
       reset();
       setSuccessStatus("Password Updated Successfully");
     }
+    stopProcessing();
   };
 
   const getPasswordField = watch("password");

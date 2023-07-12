@@ -11,7 +11,8 @@ import useUtilityContext from "../../hooks/useUtilityContext";
 
 function ProfileForm() {
   const { currentUser, updateCurrentUser } = useUserContext();
-  const { setSuccessStatus, setErrorStatus } = useUtilityContext();
+  const { startProcessing, stopProcessing, setSuccessStatus, setErrorStatus } =
+    useUtilityContext();
   const {
     register,
     handleSubmit,
@@ -26,6 +27,7 @@ function ProfileForm() {
   });
 
   const onSubmit = async (profile) => {
+    startProcessing();
     const { data, err } = await updateMe(profile);
     if (err) {
       setErrorStatus(err);
@@ -33,6 +35,7 @@ function ProfileForm() {
       updateCurrentUser(data.updatedUser);
       setSuccessStatus("Profile Updated Successfully");
     }
+    stopProcessing();
   };
 
   return (

@@ -11,9 +11,16 @@ import useTransactionQuery from "../../hooks/useTransactionQuery";
 import FormPannel from "./components/FormPannel";
 import CloseButton from "./components/CloseButton";
 import useUtilityContext from "../../hooks/useUtilityContext";
+import Loading from "../utils/Loading";
 
 function TransactionForm({ type, onClose: close }) {
-  const { setSuccessStatus, setErrorStatus } = useUtilityContext();
+  const {
+    isProcessing,
+    startProcessing,
+    stopProcessing,
+    setSuccessStatus,
+    setErrorStatus,
+  } = useUtilityContext();
 
   const {
     control,
@@ -26,6 +33,7 @@ function TransactionForm({ type, onClose: close }) {
     useTransactionQuery();
 
   const onSubmit = async (transactionData) => {
+    startProcessing();
     const transaction = { ...transactionData, type };
     const { data, err } = await addTransaction(transaction);
     if (err) {
@@ -39,6 +47,7 @@ function TransactionForm({ type, onClose: close }) {
       setSuccessStatus("Transaction Created");
       close();
     }
+    stopProcessing();
   };
   return (
     <FormPannel
@@ -65,6 +74,15 @@ function TransactionForm({ type, onClose: close }) {
         {type === "income" && <Button success>Add Income</Button>}
         {type === "expense" && <Button success>Add Expense</Button>}
       </div>
+
+      {/*
+        Display loading screen upon processing initiation
+       */}
+      {isProcessing && (
+        <div className="absolute h-full w-full p-12 flex justify-center items-center bg-accent/30">
+          <Loading />
+        </div>
+      )}
     </FormPannel>
   );
 }

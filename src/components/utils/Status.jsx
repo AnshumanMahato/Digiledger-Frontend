@@ -4,7 +4,7 @@ function Status({ status, message }) {
   const classes = classNames(
     "fixed top-0 left-[50%] z-[9999]",
     "transform translate-x-[-50%]",
-    "text-white text-center text-lg",
+    "text-white text-center text-base md:text-lg",
     "p-4 rounded-b-lg",
     {
       "bg-red-500": status === "error",
