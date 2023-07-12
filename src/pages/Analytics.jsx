@@ -100,7 +100,7 @@ function Analytics() {
   }, [state, startFetching, stopFetching, setErrorStatus]);
 
   return (
-    <main className="flex flex-col items-center w-full flex-grow">
+    <main className="flex flex-col items-center w-full flex-grow mb-5">
       <Section className="flex flex-wrap justify-evenly items-center gap-2">
         <Button
           small
